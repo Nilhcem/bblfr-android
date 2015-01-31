@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.ui.base;
+package com.nilhcem.bblfr.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

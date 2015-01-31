@@ -3,8 +3,8 @@ package com.nilhcem.bblfr;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.logging.JobQueueLogger;
-import com.nilhcem.bblfr.jobs.baggers.GetBaggersJob;
-import com.nilhcem.bblfr.ui.MainActivity;
+import com.nilhcem.bblfr.jobs.splashscreen.GetBaggersJob;
+import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.squareup.okhttp.Cache;
@@ -22,7 +22,7 @@ import timber.log.Timber;
 
 @Module(
         injects = {
-                MainActivity.class,
+                SplashscreenActivity.class,
                 GetBaggersJob.class
         }
 )

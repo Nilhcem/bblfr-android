@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.events;
+package com.nilhcem.bblfr.events.splashscreen;
 
 import com.nilhcem.bblfr.model.Baggers;
 

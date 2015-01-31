@@ -1,9 +1,9 @@
-package com.nilhcem.bblfr.jobs.baggers;
+package com.nilhcem.bblfr.jobs.splashscreen;
 
 import android.content.Context;
 
 import com.nilhcem.bblfr.BuildConfig;
-import com.nilhcem.bblfr.events.BaggersReceivedEvent;
+import com.nilhcem.bblfr.events.splashscreen.BaggersReceivedEvent;
 import com.nilhcem.bblfr.jobs.NetworkJob;
 import com.nilhcem.bblfr.model.Baggers;
 import com.squareup.okhttp.Request;

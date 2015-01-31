@@ -1,20 +1,20 @@
-package com.nilhcem.bblfr.ui;
+package com.nilhcem.bblfr.ui.splashscreen;
 
 import android.os.Bundle;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.events.BaggersReceivedEvent;
-import com.nilhcem.bblfr.jobs.baggers.GetBaggersJob;
-import com.nilhcem.bblfr.ui.base.BaseActivity;
+import com.nilhcem.bblfr.events.splashscreen.BaggersReceivedEvent;
+import com.nilhcem.bblfr.jobs.splashscreen.GetBaggersJob;
+import com.nilhcem.bblfr.ui.BaseActivity;
 
 import timber.log.Timber;
 
-public class MainActivity extends BaseActivity {
+public class SplashscreenActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.splashscreen_activity);
         mJobManager.addJob(new GetBaggersJob(this));
     }
 
