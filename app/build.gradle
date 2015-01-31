@@ -17,15 +17,39 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        // Should be the default flavor.
+        real {
+            buildConfigField 'String', 'WS_ENDPOINT', '"https://raw.githubusercontent.com/nrichand/BrownBagLunch/gh-pages/"'
+            buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
+        }
+    }
 }
 
 dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
 }
