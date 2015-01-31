@@ -28,13 +28,11 @@ public class MainActivity extends ActionBarActivity {
                         .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
                         .build();
                 try {
+                    // Json starts with "var data = {"
                     Response response = client.newCall(request).execute();
-                    String body = response.body().string();
-                    // Json starts with "var data = {" and ends with ";"
-                    body = body.replaceFirst("[^{]*", "");
-                    body = body.substring(0, body.length() - 1);
+                    String body = response.body().string().replaceFirst("[^{]*", "");
 
-                    // Serialisation
+                    // Deserialize string to a Json object
                     ObjectMapper mapper = new ObjectMapper();
                     return mapper.readValue(body, Baggers.class);
                 } catch (IOException e) {
