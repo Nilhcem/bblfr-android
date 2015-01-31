@@ -1,10 +1,12 @@
-package com.nilhcem.bblfr;
+package com.nilhcem.bblfr.ui;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilhcem.bblfr.BuildConfig;
+import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.model.Baggers;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
