@@ -4,17 +4,17 @@ import ollie.Model;
 import ollie.annotation.Column;
 import ollie.annotation.Table;
 
-@Table("baggers_cities")
-public class BaggerCity extends Model {
+@Table("baggers_tags")
+public class BaggerTag extends Model {
 
     @Column("bagger")
     public Bagger mBagger;
 
-    @Column("city")
-    public City mCity;
+    @Column("tag")
+    public Tag mTag;
 
-    public BaggerCity(Bagger bagger, City city) {
+    public BaggerTag(Bagger bagger, Tag tag) {
         mBagger = bagger;
-        mCity = city;
+        mTag = tag;
     }
 }

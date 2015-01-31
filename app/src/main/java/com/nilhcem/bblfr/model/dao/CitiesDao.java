@@ -4,7 +4,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.nilhcem.bblfr.model.City;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,6 +31,16 @@ public class CitiesDao {
 
     public List<City> getAll() {
         return Select.from(City.class).fetch();
+    }
+
+    public Map<String, City> getAllInMap() {
+        Map<String, City> map = new HashMap<>();
+
+        List<City> cities = getAll();
+        for (City city : cities) {
+            map.put(city.getName(), city);
+        }
+        return map;
     }
 
     public void save(List<City> cities) {

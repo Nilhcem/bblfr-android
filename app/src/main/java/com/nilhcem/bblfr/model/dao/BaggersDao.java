@@ -4,12 +4,15 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.nilhcem.bblfr.model.Bagger;
 import com.nilhcem.bblfr.model.BaggerCity;
+import com.nilhcem.bblfr.model.BaggerTag;
 import com.nilhcem.bblfr.model.City;
-import com.nilhcem.bblfr.model.JsonData;
 import com.nilhcem.bblfr.model.Session;
+import com.nilhcem.bblfr.model.Tag;
 import com.nilhcem.bblfr.model.Website;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,17 +22,14 @@ import ollie.Ollie;
 @Singleton
 public class BaggersDao {
 
-    @Inject
-    CitiesDao mCitiesDao;
-
-    public JsonData getData() {
-        // TODO
-        return null;
-    }
+    @Inject CitiesDao mCitiesDao;
 
     public void save(List<Bagger> baggers) {
         SQLiteDatabase database = Ollie.getDatabase();
         database.beginTransaction();
+
+        Map<String, Tag> tagsMap = new HashMap<>();
+
         try {
             for (Bagger bagger : baggers) {
                 bagger.save();
@@ -49,8 +49,23 @@ public class BaggersDao {
                     }
                 }
 
+                List<String> tagNames = bagger.getTags();
+                if (tagNames != null) {
+                    for (String tagName : tagNames) {
+                        Tag tag = tagsMap.get(tagName);
+                        if (tag == null) {
+                            tag = new Tag(tagName);
+                            tag.save();
+                            tagsMap.put(tagName, tag);
+                        }
+                        BaggerTag baggerTag = new BaggerTag(bagger, tag);
+                        baggerTag.save();
+                    }
+                }
+
+                Map<String, City> citiesMap = mCitiesDao.getAllInMap();
                 for (String cityName : bagger.getCities()) {
-                    City city = mCitiesDao.getByName(cityName);
+                    City city = citiesMap.get(cityName);
                     if (city != null) {
                         BaggerCity bc = new BaggerCity(bagger, city);
                         bc.save();
