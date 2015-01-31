@@ -3,22 +3,24 @@ package com.nilhcem.bblfr;
 import android.app.Application;
 import android.content.Context;
 
-import com.nilhcem.bblfr.core.logging.JobQueueLogger;
 import com.nilhcem.bblfr.core.logging.ReleaseTree;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.config.Configuration;
 
+import dagger.ObjectGraph;
 import timber.log.Timber;
 
 public class BBLApplication extends Application {
 
-    private JobManager mJobManager;
+    private ObjectGraph mObjectGraph;
+
+    public static BBLApplication get(Context context) {
+        return (BBLApplication) context.getApplicationContext();
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         initLogger();
-        initJobManager();
+        initObjectGraph();
     }
 
     private void initLogger() {
@@ -29,22 +31,11 @@ public class BBLApplication extends Application {
         }
     }
 
-    private void initJobManager() {
-        Configuration configuration = new Configuration.Builder(this)
-                .customLogger(new JobQueueLogger())
-                .minConsumerCount(1)
-                .maxConsumerCount(3)
-                .loadFactor(3)
-                .consumerKeepAlive(120)
-                .build();
-        mJobManager = new JobManager(this, configuration);
+    private void initObjectGraph() {
+        mObjectGraph = ObjectGraph.create(new BBLModule(this));
     }
 
-    public JobManager getJobManager() {
-        return mJobManager;
-    }
-
-    public static BBLApplication get(Context context) {
-        return (BBLApplication) context.getApplicationContext();
+    public void inject(Object target) {
+        mObjectGraph.inject(target);
     }
 }

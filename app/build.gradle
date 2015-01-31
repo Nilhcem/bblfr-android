@@ -42,7 +42,7 @@ android {
     productFlavors {
         // Should be the default flavor.
         real {
-            buildConfigField 'String', 'WS_ENDPOINT', '"https://raw.githubusercontent.com/nrichand/BrownBagLunch/gh-pages/"'
+            buildConfigField 'String', 'WS_ENDPOINT', '"http://www.brownbaglunch.fr/"'
             buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
         }
     }
@@ -55,4 +55,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+
+    compile 'com.squareup.dagger:dagger:1.2.2'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
 }

@@ -15,7 +15,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mJobManager.addJob(new GetBaggersJob());
+        mJobManager.addJob(new GetBaggersJob(this));
     }
 
     public void onEventMainThread(BaggersReceivedEvent event) {
