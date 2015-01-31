@@ -17,4 +17,48 @@ public class Bagger {
     @JsonProperty(value = "sessions") List<Session> mSessions;
     @JsonProperty(value = "tags") List<String> mTags;
     @JsonProperty(value = "cities") List<String> mCities;
+
+    public String getName() {
+        return mName;
+    }
+
+    public String getBio() {
+        return mBio;
+    }
+
+    public String getPictureUrl() {
+        return mPictureUrl;
+    }
+
+    public List<Website> getWebsites() {
+        return mWebsites;
+    }
+
+    public String getTwitter() {
+        return mTwitter;
+    }
+
+    public String getContact() {
+        return mContact;
+    }
+
+    public String getEmail() {
+        return mEmail;
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public List<Session> getSessions() {
+        return mSessions;
+    }
+
+    public List<String> getTags() {
+        return mTags;
+    }
+
+    public List<String> getCities() {
+        return mCities;
+    }
 }
