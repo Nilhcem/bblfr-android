@@ -14,6 +14,8 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
+import timber.log.Timber;
+
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -46,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Baggers baggers) {
                 super.onPostExecute(baggers);
-
+                Timber.d("Baggers count: %d", baggers.getBaggers().size());
             }
         }.execute();
     }
