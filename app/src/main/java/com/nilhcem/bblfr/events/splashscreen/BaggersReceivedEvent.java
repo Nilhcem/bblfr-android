@@ -1,12 +1,12 @@
 package com.nilhcem.bblfr.events.splashscreen;
 
-import com.nilhcem.bblfr.model.Baggers;
+import com.nilhcem.bblfr.model.JsonData;
 
 public class BaggersReceivedEvent {
 
-    public final Baggers baggers;
+    public final JsonData baggers;
 
-    public BaggersReceivedEvent(Baggers receivedBaggers) {
+    public BaggersReceivedEvent(JsonData receivedBaggers) {
         baggers = receivedBaggers;
     }
 }

@@ -4,19 +4,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Bagger {
+import ollie.Model;
+import ollie.annotation.Column;
+import ollie.annotation.Table;
 
-    @JsonProperty(value = "name") String mName;
-    @JsonProperty(value = "bio") String mBio;
-    @JsonProperty(value = "picture") String mPictureUrl;
-    @JsonProperty(value = "websites") List<Website> mWebsites;
-    @JsonProperty(value = "twitter") String mTwitter;
-    @JsonProperty(value = "contact") String mContact;
-    @JsonProperty(value = "mail") String mEmail;
-    @JsonProperty(value = "location") String mLocation;
-    @JsonProperty(value = "sessions") List<Session> mSessions;
-    @JsonProperty(value = "tags") List<String> mTags;
-    @JsonProperty(value = "cities") List<String> mCities;
+@Table("baggers")
+public class Bagger extends Model {
+
+    @JsonProperty(value = "name")
+    @Column("name")
+    public String mName;
+
+    @JsonProperty(value = "bio")
+    @Column("bio")
+    public String mBio;
+
+    @JsonProperty(value = "picture")
+    @Column("picture")
+    public String mPictureUrl;
+
+    @JsonProperty(value = "websites")
+    public List<Website> mWebsites;
+
+    @JsonProperty(value = "twitter")
+    @Column("twitter")
+    public String mTwitter;
+
+    @JsonProperty(value = "contact")
+    @Column("contact")
+    public String mContact;
+
+    @JsonProperty(value = "mail")
+    @Column("mail")
+    public String mEmail;
+
+    @JsonProperty(value = "location")
+    @Column("location")
+    public String mLocation;
+
+    @JsonProperty(value = "sessions")
+    public List<Session> mSessions;
+
+    @JsonProperty(value = "tags")
+//    @Column("tags")
+    public List<String> mTags;
+
+    @JsonProperty(value = "cities")
+    public List<String> mCities;
 
     public String getName() {
         return mName;

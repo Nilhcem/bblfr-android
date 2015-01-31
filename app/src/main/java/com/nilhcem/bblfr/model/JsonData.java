@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Baggers {
+public class JsonData {
 
     @JsonProperty(value = "baggers") List<Bagger> mBaggers;
     @JsonProperty(value = "cities") List<City> mCities;

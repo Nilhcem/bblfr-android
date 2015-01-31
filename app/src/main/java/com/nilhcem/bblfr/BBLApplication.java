@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.nilhcem.bblfr.core.logging.ReleaseTree;
+import com.nilhcem.bblfr.core.db.Database;
 
 import dagger.ObjectGraph;
 import timber.log.Timber;
@@ -21,6 +22,7 @@ public class BBLApplication extends Application {
         super.onCreate();
         initLogger();
         initObjectGraph();
+        Database.init(this);
     }
 
     private void initLogger() {
