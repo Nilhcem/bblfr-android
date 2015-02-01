@@ -14,8 +14,6 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
 import timber.log.Timber;
 
 public class ImportBaggersService {
@@ -25,39 +23,30 @@ public class ImportBaggersService {
     @Inject JsonToDatabaseDao mDao;
 
     public Observable<Boolean> importBaggers() {
-        return getJsonData()
-                .map(new Func1<JsonData, Boolean>() {
-                    @Override
-                    public Boolean call(JsonData jsonData) {
-                        return saveToDatabase(jsonData);
-                    }
-                });
+        return getJsonData().map(this::saveToDatabase);
     }
 
     private Observable<JsonData> getJsonData() {
-        return Observable.create(new Observable.OnSubscribe<JsonData>() {
-            @Override
-            public void call(Subscriber<? super JsonData> subscriber) {
-                JsonData jsonData = null;
+        return Observable.create(subscriber -> {
+            JsonData jsonData = null;
 
-                Request request = new Request.Builder()
-                        .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
-                        .build();
+            Request request = new Request.Builder()
+                    .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
+                    .build();
 
-                Response response;
-                try {
-                    response = mClient.newCall(request).execute();
+            Response response;
+            try {
+                response = mClient.newCall(request).execute();
 
-                    // Response starts with "var data = {", which we should remove.
-                    String body = response.body().string().replaceFirst("[^{]*", "");
-                    jsonData = mMapper.readValue(body, JsonData.class);
-                } catch (IOException e) {
-                    Timber.e(e, "Error importing baggers");
-                }
-
-                subscriber.onNext(jsonData);
-                subscriber.onCompleted();
+                // Response starts with "var data = {", which we should remove.
+                String body = response.body().string().replaceFirst("[^{]*", "");
+                jsonData = mMapper.readValue(body, JsonData.class);
+            } catch (IOException e) {
+                Timber.e(e, "Error importing baggers");
             }
+
+            subscriber.onNext(jsonData);
+            subscriber.onCompleted();
         });
     }
 
