@@ -1,6 +1,8 @@
 package com.nilhcem.bblfr.ui.splashscreen;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportBaggersService;
@@ -8,6 +10,7 @@ import com.nilhcem.bblfr.ui.BaseActivity;
 
 import javax.inject.Inject;
 
+import butterknife.InjectView;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -17,10 +20,16 @@ public class SplashscreenActivity extends BaseActivity implements Action1<Boolea
 
     @Inject ImportBaggersService mService;
 
+    @InjectView(R.id.splash_subtitle) TextView mSubtitle;
+
+    public SplashscreenActivity() {
+        super(R.layout.splashscreen_activity);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashscreen_activity);
+        mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));
 
         AppObservable.bindActivity(this, mService.importBaggers())
                 .subscribeOn(Schedulers.io())
