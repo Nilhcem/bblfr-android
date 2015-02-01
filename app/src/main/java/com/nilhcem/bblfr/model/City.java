@@ -14,8 +14,8 @@ public class City extends Model {
     public String mName;
 
     @JsonProperty(value = "ville_img")
-    @Column("city_img")
-    public String mCityPicture;
+    @Column("picture")
+    public String mPicture;
 
     @JsonProperty(value = "lat")
     @Column("lat")
@@ -23,21 +23,21 @@ public class City extends Model {
 
     @JsonProperty(value = "lng")
     @Column("lng")
-    public Double mLong;
+    public Double mLng;
 
     public String getName() {
         return mName;
     }
 
-    public String getCityPicture() {
-        return mCityPicture;
+    public String getPicture() {
+        return mPicture;
     }
 
     public Double getLat() {
         return mLat;
     }
 
-    public Double getLong() {
-        return mLong;
+    public Double getLng() {
+        return mLng;
     }
 }

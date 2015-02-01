@@ -6,8 +6,7 @@ import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.events.splashscreen.BaggersReceivedEvent;
 import com.nilhcem.bblfr.jobs.NetworkJob;
 import com.nilhcem.bblfr.model.JsonData;
-import com.nilhcem.bblfr.model.dao.BaggersDao;
-import com.nilhcem.bblfr.model.dao.CitiesDao;
+import com.nilhcem.bblfr.model.dao.JsonToDatabaseDao;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
@@ -15,8 +14,7 @@ import javax.inject.Inject;
 
 public class GetBaggersJob extends NetworkJob {
 
-    @Inject BaggersDao mBaggersDao;
-    @Inject CitiesDao mCitiesDao;
+    @Inject JsonToDatabaseDao mJsonToDatabase;
 
     public GetBaggersJob(Context context) {
         super(context);
@@ -32,12 +30,10 @@ public class GetBaggersJob extends NetworkJob {
 
         // Response starts with "var data = {", which we should remove.
         String body = response.body().string().replaceFirst("[^{]*", "");
+        JsonData jsonData = mMapper.readValue(body, JsonData.class);
+        mJsonToDatabase.saveJsonToDatabase(jsonData);
 
-        // Post the deserialized Json object.
-        JsonData baggers = mMapper.readValue(body, JsonData.class);
-        mCitiesDao.save(baggers.getCities());
-        mBaggersDao.save(baggers.getBaggers());
-        mBus.post(new BaggersReceivedEvent(baggers));
+        mBus.post(new BaggersReceivedEvent(jsonData)); // TODO
     }
 
     @Override

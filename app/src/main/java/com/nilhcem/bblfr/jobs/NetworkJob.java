@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.jobs;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

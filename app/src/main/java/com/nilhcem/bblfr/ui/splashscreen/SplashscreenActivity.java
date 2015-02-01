@@ -25,6 +25,5 @@ public class SplashscreenActivity extends BaseActivity {
 
     public void onEventMainThread(BaggersReceivedEvent event) {
         Timber.d("Baggers received");
-
     }
 }
