@@ -7,10 +7,10 @@ import ollie.annotation.Table;
 @Table("baggers_tags")
 public class BaggerTag extends Model {
 
-    @Column("bagger")
+    @Column("bagger_id")
     public Bagger mBagger;
 
-    @Column("tag")
+    @Column("tag_id")
     public Tag mTag;
 
     public BaggerTag(Bagger bagger, Tag tag) {

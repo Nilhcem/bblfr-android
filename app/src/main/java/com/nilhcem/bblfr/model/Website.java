@@ -19,7 +19,7 @@ public class Website extends Model {
     public String mLink;
 
     @JsonIgnore
-    @Column("bagger")
+    @Column("bagger_id")
     public Bagger mBagger;
 
     public String getTitle() {

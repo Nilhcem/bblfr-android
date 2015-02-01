@@ -46,7 +46,6 @@ public class Bagger extends Model {
     public List<Session> mSessions;
 
     @JsonProperty(value = "tags")
-//    @Column("tags")
     public List<String> mTags;
 
     @JsonProperty(value = "cities")

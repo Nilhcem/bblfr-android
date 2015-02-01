@@ -19,7 +19,7 @@ public class Session extends Model {
     public String mSummary;
 
     @JsonIgnore
-    @Column("bagger")
+    @Column("bagger_id")
     public Bagger mBagger;
 
     public String getTitle() {

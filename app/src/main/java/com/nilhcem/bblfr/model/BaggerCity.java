@@ -7,10 +7,10 @@ import ollie.annotation.Table;
 @Table("baggers_cities")
 public class BaggerCity extends Model {
 
-    @Column("bagger")
+    @Column("bagger_id")
     public Bagger mBagger;
 
-    @Column("city")
+    @Column("city_id")
     public City mCity;
 
     public BaggerCity(Bagger bagger, City city) {
