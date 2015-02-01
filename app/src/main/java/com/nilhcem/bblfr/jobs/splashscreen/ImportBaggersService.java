@@ -14,7 +14,8 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Func0;
+import rx.Subscriber;
+import rx.functions.Func1;
 import timber.log.Timber;
 
 public class ImportBaggersService {
@@ -24,11 +25,21 @@ public class ImportBaggersService {
     @Inject JsonToDatabaseDao mDao;
 
     public Observable<Boolean> importBaggers() {
-        // With defer, the Observable returned won't call the following blocking method until we subscribe to it.
-        return Observable.defer(new Func0<Observable<Boolean>>() {
+        return getJsonData()
+                .map(new Func1<JsonData, Boolean>() {
+                    @Override
+                    public Boolean call(JsonData jsonData) {
+                        return saveToDatabase(jsonData);
+                    }
+                });
+    }
+
+    private Observable<JsonData> getJsonData() {
+        return Observable.create(new Observable.OnSubscribe<JsonData>() {
             @Override
-            public Observable<Boolean> call() {
-                Boolean success = Boolean.FALSE;
+            public void call(Subscriber<? super JsonData> subscriber) {
+                JsonData jsonData = null;
+
                 Request request = new Request.Builder()
                         .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
                         .build();
@@ -39,15 +50,23 @@ public class ImportBaggersService {
 
                     // Response starts with "var data = {", which we should remove.
                     String body = response.body().string().replaceFirst("[^{]*", "");
-                    JsonData jsonData = mMapper.readValue(body, JsonData.class);
-
-                    mDao.saveJsonToDatabase(jsonData);
-                    success = Boolean.TRUE;
+                    jsonData = mMapper.readValue(body, JsonData.class);
                 } catch (IOException e) {
                     Timber.e(e, "Error importing baggers");
                 }
-                return Observable.just(success);
+
+                subscriber.onNext(jsonData);
+                subscriber.onCompleted();
             }
         });
+    }
+
+    private Boolean saveToDatabase(JsonData jsonData) {
+        Boolean success = Boolean.FALSE;
+        if (jsonData != null) {
+            mDao.saveJsonToDatabase(jsonData);
+            success = Boolean.TRUE;
+        }
+        return success;
     }
 }
