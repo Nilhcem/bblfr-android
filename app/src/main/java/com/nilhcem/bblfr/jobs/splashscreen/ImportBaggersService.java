@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.jobs.splashscreen;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.model.JsonData;
@@ -23,13 +22,12 @@ public class ImportBaggersService {
     @Inject JsonToDatabaseDao mDao;
 
     public Observable<Boolean> importBaggers() {
-        return getJsonData().map(this::saveToDatabase);
+        return getProperJson().flatMap(this::convertToJsonData).map(this::saveToDatabase);
     }
 
-    private Observable<JsonData> getJsonData() {
+    private Observable<String> getProperJson() {
         return Observable.create(subscriber -> {
-            JsonData jsonData = null;
-
+            String json = null;
             Request request = new Request.Builder()
                     .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
                     .build();
@@ -37,17 +35,25 @@ public class ImportBaggersService {
             Response response;
             try {
                 response = mClient.newCall(request).execute();
-
                 // Response starts with "var data = {", which we should remove.
-                String body = response.body().string().replaceFirst("[^{]*", "");
-                jsonData = mMapper.readValue(body, JsonData.class);
+                json = response.body().string().replaceFirst("[^{]*", "");
             } catch (IOException e) {
                 Timber.e(e, "Error importing baggers");
             }
 
-            subscriber.onNext(jsonData);
+            subscriber.onNext(json);
             subscriber.onCompleted();
         });
+    }
+
+    private Observable<JsonData> convertToJsonData(String json) {
+        JsonData jsonData = null;
+        try {
+            jsonData = mMapper.readValue(json, JsonData.class);
+        } catch (IOException e) {
+            Timber.e(e, "Error converting json to a JsonData object");
+        }
+        return Observable.just(jsonData);
     }
 
     private Boolean saveToDatabase(JsonData jsonData) {
