@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.splashscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportBaggersService;
 import com.nilhcem.bblfr.ui.BaseActivity;
+import com.nilhcem.bblfr.ui.SecondActivity;
 
 import javax.inject.Inject;
 
@@ -39,5 +41,6 @@ public class SplashscreenActivity extends BaseActivity implements Action1<Boolea
     @Override
     public void call(Boolean success) {
         Timber.d("Import successful: " + success);
+        startActivity(new Intent(this, SecondActivity.class));
     }
 }
