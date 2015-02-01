@@ -2,11 +2,7 @@ package com.nilhcem.bblfr;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nilhcem.bblfr.core.logging.JobQueueLogger;
-import com.nilhcem.bblfr.jobs.splashscreen.GetBaggersJob;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.config.Configuration;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -17,13 +13,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import de.greenrobot.event.EventBus;
 import timber.log.Timber;
 
 @Module(
         injects = {
-                SplashscreenActivity.class,
-                GetBaggersJob.class
+                SplashscreenActivity.class
         }
 )
 public class BBLModule {
@@ -34,10 +28,6 @@ public class BBLModule {
 
     public BBLModule(BBLApplication app) {
         mApp = app;
-    }
-
-    @Provides @Singleton EventBus provideEventBus() {
-        return EventBus.getDefault();
     }
 
     @Provides @Singleton OkHttpClient provideOkHttpClient() {
@@ -52,17 +42,6 @@ public class BBLModule {
             Timber.e(e, "Unable to install disk cache.");
         }
         return client;
-    }
-
-    @Provides @Singleton JobManager provideJobManager() {
-        Configuration configuration = new Configuration.Builder(mApp)
-                .customLogger(new JobQueueLogger())
-                .minConsumerCount(1)
-                .maxConsumerCount(3)
-                .loadFactor(3)
-                .consumerKeepAlive(120)
-                .build();
-        return new JobManager(mApp, configuration);
     }
 
     @Provides @Singleton ObjectMapper provideObjectMapper() {
