@@ -12,6 +12,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/logo_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

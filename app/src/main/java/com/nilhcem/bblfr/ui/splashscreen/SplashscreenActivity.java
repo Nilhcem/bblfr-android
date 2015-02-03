@@ -3,6 +3,9 @@ package com.nilhcem.bblfr.ui.splashscreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
@@ -22,6 +25,7 @@ public class SplashscreenActivity extends BaseActivity {
 
     @Inject ImportBaggersService mService;
 
+    @InjectView(R.id.logo_container) ViewGroup mLogoContainer;
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
 
     private Subscription mSubscription;
@@ -41,11 +45,19 @@ public class SplashscreenActivity extends BaseActivity {
                     startActivity(new Intent(this, SecondActivity.class));
 
                 });
+        animateLogo();
     }
 
     @Override
     protected void onStop() {
         mSubscription.unsubscribe();
         super.onStop();
+    }
+
+    private void animateLogo() {
+        Animation localAnimation = AnimationUtils.loadAnimation(this, R.anim.splashscreen_logo);
+        mLogoContainer.clearAnimation();
+        mLogoContainer.setAnimation(localAnimation);
+        mLogoContainer.startAnimation(localAnimation);
     }
 }
