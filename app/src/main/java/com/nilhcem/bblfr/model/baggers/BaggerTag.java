@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.model;
+package com.nilhcem.bblfr.model.baggers;
 
 import ollie.Model;
 import ollie.annotation.Column;
@@ -8,13 +8,13 @@ import ollie.annotation.Table;
 public class BaggerTag extends Model {
 
     @Column("bagger_id")
-    public Bagger mBagger;
+    public Bagger bagger;
 
     @Column("tag_id")
-    public Tag mTag;
+    public Tag tag;
 
     public BaggerTag(Bagger bagger, Tag tag) {
-        mBagger = bagger;
-        mTag = tag;
+        this.bagger = bagger;
+        this.tag = tag;
     }
 }

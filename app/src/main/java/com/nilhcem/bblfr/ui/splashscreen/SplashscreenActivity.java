@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.jobs.splashscreen.ImportBaggersService;
+import com.nilhcem.bblfr.jobs.splashscreen.ImportService;
 import com.nilhcem.bblfr.ui.BaseActivity;
 import com.nilhcem.bblfr.ui.SecondActivity;
 
@@ -23,7 +23,7 @@ import timber.log.Timber;
 
 public class SplashscreenActivity extends BaseActivity {
 
-    @Inject ImportBaggersService mService;
+    @Inject ImportService mImportService;
 
     @InjectView(R.id.logo_container) ViewGroup mLogoContainer;
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
@@ -38,10 +38,10 @@ public class SplashscreenActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));
-        mSubscription = AppObservable.bindActivity(this, mService.importBaggers())
+        mSubscription = AppObservable.bindActivity(this, mImportService.importData())
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
-                    Timber.d("Import successful: " + success);
+                    Timber.d("Import successful: %b - %b", success.first, success.second);
                     startActivity(new Intent(this, SecondActivity.class));
 
                 });

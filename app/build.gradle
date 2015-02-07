@@ -60,6 +60,7 @@ android {
         real {
             buildConfigField 'String', 'WS_ENDPOINT', '"http://www.brownbaglunch.fr/"'
             buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
+            buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
         }
     }
 }

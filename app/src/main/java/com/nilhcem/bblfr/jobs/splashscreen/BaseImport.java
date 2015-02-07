@@ -1,35 +1,43 @@
 package com.nilhcem.bblfr.jobs.splashscreen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nilhcem.bblfr.BuildConfig;
-import com.nilhcem.bblfr.model.JsonData;
-import com.nilhcem.bblfr.model.dao.JsonToDatabaseDao;
+import com.nilhcem.bblfr.model.JsonToDatabaseDao;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import rx.Observable;
 import timber.log.Timber;
 
-public class ImportBaggersService {
+public abstract class BaseImport<T> {
 
-    @Inject OkHttpClient mClient;
-    @Inject ObjectMapper mMapper;
-    @Inject JsonToDatabaseDao mDao;
+    private String mUrl;
+    private Class<T> mClazz;
 
-    public Observable<Boolean> importBaggers() {
-        return getProperJson().flatMap(this::convertToJsonData).map(this::saveToDatabase);
+    private OkHttpClient mClient;
+    private ObjectMapper mMapper;
+    private JsonToDatabaseDao<T> mDao;
+
+    public BaseImport(OkHttpClient client, ObjectMapper mapper, JsonToDatabaseDao<T> dao, String url, Class<T> clazz) {
+        mClient = client;
+        mMapper = mapper;
+        mDao = dao;
+
+        mUrl = url;
+        mClazz = clazz;
     }
 
-    private Observable<String> getProperJson() {
+    public Observable<Boolean> importData() {
+        return getProperJson(mUrl).flatMap(this::convertToJsonData).map(this::saveToDatabase);
+    }
+
+    protected Observable<String> getProperJson(String url) {
         return Observable.create(subscriber -> {
             String json = null;
             Request request = new Request.Builder()
-                    .url(BuildConfig.WS_ENDPOINT + BuildConfig.WS_BAGGERS_URL)
+                    .url(url)
                     .build();
 
             Response response;
@@ -46,20 +54,20 @@ public class ImportBaggersService {
         });
     }
 
-    private Observable<JsonData> convertToJsonData(String json) {
-        JsonData jsonData = null;
+    private Observable<T> convertToJsonData(String json) {
+        T jsonData = null;
         try {
-            jsonData = mMapper.readValue(json, JsonData.class);
+            jsonData = mMapper.readValue(json, mClazz);
         } catch (IOException e) {
-            Timber.e(e, "Error converting json to a JsonData object");
+            Timber.e(e, "Error converting to a json object");
         }
         return Observable.just(jsonData);
     }
 
-    private Boolean saveToDatabase(JsonData jsonData) {
+    private Boolean saveToDatabase(T data) {
         Boolean success = Boolean.FALSE;
-        if (jsonData != null) {
-            mDao.saveJsonToDatabase(jsonData);
+        if (data != null) {
+            mDao.saveJsonToDatabase(data);
             success = Boolean.TRUE;
         }
         return success;

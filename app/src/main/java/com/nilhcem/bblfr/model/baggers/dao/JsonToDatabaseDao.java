@@ -1,15 +1,15 @@
-package com.nilhcem.bblfr.model.dao;
+package com.nilhcem.bblfr.model.baggers.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nilhcem.bblfr.model.Bagger;
-import com.nilhcem.bblfr.model.BaggerCity;
-import com.nilhcem.bblfr.model.BaggerTag;
-import com.nilhcem.bblfr.model.City;
-import com.nilhcem.bblfr.model.JsonData;
-import com.nilhcem.bblfr.model.Session;
-import com.nilhcem.bblfr.model.Tag;
-import com.nilhcem.bblfr.model.Website;
+import com.nilhcem.bblfr.model.baggers.Bagger;
+import com.nilhcem.bblfr.model.baggers.BaggerCity;
+import com.nilhcem.bblfr.model.baggers.BaggerTag;
+import com.nilhcem.bblfr.model.baggers.BaggersData;
+import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.model.baggers.Session;
+import com.nilhcem.bblfr.model.baggers.Tag;
+import com.nilhcem.bblfr.model.baggers.Website;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,19 +19,20 @@ import javax.inject.Inject;
 
 import ollie.Ollie;
 
-public class JsonToDatabaseDao {
+public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabaseDao<BaggersData> {
 
     @Inject
     public JsonToDatabaseDao() {
     }
 
-    public void saveJsonToDatabase(JsonData jsonData) {
+    @Override
+    public void saveJsonToDatabase(BaggersData data) {
         SQLiteDatabase database = Ollie.getDatabase();
         database.beginTransaction();
         try {
-            Map<String, City> citiesMap = saveCities(jsonData.getCities());
-            Map<String, Tag> tagsMap = saveTags(jsonData.getBaggers());
-            saveBaggers(jsonData.getBaggers(), citiesMap, tagsMap);
+            Map<String, City> citiesMap = saveCities(data.cities);
+            Map<String, Tag> tagsMap = saveTags(data.baggers);
+            saveBaggers(data.baggers, citiesMap, tagsMap);
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();
@@ -42,7 +43,7 @@ public class JsonToDatabaseDao {
         Map<String, City> map = new HashMap<>();
         for (City city : cities) {
             city.save();
-            map.put(city.getName(), city);
+            map.put(city.name, city);
         }
         return map;
     }
@@ -50,7 +51,7 @@ public class JsonToDatabaseDao {
     private Map<String, Tag> saveTags(List<Bagger> baggers) {
         Map<String, Tag> map = new HashMap<>();
         for (Bagger bagger : baggers) {
-            List<String> tagNames = bagger.getTags();
+            List<String> tagNames = bagger.tags;
             if (tagNames != null) {
                 for (String tagName : tagNames) {
                     Tag tag = map.get(tagName);
@@ -68,17 +69,17 @@ public class JsonToDatabaseDao {
     private void saveBaggers(List<Bagger> baggers, Map<String, City> citiesMap, Map<String, Tag> tagsMap) {
         for (Bagger bagger : baggers) {
             bagger.save();
-            saveBaggerWebsites(bagger, bagger.getWebsites());
-            saveBaggerSessions(bagger, bagger.getSessions());
-            saveBaggerCities(bagger, bagger.getCities(), citiesMap);
-            saveBaggerTags(bagger, bagger.getTags(), tagsMap);
+            saveBaggerWebsites(bagger, bagger.websites);
+            saveBaggerSessions(bagger, bagger.sessions);
+            saveBaggerCities(bagger, bagger.cities, citiesMap);
+            saveBaggerTags(bagger, bagger.tags, tagsMap);
         }
     }
 
     private void saveBaggerWebsites(Bagger bagger, List<Website> websites) {
         if (websites != null) {
             for (Website website : websites) {
-                website.setBagger(bagger);
+                website.bagger = bagger;
                 website.save();
             }
         }
@@ -87,7 +88,7 @@ public class JsonToDatabaseDao {
     private void saveBaggerSessions(Bagger bagger, List<Session> sessions) {
         if (sessions != null) {
             for (Session session : sessions) {
-                session.setBagger(bagger);
+                session.bagger = bagger;
                 session.save();
             }
         }

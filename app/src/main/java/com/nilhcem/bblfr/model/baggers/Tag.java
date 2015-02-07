@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.model;
+package com.nilhcem.bblfr.model.baggers;
 
 import ollie.Model;
 import ollie.annotation.Column;
@@ -8,9 +8,9 @@ import ollie.annotation.Table;
 public class Tag extends Model {
 
     @Column("name")
-    public String mName;
+    public String name;
 
     public Tag(String name) {
-        mName = name;
+        this.name = name;
     }
 }

@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.model.dao;
+package com.nilhcem.bblfr.model.baggers.dao;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
