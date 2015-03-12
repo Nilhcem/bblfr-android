@@ -17,15 +17,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion '22.0.0'
 
     defaultConfig {
-        applicationId "com.nilhcem.bblfr"
+        applicationId 'com.nilhcem.bblfr'
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
 
     compileOptions {
@@ -70,10 +70,10 @@ retrolambda {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.jakewharton.timber:timber:2.5.1'
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.jakewharton.timber:timber:2.7.1'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
     compile 'io.reactivex:rxandroid:0.24.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.3.0'

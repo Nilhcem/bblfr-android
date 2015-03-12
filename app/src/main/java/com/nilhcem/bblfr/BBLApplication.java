@@ -3,7 +3,6 @@ package com.nilhcem.bblfr;
 import android.app.Application;
 import android.content.Context;
 
-import com.nilhcem.bblfr.core.logging.ReleaseTree;
 import com.nilhcem.bblfr.core.db.Database;
 
 import dagger.ObjectGraph;
@@ -28,8 +27,6 @@ public class BBLApplication extends Application {
     private void initLogger() {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-        } else {
-            Timber.plant(new ReleaseTree());
         }
     }
 
