@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:2.5.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.0.1'
     }
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion '22.0.0'
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         applicationId 'com.nilhcem.bblfr'
@@ -72,8 +72,8 @@ retrolambda {
 dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.jakewharton.timber:timber:2.7.1'
-    compile 'com.squareup.okhttp:okhttp:2.2.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.2'
     compile 'io.reactivex:rxandroid:0.24.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.3.0'
