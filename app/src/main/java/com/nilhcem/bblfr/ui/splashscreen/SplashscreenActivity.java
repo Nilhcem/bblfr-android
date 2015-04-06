@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.ui.splashscreen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.ViewGroup;
@@ -42,8 +41,7 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    startActivity(new Intent(this, SecondActivity.class));
-
+                    SecondActivity.launch(this);
                 });
         animateLogo();
     }
