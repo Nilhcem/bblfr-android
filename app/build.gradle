@@ -84,4 +84,7 @@ dependencies {
 
     compile 'com.michaelpardo:ollie:0.3.1'
     provided 'com.michaelpardo:ollie-compiler:0.3.1'
+
+    compile 'com.github.frankiesardo:icepick:2.3.6'
+    provided 'com.github.frankiesardo:icepick-processor:2.3.6'
 }

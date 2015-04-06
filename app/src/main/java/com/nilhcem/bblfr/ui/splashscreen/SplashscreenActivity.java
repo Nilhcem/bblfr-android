@@ -26,7 +26,8 @@ public class SplashscreenActivity extends BaseActivity {
 
     @Inject ImportService mImportService;
 
-    @InjectView(R.id.logo_container) ViewGroup mLogoContainer;
+    @InjectView(R.id.splash_background) ViewGroup mBackground;
+    @InjectView(R.id.splash_logo_container) ViewGroup mLogoContainer;
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
     @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
@@ -44,7 +45,7 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    SecondActivity.launch(this);
+                    SecondActivity.launch(this, mBackground);
                 });
         animateLogo();
     }

@@ -10,6 +10,7 @@ import com.nilhcem.bblfr.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
+import icepick.Icepick;
 
 public abstract class BaseActivity extends ActionBarActivity {
 
@@ -25,6 +26,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
 
         mApplication = BBLApplication.get(this);
         mApplication.inject(this);
@@ -37,5 +39,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                 setSupportActionBar(mToolbar);
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 }
