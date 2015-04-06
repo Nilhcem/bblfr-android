@@ -10,6 +10,9 @@ public class Tag extends Model {
     @Column("name")
     public String name;
 
+    public Tag() {
+    }
+
     public Tag(String name) {
         this.name = name;
     }
