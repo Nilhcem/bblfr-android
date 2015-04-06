@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 

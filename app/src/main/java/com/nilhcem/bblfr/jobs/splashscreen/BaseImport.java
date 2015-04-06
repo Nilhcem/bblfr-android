@@ -30,7 +30,7 @@ public abstract class BaseImport<T> {
     }
 
     public Observable<Boolean> importData() {
-        return getProperJson(mUrl).flatMap(this::convertToJsonData).map(this::saveToDatabase);
+        return getProperJson(mUrl).map(this::convertToJsonData).map(this::saveToDatabase);
     }
 
     protected Observable<String> getProperJson(String url) {
@@ -54,14 +54,14 @@ public abstract class BaseImport<T> {
         });
     }
 
-    private Observable<T> convertToJsonData(String json) {
+    private T convertToJsonData(String json) {
         T jsonData = null;
         try {
             jsonData = mMapper.readValue(json, mClazz);
         } catch (IOException e) {
             Timber.e(e, "Error converting to a json object");
         }
-        return Observable.just(jsonData);
+        return jsonData;
     }
 
     private Boolean saveToDatabase(T data) {
