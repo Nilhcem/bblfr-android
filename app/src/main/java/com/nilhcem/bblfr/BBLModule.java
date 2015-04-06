@@ -3,22 +3,22 @@ package com.nilhcem.bblfr;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.ui.SecondActivity;
+import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import timber.log.Timber;
 
 @Module(
         injects = {
                 SplashscreenActivity.class,
+                LocationsMapActivity.class,
                 SecondActivity.class
         }
 )

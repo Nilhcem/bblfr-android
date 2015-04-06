@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.locations.LocationsMapActivity"/>
+
         <activity android:name=".ui.SecondActivity"/>
     </application>
 </manifest>

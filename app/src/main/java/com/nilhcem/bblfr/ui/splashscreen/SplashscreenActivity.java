@@ -11,7 +11,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportService;
 import com.nilhcem.bblfr.ui.BaseActivity;
-import com.nilhcem.bblfr.ui.SecondActivity;
+import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 
 import javax.inject.Inject;
 
@@ -45,7 +45,7 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    SecondActivity.launch(this, mBackground);
+                    LocationsMapActivity.launch(this);
                 });
         animateLogo();
     }
