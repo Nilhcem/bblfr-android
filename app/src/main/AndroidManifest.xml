@@ -18,8 +18,7 @@
 
         <activity
             android:name=".ui.splashscreen.SplashscreenActivity"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
