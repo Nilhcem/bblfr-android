@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportService;
 import com.nilhcem.bblfr.ui.BaseActivity;
@@ -15,6 +16,7 @@ import com.nilhcem.bblfr.ui.SecondActivity;
 import javax.inject.Inject;
 
 import butterknife.InjectView;
+import butterknife.Optional;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
@@ -26,6 +28,7 @@ public class SplashscreenActivity extends BaseActivity {
 
     @InjectView(R.id.logo_container) ViewGroup mLogoContainer;
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
+    @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
     private Subscription mSubscription;
 
@@ -57,5 +60,12 @@ public class SplashscreenActivity extends BaseActivity {
         mLogoContainer.clearAnimation();
         mLogoContainer.setAnimation(localAnimation);
         mLogoContainer.startAnimation(localAnimation);
+
+        if (mShimmerContainer != null) {
+            mShimmerContainer.setDuration(900);
+            mShimmerContainer.setBaseAlpha(0.65f);
+            mShimmerContainer.setRepeatCount(1);
+            mShimmerContainer.startShimmerAnimation();
+        }
     }
 }

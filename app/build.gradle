@@ -77,6 +77,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.24.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.3.0'
+    compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
