@@ -10,6 +10,9 @@ public class Interest extends Model {
     @Column("name")
     public String name;
 
+    public Interest() {
+    }
+
     public Interest(String name) {
         this.name = name;
     }

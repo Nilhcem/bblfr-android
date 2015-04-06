@@ -34,7 +34,7 @@ public class LocationsMapActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSubscription = AppObservable.bindActivity(this, mLocationsService.getHosts())
+        mSubscription = AppObservable.bindActivity(this, mLocationsService.getLocations())
                 .subscribeOn(Schedulers.io())
                 .subscribe(locations -> {
                     Timber.d("BBL Hosts loaded from DB");
