@@ -28,8 +28,15 @@ public class BaggersDao {
     public BaggersDao() {
     }
 
-    public List<Bagger> getBaggers() {
-        List<Bagger> baggers = Select.from(Bagger.class).fetch();
+    public List<Bagger> getBaggers(Long cityId) {
+        List<Bagger> baggers;
+
+        if (cityId == null) {
+            baggers = Select.from(Bagger.class).fetch();
+        } else {
+            baggers = Select.from(Bagger.class).innerJoin(BaggerCity.class).on("baggers._id=baggers_cities.bagger_id").where("baggers_cities.city_id=?", cityId).fetch();
+        }
+
         for (Bagger bagger : baggers) {
             fillBaggerData(bagger);
         }

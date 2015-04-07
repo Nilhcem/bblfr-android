@@ -38,7 +38,7 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     public LocationsInfoWindowAdapter(Context context, Map<Marker, Location> markerLocations) {
         mContext = context;
         mLocations = markerLocations;
-        mLayout = LayoutInflater.from(context).inflate(R.layout.locations_map_info_window, null);
+        mLayout = LayoutInflater.from(context).inflate(R.layout.map_locations_info_window, null);
         ButterKnife.inject(this, mLayout);
     }
 

@@ -34,7 +34,7 @@ public class MapUtils {
         return new LatLng(Double.parseDouble(gpsSplit[0].trim()), Double.parseDouble(gpsSplit[1].trim()));
     }
 
-    public static void moveToCurrentLocation(GoogleMap map, List<Marker> markers, Location lastLocation) {
+    public static void moveToCurrentLocation(GoogleMap map, List<Marker> markers, Location lastLocation, float zoom) {
         map.setMyLocationEnabled(true);
 
         Location location = lastLocation;
@@ -42,11 +42,11 @@ public class MapUtils {
             moveToMarkerBounds(map, markers);
         } else {
             LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 11));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoom));
         }
     }
 
-    private static void moveToMarkerBounds(GoogleMap map, List<Marker> markers) {
+    public static void moveToMarkerBounds(GoogleMap map, List<Marker> markers) {
         // Calculate the bounds of all the markers
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Marker marker : markers) {

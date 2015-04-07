@@ -11,10 +11,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
 import icepick.Icepick;
+import rx.Subscription;
 
 public abstract class BaseActivity extends ActionBarActivity {
 
     protected BBLApplication mApplication;
+    protected Subscription mSubscription;
     private final int mLayoutResId;
 
     @Optional @InjectView(R.id.toolbar) protected Toolbar mToolbar;
@@ -39,6 +41,14 @@ public abstract class BaseActivity extends ActionBarActivity {
                 setSupportActionBar(mToolbar);
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if (mSubscription != null) {
+            mSubscription.unsubscribe();
+        }
+        super.onStop();
     }
 
     @Override

@@ -33,6 +33,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.baggers.map.BaggersMapActivity"/>
+
+        <activity android:name=".ui.baggers.list.BaggersListActivity"/>
+
         <activity android:name=".ui.locations.LocationsMapActivity"/>
 
         <activity android:name=".ui.SecondActivity"/>

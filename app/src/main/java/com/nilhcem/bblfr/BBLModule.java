@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.ui.SecondActivity;
+import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
@@ -20,6 +22,8 @@ import dagger.Provides;
         injects = {
                 LocationProvider.class,
                 SplashscreenActivity.class,
+                BaggersMapActivity.class,
+                BaggersListActivity.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }

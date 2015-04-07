@@ -11,13 +11,12 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportService;
 import com.nilhcem.bblfr.ui.BaseActivity;
-import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
+import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 
 import javax.inject.Inject;
 
 import butterknife.InjectView;
 import butterknife.Optional;
-import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -31,8 +30,6 @@ public class SplashscreenActivity extends BaseActivity {
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
     @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
-    private Subscription mSubscription;
-
     public SplashscreenActivity() {
         super(R.layout.splashscreen_activity);
     }
@@ -45,15 +42,9 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    LocationsMapActivity.launch(this);
+                    BaggersMapActivity.launch(this);
                 });
         animateLogo();
-    }
-
-    @Override
-    protected void onStop() {
-        mSubscription.unsubscribe();
-        super.onStop();
     }
 
     private void animateLogo() {
