@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.ui.SecondActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
 import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -17,6 +20,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
 
 @Module(
         injects = {
@@ -24,6 +28,7 @@ import dagger.Provides;
                 SplashscreenActivity.class,
                 BaggersMapActivity.class,
                 BaggersListActivity.class,
+                BaggersListHeaderView.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }
@@ -52,5 +57,12 @@ public class BBLModule {
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return mapper;
+    }
+
+    @Provides @Singleton Picasso providePicasso(OkHttpClient client) {
+        return new Picasso.Builder(mApp)
+                .downloader(new OkHttpDownloader(client))
+                .listener((picasso, uri, e) -> Timber.e(e, "Failed to load image: %s", uri))
+                .build();
     }
 }

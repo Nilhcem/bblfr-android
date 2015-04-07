@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
 import com.nilhcem.bblfr.R;
@@ -16,24 +18,25 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.InjectView;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class BaggersListActivity extends BaseActivity {
 
-    private static final String EXTRA_CITY_ID = "mCityId";
-    private static final String EXTRA_CITY_NAME = "mCityName";
+    private static final String EXTRA_CITY = "mCity";
 
     @Inject BaggersService mBaggersService;
-    private Long mCityId;
-    private String mCityName;
+    @InjectView(R.id.baggers_list_recycler_view) RecyclerView mRecyclerView;
+
+    private City mCity;
+    private BaggersListAdapter mAdapter;
 
     public static void launch(@NonNull Context context, City city) {
         Intent intent = new Intent(context, BaggersListActivity.class);
         if (city != null) {
-            intent.putExtra(EXTRA_CITY_ID, city.id);
-            intent.putExtra(EXTRA_CITY_NAME, city.name);
+            intent.putExtra(EXTRA_CITY, city);
         }
         context.startActivity(intent);
     }
@@ -47,8 +50,9 @@ public class BaggersListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getDataFromExtra();
         setToolbarTitle();
+        initRecyclerView();
 
-        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(mCityId))
+        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(mCity.id))
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::onBaggersLoaded);
     }
@@ -56,25 +60,26 @@ public class BaggersListActivity extends BaseActivity {
     private void setToolbarTitle() {
         String title;
 
-        if (TextUtils.isEmpty(mCityName)) {
+        if (TextUtils.isEmpty(mCity.name)) {
             title = getString(R.string.baggers_map_toolbar_title);
         } else {
-            title = getString(R.string.baggers_list_toolbar_title, mCityName);
+            title = getString(R.string.baggers_list_toolbar_title, mCity.name);
         }
         getSupportActionBar().setTitle(title);
     }
 
     private void getDataFromExtra() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.containsKey(EXTRA_CITY_ID)) {
-                mCityId = extras.getLong(EXTRA_CITY_ID);
-            }
-            mCityName = getIntent().getStringExtra(EXTRA_CITY_NAME);
-        }
+        mCity = getIntent().getParcelableExtra(EXTRA_CITY);
     }
 
     private void onBaggersLoaded(List<Bagger> baggers) {
         Timber.d("Baggers loaded from DB");
+        mAdapter.updateItems(mCity.picture, baggers);
+    }
+
+    private void initRecyclerView() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new BaggersListAdapter();
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

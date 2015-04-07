@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/white"
               android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/baggers_list_recycler_view"
+    <TextView
+        android:id="@+id/bagger_entry_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="12dp"/>
+        tools:text="ENTRY NAME"/>
 </LinearLayout>
