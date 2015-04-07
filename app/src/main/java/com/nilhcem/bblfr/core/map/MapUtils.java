@@ -16,6 +16,10 @@ import rx.Observable;
 
 public class MapUtils {
 
+    private MapUtils() {
+        throw new UnsupportedOperationException();
+    }
+
     public static Observable<GoogleMap> getGoogleMapObservable(MapFragment fragment) {
         return Observable.defer(() -> {
             GoogleMap map = fragment.getMap();
