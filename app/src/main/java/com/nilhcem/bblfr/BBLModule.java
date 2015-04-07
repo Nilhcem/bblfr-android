@@ -2,6 +2,7 @@ package com.nilhcem.bblfr;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.ui.SecondActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
@@ -17,6 +18,7 @@ import dagger.Provides;
 
 @Module(
         injects = {
+                LocationProvider.class,
                 SplashscreenActivity.class,
                 LocationsMapActivity.class,
                 SecondActivity.class

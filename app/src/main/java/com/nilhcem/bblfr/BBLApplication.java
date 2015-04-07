@@ -3,6 +3,7 @@ package com.nilhcem.bblfr;
 import android.app.Application;
 import android.content.Context;
 
+import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.core.db.Database;
 
 import dagger.ObjectGraph;
@@ -21,6 +22,7 @@ public class BBLApplication extends Application {
         super.onCreate();
         initLogger();
         initObjectGraph();
+        initLocationProvider();
         Database.init(this);
     }
 
@@ -32,6 +34,10 @@ public class BBLApplication extends Application {
 
     private void initObjectGraph() {
         mObjectGraph = ObjectGraph.create(new BBLModule(this));
+    }
+
+    private void initLocationProvider() {
+        mObjectGraph.get(LocationProvider.class).init(this);
     }
 
     public void inject(Object target) {

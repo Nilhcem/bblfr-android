@@ -14,6 +14,9 @@ public class BaggersService {
     @Inject BaggersDao mDao;
 
     public Observable<List<Bagger>> getBaggers() {
-        return Observable.defer(() -> Observable.just(mDao.getBaggers()));
+        return Observable.defer(() -> {
+            List<Bagger> baggers = mDao.getBaggers();
+            return Observable.just(baggers);
+        });
     }
 }

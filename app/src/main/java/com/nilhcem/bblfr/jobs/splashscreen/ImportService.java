@@ -15,6 +15,6 @@ public class ImportService {
         return Observable.zip(
                 baggersService.importData(),
                 locationsService.importData(),
-                Pair::new);
+                Pair::create);
     }
 }
