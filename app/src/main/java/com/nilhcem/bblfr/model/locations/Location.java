@@ -1,6 +1,9 @@
 package com.nilhcem.bblfr.model.locations;
 
+import android.text.TextUtils;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nilhcem.bblfr.BuildConfig;
 
 import java.util.List;
 
@@ -44,4 +47,15 @@ public class Location extends Model {
 
     @JsonProperty
     public Audience audience;
+
+    public String getPictureUrl() {
+        String pictureUrl = picture;
+
+        if (!TextUtils.isEmpty(pictureUrl)) {
+            if (!pictureUrl.startsWith("http")) {
+                pictureUrl = BuildConfig.WS_ENDPOINT + pictureUrl;
+            }
+        }
+        return pictureUrl;
+    }
 }

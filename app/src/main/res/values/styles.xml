@@ -11,4 +11,12 @@
         <item name="android:icon">@color/icons</item>
         <item name="android:divider">@color/divider</item>
     </style>
+
+    <!-- Location Info Window. -->
+    <style name="LocationInfoWindow"/>
+
+    <style name="LocationInfoWindow.SmallText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
 </resources>

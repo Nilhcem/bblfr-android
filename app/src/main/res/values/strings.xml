@@ -6,4 +6,10 @@
     <string name="splash_title">Brown Bag Lunch</string>
     <string name="splash_subtitle"><![CDATA[Les meilleurs <em>experts</em>, pour un midi <em>chez vous</em>, gratuitement&nbsp;!]]></string>
 
+    <!-- Locations -->
+    <string name="location_toolbar_title">Où proposer un BBL ?</string>
+    <string name="location_name"><![CDATA[<u>%s</u>]]></string>
+    <string name="location_contact"><![CDATA[<br /><b>Infos et contact&nbsp;:</b><br /> %s]]></string>
+    <string name="location_audience"><![CDATA[<br /><b>Audience&nbsp;:</b><br /> %s]]></string>
+    <string name="location_interests"><![CDATA[<br /><b>Centres d\'intérêts&nbsp;:</b><br /> %s]]></string>
 </resources>

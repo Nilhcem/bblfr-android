@@ -3,8 +3,8 @@ package com.nilhcem.bblfr;
 import android.app.Application;
 import android.content.Context;
 
-import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.core.db.Database;
+import com.nilhcem.bblfr.core.map.LocationProvider;
 
 import dagger.ObjectGraph;
 import timber.log.Timber;
