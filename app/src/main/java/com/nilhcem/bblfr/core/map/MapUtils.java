@@ -16,6 +16,8 @@ import rx.Observable;
 
 public class MapUtils {
 
+    public static final float HUE_DEFAULT = 25.0f;
+
     private MapUtils() {
         throw new UnsupportedOperationException();
     }

@@ -84,7 +84,7 @@ public class LocationsMapActivity extends BaseActivity {
                     .position(MapUtils.gpsToLatLng(location.gps))
                     .title(location.name)
                     .snippet(location.address)
-                    .icon(BitmapDescriptorFactory.defaultMarker(25.0f))
+                    .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
             );
             markers.add(marker);
             markerLocations.put(marker, location);
