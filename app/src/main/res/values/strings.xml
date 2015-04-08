@@ -9,6 +9,8 @@
     <!-- Baggers -->
     <string name="baggers_map_toolbar_title">Trouver un bagger</string>
     <string name="baggers_list_toolbar_title">Baggers à %s</string>
+    <string name="baggers_list_location"><![CDATA[<b>Lieux :</b> %s]]></string>
+    <string name="baggers_list_contact_button">Invitez-moi chez vous !</string>
 
     <!-- Locations -->
     <string name="location_toolbar_title">Où proposer un BBL ?</string>

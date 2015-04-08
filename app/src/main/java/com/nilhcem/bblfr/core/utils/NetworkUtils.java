@@ -4,7 +4,11 @@ import android.text.TextUtils;
 
 import com.nilhcem.bblfr.BuildConfig;
 
+import java.util.Locale;
+
 public class NetworkUtils {
+
+    private static final String TWITTER_LINK_PREFIX = "http://www.twitter.com/#!/%s";
 
     private NetworkUtils() {
         throw new UnsupportedOperationException();
@@ -19,5 +23,9 @@ public class NetworkUtils {
             }
         }
         return absoluteUrl;
+    }
+
+    public static String getTwitterUrl(String username) {
+        return String.format(Locale.US, TWITTER_LINK_PREFIX, username);
     }
 }

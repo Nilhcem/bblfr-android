@@ -1,13 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/bagger_entry_name"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="ENTRY NAME"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical">
+
+            <com.devspark.robototextview.widget.RobotoTextView
+                android:id="@+id/bagger_entry_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_dark"
+                android:textSize="22sp"
+                app:typeface="roboto_condensed_bold"
+                tools:text="Jean-Louis Rigau"
+                tools:textStyle="bold"/>
+
+            <com.devspark.robototextview.widget.RobotoTextView
+                android:id="@+id/bagger_entry_links"
+                style="@style/LocationInfoWindow.SmallText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/primary_text"
+                android:textColorLink="@color/primary"
+                android:textSize="14sp"
+                app:typeface="roboto_light"
+                tools:text="Website\nTwitter"/>
+
+            <com.devspark.robototextview.widget.RobotoTextView
+                android:id="@+id/bagger_entry_bio"
+                style="@style/LocationInfoWindow.SmallText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                app:typeface="roboto_light_italic"
+                tools:text="Développeur Java, Cloud Addict"/>
+
+            <com.devspark.robototextview.widget.RobotoTextView
+                android:id="@+id/bagger_entry_sessions"
+                style="@style/LocationInfoWindow.SmallText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:typeface="roboto_light"
+                tools:text="Propose\n> Continuous Deployment avec CloudBees\nDéployer une application dans le Cloud"/>
+
+            <com.devspark.robototextview.widget.RobotoTextView
+                android:id="@+id/bagger_entry_locations"
+                style="@style/LocationInfoWindow.SmallText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                app:typeface="roboto_light"
+                tools:text="Lieux : Paris et la Défense"/>
+
+            <Button
+                android:id="@+id/bagger_entry_invite_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/baggers_invite_button"
+                android:text="@string/baggers_list_contact_button"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

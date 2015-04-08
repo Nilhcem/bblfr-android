@@ -3,6 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:layout_marginBottom="4dp"
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
@@ -10,5 +11,5 @@
         android:id="@+id/baggers_list_city_header"
         android:layout_width="250dp"
         android:layout_height="100dp"
-        tools:background="@color/primary"/>
+        tools:src="@drawable/location_placeholder"/>
 </LinearLayout>

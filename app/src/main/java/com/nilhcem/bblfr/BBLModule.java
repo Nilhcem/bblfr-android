@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.ui.SecondActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
 import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
@@ -29,6 +30,7 @@ import timber.log.Timber;
                 BaggersMapActivity.class,
                 BaggersListActivity.class,
                 BaggersListHeaderView.class,
+                BaggersListEntryView.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }

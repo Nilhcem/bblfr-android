@@ -32,7 +32,7 @@ import timber.log.Timber;
 
 public class BaggersMapActivity extends BaseMapActivity {
 
-    private static final float DEFAULT_ZOOM = 9f;
+    private static final float DEFAULT_ZOOM = 10f;
 
     @Inject BaggersService mBaggersService;
 
