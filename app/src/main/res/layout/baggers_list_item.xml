@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
 
@@ -24,28 +24,49 @@
             android:layout_marginTop="2dp"
             android:orientation="vertical">
 
-            <com.devspark.robototextview.widget.RobotoTextView
-                android:id="@+id/bagger_entry_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_dark"
-                android:textSize="22sp"
-                app:typeface="roboto_condensed_bold"
-                tools:text="Jean-Louis Rigau"
-                tools:textStyle="bold"/>
+                android:orientation="horizontal">
 
-            <com.devspark.robototextview.widget.RobotoTextView
-                android:id="@+id/bagger_entry_links"
-                style="@style/LocationInfoWindow.SmallText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="18dp"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/primary_text"
-                android:textColorLink="@color/primary"
-                android:textSize="14sp"
-                app:typeface="roboto_light"
-                tools:text="Website\nTwitter"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        android:id="@+id/bagger_entry_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="22sp"
+                        app:typeface="roboto_condensed_bold"
+                        tools:text="Jean-Louis Rigau"
+                        tools:textStyle="bold"/>
+
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        android:id="@+id/bagger_entry_links"
+                        style="@style/LocationInfoWindow.SmallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/primary_text"
+                        android:textColorLink="@color/primary"
+                        android:textSize="14sp"
+                        app:typeface="roboto_light"
+                        tools:text="Website\nTwitter"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/bagger_entry_picture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="4dp"
+                    tools:background="@color/primary"/>
+            </LinearLayout>
 
             <com.devspark.robototextview.widget.RobotoTextView
                 android:id="@+id/bagger_entry_bio"

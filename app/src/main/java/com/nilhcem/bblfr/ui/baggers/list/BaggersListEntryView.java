@@ -6,10 +6,13 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.ui.RoundedTransformation;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
+import com.squareup.picasso.Callback;
 
 import butterknife.InjectView;
 
@@ -20,6 +23,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
     @InjectView(R.id.bagger_entry_bio) TextView mBio;
     @InjectView(R.id.bagger_entry_sessions) TextView mSessions;
     @InjectView(R.id.bagger_entry_locations) TextView mLocations;
+    @InjectView(R.id.bagger_entry_picture) ImageView mPicture;
     @InjectView(R.id.bagger_entry_invite_button) Button mInvite;
 
     public BaggersListEntryView(ViewGroup parent) {
@@ -37,6 +41,18 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
         setTextIfAny(mSessions, data.sessions);
         setTextIfAny(mBio, data.bio);
         setTextIfAny(mLocations, data.locations);
+
+        mPicasso.load(data.pictureUrl).transform(new RoundedTransformation(4, 0)).noFade().into(mPicture, new Callback() {
+            @Override
+            public void onSuccess() {
+                mPicture.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                mPicture.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setTextIfAny(TextView textview, CharSequence text) {

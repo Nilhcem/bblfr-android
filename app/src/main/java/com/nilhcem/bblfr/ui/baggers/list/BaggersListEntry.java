@@ -36,11 +36,13 @@ public class BaggersListEntry {
     public final CharSequence sessions;
     public final CharSequence bio;
     public final CharSequence locations;
+    public final String pictureUrl;
 
     public BaggersListEntry(Context context, Bagger bagger) {
         this.bagger = bagger;
 
         name = bagger.name;
+        pictureUrl = NetworkUtils.getAbsoluteUrl(bagger.picture);
         links = linksToSpannable(context, bagger.websites, bagger.twitter);
         sessions = sessionsToSpannable(context, bagger.sessions);
         bio = htmlTextToSpannable(bagger.bio);
