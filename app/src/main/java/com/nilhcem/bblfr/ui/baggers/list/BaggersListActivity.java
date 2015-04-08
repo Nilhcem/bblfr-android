@@ -10,7 +10,6 @@ import android.text.TextUtils;
 
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
-import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseActivity;
 
@@ -52,7 +51,7 @@ public class BaggersListActivity extends BaseActivity {
         setToolbarTitle();
         initRecyclerView();
 
-        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(mCity.id))
+        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id))
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::onBaggersLoaded);
     }
@@ -72,7 +71,7 @@ public class BaggersListActivity extends BaseActivity {
         mCity = getIntent().getParcelableExtra(EXTRA_CITY);
     }
 
-    private void onBaggersLoaded(List<Bagger> baggers) {
+    private void onBaggersLoaded(List<BaggersListEntry> baggers) {
         Timber.d("Baggers loaded from DB");
         mAdapter.updateItems(mCity.picture, baggers);
     }

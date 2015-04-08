@@ -24,7 +24,7 @@ public class BaggersListAdapter extends RecyclerView.Adapter<BaseRecyclerViewHol
     private static final int TYPE_HEADER = 2;
 
     private String mHeaderPictureUrl;
-    private List<Bagger> mItems = Collections.emptyList();
+    private List<BaggersListEntry> mItems = Collections.emptyList();
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,7 +63,7 @@ public class BaggersListAdapter extends RecyclerView.Adapter<BaseRecyclerViewHol
         return TYPE_ITEM;
     }
 
-    public void updateItems(String headerPictureUrl, List<Bagger> items) {
+    public void updateItems(String headerPictureUrl, List<BaggersListEntry> items) {
         mHeaderPictureUrl = headerPictureUrl;
 
         if (items == null) {
