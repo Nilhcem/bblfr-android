@@ -7,12 +7,15 @@
     <string name="splash_subtitle"><![CDATA[Les meilleurs <em>experts</em>, pour un midi <em>chez vous</em>, gratuitement&nbsp;!]]></string>
 
     <!-- Baggers -->
-    <string name="baggers_map_toolbar_title">Trouver un bagger</string>
+    <string name="baggers_map_toolbar_title">Baggers à proximité</string>
     <string name="baggers_list_toolbar_title">Baggers à %s</string>
     <string name="baggers_list_location"><![CDATA[<b>Lieux :</b> %s]]></string>
     <string name="baggers_list_contact_button">Invitez-moi chez vous !</string>
     <string name="baggers_list_contact_chooser_title">Contacter ce bagger par email</string>
     <string name="baggers_list_contact_email_subject">Contact pour un BBL</string>
+
+    <!-- Search -->
+    <string name="baggers_search_toolbar_title">Rechercher un Bagger</string>
 
     <!-- Locations -->
     <string name="location_toolbar_title">Où proposer un BBL ?</string>

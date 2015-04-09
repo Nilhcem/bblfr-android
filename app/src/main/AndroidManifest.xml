@@ -37,6 +37,8 @@
 
         <activity android:name=".ui.baggers.list.BaggersListActivity"/>
 
+        <activity android:name=".ui.baggers.search.BaggersSearchActivity"/>
+
         <activity android:name=".ui.locations.LocationsMapActivity"/>
 
         <activity android:name=".ui.SecondActivity"/>
