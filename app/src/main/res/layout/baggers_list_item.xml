@@ -35,27 +35,27 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.devspark.robototextview.widget.RobotoTextView
+                    <TextView
                         android:id="@+id/bagger_entry_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/primary_dark"
                         android:textSize="22sp"
-                        app:typeface="roboto_condensed_bold"
-                        tools:text="Jean-Louis Rigau"
-                        tools:textStyle="bold"/>
+                        android:textStyle="bold"
+                        tools:text="Jean-Louis Rigau"/>
 
-                    <com.devspark.robototextview.widget.RobotoTextView
+                    <TextView
                         android:id="@+id/bagger_entry_links"
                         style="@style/LocationInfoWindow.SmallText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:layout_marginTop="12dp"
+                        android:fontFamily="sans-serif-light"
                         android:textColor="@color/primary_text"
                         android:textColorLink="@color/primary"
                         android:textSize="14sp"
-                        app:typeface="roboto_light"
                         tools:text="Website\nTwitter"/>
                 </LinearLayout>
 
@@ -63,40 +63,41 @@
                     android:id="@+id/bagger_entry_picture"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="6dp"
                     android:layout_marginLeft="4dp"
+                    android:layout_marginTop="6dp"
                     tools:background="@color/primary"/>
             </LinearLayout>
 
-            <com.devspark.robototextview.widget.RobotoTextView
+            <TextView
                 android:id="@+id/bagger_entry_bio"
                 style="@style/LocationInfoWindow.SmallText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp"
-                app:typeface="roboto_light_italic"
+                android:textStyle="italic"
                 tools:text="Développeur Java, Cloud Addict"/>
 
-            <com.devspark.robototextview.widget.RobotoTextView
+            <TextView
                 android:id="@+id/bagger_entry_sessions"
                 style="@style/LocationInfoWindow.SmallText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:textSize="14sp"
-                app:typeface="roboto_light"
                 tools:text="Propose\n> Continuous Deployment avec CloudBees\nDéployer une application dans le Cloud"/>
 
-            <com.devspark.robototextview.widget.RobotoTextView
+            <TextView
                 android:id="@+id/bagger_entry_locations"
                 style="@style/LocationInfoWindow.SmallText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif-light"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp"
-                app:typeface="roboto_light"
                 tools:text="Lieux : Paris et la Défense"/>
 
             <Button

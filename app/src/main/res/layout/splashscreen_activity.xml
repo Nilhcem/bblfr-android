@@ -2,7 +2,6 @@
 <RelativeLayout
     android:id="@+id/splash_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,29 +19,35 @@
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
-        <com.devspark.robototextview.widget.RobotoTextView
-            android:id="@+id/splash_title"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/splash_shimmer_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/splash_title"
-            android:textColor="@color/primary_text"
-            android:textSize="44sp"
-            android:textStyle="bold"
-            app:typeface="roboto_condensed_bold"/>
+            android:layout_height="wrap_content">
 
-        <com.devspark.robototextview.widget.RobotoTextView
+            <TextView
+                android:id="@+id/splash_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:text="@string/splash_title"
+                android:textColor="@color/black"
+                android:textSize="44sp"
+                android:textStyle="bold"/>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
             android:id="@+id/splash_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@color/primary_light"
             android:textSize="18sp"
-            app:typeface="roboto_light"
             tools:text="@string/splash_subtitle"/>
     </LinearLayout>
 </RelativeLayout>

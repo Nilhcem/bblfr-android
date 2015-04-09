@@ -79,7 +79,6 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.2'
     compile 'io.reactivex:rxandroid:0.24.0'
     compile 'com.jakewharton:butterknife:6.1.0'
-    compile 'com.github.johnkil.android-robototextview:robototextview:2.3.0'
     compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
 
