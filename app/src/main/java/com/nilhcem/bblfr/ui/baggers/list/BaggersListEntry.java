@@ -27,26 +27,22 @@ import static com.nilhcem.bblfr.core.utils.StringUtils.addLineSeparator;
 
 public class BaggersListEntry {
 
-    // Original data
-    public final Bagger bagger;
-
-    // Optimized data
     public final CharSequence name;
     public final CharSequence links;
     public final CharSequence sessions;
     public final CharSequence bio;
     public final CharSequence locations;
     public final String pictureUrl;
+    public final String email;
 
     public BaggersListEntry(Context context, Bagger bagger) {
-        this.bagger = bagger;
-
         name = bagger.name;
         pictureUrl = NetworkUtils.getAbsoluteUrl(bagger.picture);
         links = linksToSpannable(context, bagger.websites, bagger.twitter);
         sessions = sessionsToSpannable(context, bagger.sessions);
         bio = htmlTextToSpannable(bagger.bio);
         locations = locationsToSpannable(context, bagger.location);
+        email = toProperEmail(bagger.mail);
     }
 
     private Spanned htmlTextToSpannable(String source) {
@@ -121,5 +117,13 @@ public class BaggersListEntry {
         sb.append(ZERO_WIDTH_SPACE);
         sb.append(text);
         sb.setSpan(new CenteredImageSpan(icon), start, start + 1, SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private String toProperEmail(String orig) {
+        String proper = orig;
+        if (proper == null) {
+            proper = "";
+        }
+        return proper;
     }
 }

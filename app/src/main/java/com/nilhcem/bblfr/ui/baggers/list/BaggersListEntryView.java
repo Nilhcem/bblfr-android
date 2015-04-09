@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.baggers.list;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -11,10 +12,12 @@ import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.RoundedTransformation;
+import com.nilhcem.bblfr.core.utils.IntentUtils;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 import com.squareup.picasso.Callback;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntry> {
 
@@ -24,7 +27,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
     @InjectView(R.id.bagger_entry_sessions) TextView mSessions;
     @InjectView(R.id.bagger_entry_locations) TextView mLocations;
     @InjectView(R.id.bagger_entry_picture) ImageView mPicture;
-    @InjectView(R.id.bagger_entry_invite_button) Button mInvite;
+    @InjectView(R.id.bagger_entry_invite_button) Button mContactButton;
 
     public BaggersListEntryView(ViewGroup parent) {
         super(parent, R.layout.baggers_list_item);
@@ -41,6 +44,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
         setTextIfAny(mSessions, data.sessions);
         setTextIfAny(mBio, data.bio);
         setTextIfAny(mLocations, data.locations);
+        mContactButton.setTag(data.email);
 
         mPicasso.load(data.pictureUrl).transform(new RoundedTransformation(4, 0)).noFade().into(mPicture, new Callback() {
             @Override
@@ -53,6 +57,14 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
                 mPicture.setVisibility(View.GONE);
             }
         });
+    }
+
+    @OnClick(R.id.bagger_entry_invite_button)
+    public void onInviteButtonClicked(Button button) {
+        Context context = itemView.getContext();
+        String chooser = context.getString(R.string.baggers_list_contact_chooser_title);
+        String subject = context.getString(R.string.baggers_list_contact_email_subject);
+        IntentUtils.startEmailIntent(context, chooser, (String) button.getTag(), subject);
     }
 
     private void setTextIfAny(TextView textview, CharSequence text) {
