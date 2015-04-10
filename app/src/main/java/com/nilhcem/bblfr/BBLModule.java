@@ -8,7 +8,6 @@ import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
 import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
-import com.nilhcem.bblfr.ui.baggers.search.BaggersSearchActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
@@ -32,7 +31,6 @@ import timber.log.Timber;
                 BaggersListActivity.class,
                 BaggersListHeaderView.class,
                 BaggersListEntryView.class,
-                BaggersSearchActivity.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }
