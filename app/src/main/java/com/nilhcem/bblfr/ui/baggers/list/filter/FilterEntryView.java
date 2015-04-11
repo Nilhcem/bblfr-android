@@ -19,7 +19,7 @@ public class FilterEntryView extends BaseRecyclerViewHolder<Tag> {
     private Tag mTag;
 
     public FilterEntryView(ViewGroup parent) {
-        super(parent, R.layout.filter_list_item);
+        super(parent, R.layout.filter_list_item, false);
     }
 
     @Override

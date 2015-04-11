@@ -8,7 +8,7 @@ import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 public class FilterHeaderView extends BaseRecyclerViewHolder<Void> {
 
     public FilterHeaderView(ViewGroup parent) {
-        super(parent, R.layout.filter_list_header);
+        super(parent, R.layout.filter_list_header, false);
     }
 
     @Override

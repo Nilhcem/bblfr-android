@@ -15,12 +15,12 @@ import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
-    @Inject protected Picasso mPicasso;
-
-    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource) {
+    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi) {
         super(LayoutInflater.from(parent.getContext()).inflate(resource, parent, false));
-        BBLApplication.get(itemView.getContext()).inject(this);
         ButterKnife.inject(this, itemView);
+        if (withDi) {
+            BBLApplication.get(itemView.getContext()).inject(this);
+        }
     }
 
     public abstract void bindData(T data);

@@ -15,11 +15,16 @@ import com.nilhcem.bblfr.core.ui.RoundedTransformation;
 import com.nilhcem.bblfr.core.utils.IntentUtils;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntry> {
+
+    @Inject Picasso mPicasso;
 
     @InjectView(R.id.bagger_entry_name) TextView mName;
     @InjectView(R.id.bagger_entry_links) TextView mLinks;
@@ -30,7 +35,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
     @InjectView(R.id.bagger_entry_invite_button) Button mContactButton;
 
     public BaggersListEntryView(ViewGroup parent) {
-        super(parent, R.layout.baggers_list_item);
+        super(parent, R.layout.baggers_list_item, true);
 
         mBio.setMovementMethod(LinkMovementMethod.getInstance());
         mLinks.setMovementMethod(LinkMovementMethod.getInstance());

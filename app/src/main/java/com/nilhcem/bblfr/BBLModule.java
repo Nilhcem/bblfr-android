@@ -33,8 +33,6 @@ import timber.log.Timber;
                 BaggersListActivity.class,
                 BaggersListHeaderView.class,
                 BaggersListEntryView.class,
-                FilterEntryView.class,
-                FilterHeaderView.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }

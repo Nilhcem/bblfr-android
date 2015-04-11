@@ -7,15 +7,20 @@ import android.widget.ImageView;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 import butterknife.InjectView;
 
 public class BaggersListHeaderView extends BaseRecyclerViewHolder<String> {
 
+    @Inject Picasso mPicasso;
+
     @InjectView(R.id.baggers_list_city_header) ImageView mCityImage;
 
     public BaggersListHeaderView(ViewGroup parent) {
-        super(parent, R.layout.baggers_list_header);
+        super(parent, R.layout.baggers_list_header, true);
     }
 
     @Override

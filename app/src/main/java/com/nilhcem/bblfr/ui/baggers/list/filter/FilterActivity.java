@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.nilhcem.bblfr.R;
@@ -100,10 +101,11 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_filter_baggers) {
-            if (mDrawer.mLayout.isDrawerOpen(GravityCompat.END)) {
-                mDrawer.mLayout.closeDrawer(GravityCompat.END);
+            DrawerLayout drawer = mDrawer.mLayout;
+            if (drawer.isDrawerOpen(GravityCompat.END)) {
+                drawer.closeDrawer(GravityCompat.END);
             } else {
-                mDrawer.mLayout.openDrawer(GravityCompat.END);
+                drawer.openDrawer(GravityCompat.END);
             }
             return true;
         }
@@ -119,15 +121,18 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
     }
 
     private void injectSubLayout() {
-        mDrawer.mContent.removeAllViews();
+        ViewGroup content = mDrawer.mContent;
+        RecyclerView recyclerView = mDrawer.mRecyclerView;
+
+        content.removeAllViews();
         View subView = getLayoutInflater().inflate(mSubLayoutResId, null, true);
-        mDrawer.mContent.addView(subView);
+        content.addView(subView);
         ButterKnife.inject(this, subView);
 
-        mDrawer.mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDrawer.mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.filter_line_divider)));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.filter_line_divider)));
         mAdapter = new FilterAdapter(this);
-        mDrawer.mRecyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void getDataFromExtra() {
