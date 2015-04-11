@@ -40,31 +40,8 @@ public class BaggersListActivity extends FilterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarTitle();
+        setToolbarTitle(0);
         initRecyclerView();
-    }
-
-    private void setToolbarTitle() {
-        String title;
-
-        if (TextUtils.isEmpty(mCity.name)) {
-            title = getString(R.string.baggers_map_toolbar_title);
-        } else {
-            title = getString(R.string.baggers_list_toolbar_title, mCity.name);
-        }
-        getSupportActionBar().setTitle(title);
-    }
-
-    private void onBaggersLoaded(List<BaggersListEntry> baggers) {
-        Timber.d("Baggers loaded from DB");
-        mAdapter.updateItems(NetworkUtils.getAbsoluteUrl(mCity.picture), baggers);
-    }
-
-    private void initRecyclerView() {
-        mRecyclerView.setEmptyView(mEmptyView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new BaggersListAdapter();
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -78,5 +55,33 @@ public class BaggersListActivity extends FilterActivity {
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::onBaggersLoaded);
+    }
+
+    private void setToolbarTitle(int nbBaggers) {
+        String title;
+
+        if (TextUtils.isEmpty(mCity.name)) {
+            title = getString(R.string.baggers_map_toolbar_title);
+        } else if (nbBaggers == 0) {
+            title = getString(R.string.baggers_list_toolbar_title, mCity.name);
+        } else if (nbBaggers == 1) {
+            title = getString(R.string.baggers_list_toolbar_title_one, mCity.name);
+        } else {
+            title = getString(R.string.baggers_list_toolbar_title_many, nbBaggers, mCity.name);
+        }
+        getSupportActionBar().setTitle(title);
+    }
+
+    private void onBaggersLoaded(List<BaggersListEntry> baggers) {
+        Timber.d("Baggers loaded from DB");
+        mAdapter.updateItems(NetworkUtils.getAbsoluteUrl(mCity.picture), baggers);
+        setToolbarTitle(baggers.size());
+    }
+
+    private void initRecyclerView() {
+        mRecyclerView.setEmptyView(mEmptyView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new BaggersListAdapter();
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

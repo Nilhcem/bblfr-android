@@ -79,10 +79,8 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
         mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersTags(mCity.id))
                 .subscribeOn(Schedulers.io())
                 .subscribe(tags -> {
-                    Timber.d("Tags found");
+                    Timber.d("Tags loaded from database");
                     mAdapter.updateItems(tags);
-
-
                 });
     }
 

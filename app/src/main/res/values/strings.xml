@@ -9,6 +9,8 @@
     <!-- Baggers -->
     <string name="baggers_map_toolbar_title">Baggers à proximité</string>
     <string name="baggers_list_toolbar_title">Baggers à %s</string>
+    <string name="baggers_list_toolbar_title_one">1 Bagger à %s</string>
+    <string name="baggers_list_toolbar_title_many">%1$d Baggers à %2$s</string>
     <string name="baggers_list_location"><![CDATA[<b>Lieux :</b> %s]]></string>
     <string name="baggers_list_contact_button">Invitez-moi chez vous !</string>
     <string name="baggers_list_contact_chooser_title">Contacter ce bagger par email</string>
