@@ -25,7 +25,7 @@ import timber.log.Timber;
 public class BaggersListActivity extends FilterActivity {
 
     @InjectView(R.id.baggers_list_recycler_view) EmptyRecyclerView mRecyclerView;
-    @InjectView(R.id.baggers_list_loading_view) View mEmptyView;
+    @InjectView(R.id.loading_view) View mEmptyView;
 
     private BaggersListAdapter mAdapter;
 
@@ -74,7 +74,7 @@ public class BaggersListActivity extends FilterActivity {
 
     private void onBaggersLoaded(List<BaggersListEntry> baggers) {
         Timber.d("Baggers loaded from DB");
-        mAdapter.updateItems(NetworkUtils.getAbsoluteUrl(mCity.picture), baggers);
+        mAdapter.updateItems(baggers, NetworkUtils.getAbsoluteUrl(mCity.picture));
         setToolbarTitle(baggers.size());
     }
 

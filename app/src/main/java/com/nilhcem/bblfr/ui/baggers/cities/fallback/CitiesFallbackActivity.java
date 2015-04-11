@@ -1,0 +1,82 @@
+package com.nilhcem.bblfr.ui.baggers.cities.fallback;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+
+import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
+import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
+import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
+import com.nilhcem.bblfr.jobs.baggers.BaggersService;
+import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.ui.BaseActivity;
+import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.InjectView;
+import rx.android.app.AppObservable;
+import rx.schedulers.Schedulers;
+import timber.log.Timber;
+
+/**
+ * Displays a list of cities.
+ * <p>
+ * Fallback for {@link com.nilhcem.bblfr.ui.baggers.cities.CitiesMapActivity}
+ * for devices without Google Play Services)
+ * </p>
+ */
+public class CitiesFallbackActivity extends BaseActivity implements CitiesFallbackAdapter.OnCitySelectedListener {
+
+    @Inject BaggersService mBaggersService;
+
+    @InjectView(R.id.cities_fallback_recycler_view) EmptyRecyclerView mRecyclerView;
+    @InjectView(R.id.loading_view) View mEmptyView;
+
+    private CitiesFallbackAdapter mAdapter;
+
+    public CitiesFallbackActivity() {
+        super(R.layout.cities_fallback_activity);
+    }
+
+    // Temporary
+    public static void launch(@NonNull Context context) {
+        Intent intent = new Intent(context, CitiesFallbackActivity.class);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle(R.string.cities_fallback_toolbar_title);
+        initRecyclerView();
+
+        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersCities())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::onCitiesLoaded);
+    }
+
+    @Override
+    public void onCitySelected(City selectedCity) {
+        BaggersListActivity.launch(this, selectedCity);
+    }
+
+    private void initRecyclerView() {
+        mRecyclerView.setEmptyView(mEmptyView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.line_divider)));
+        mAdapter = new CitiesFallbackAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void onCitiesLoaded(List<City> cities) {
+        Timber.d("BBL Cities loaded from DB");
+        mAdapter.updateItems(cities);
+    }
+}

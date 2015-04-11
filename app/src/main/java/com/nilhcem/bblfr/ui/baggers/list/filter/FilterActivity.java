@@ -47,7 +47,7 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
         @InjectView(R.id.filter_drawer_layout) DrawerLayout mLayout;
         @InjectView(R.id.filter_content_frame) FrameLayout mContent;
         @InjectView(R.id.filter_recycler_view) EmptyRecyclerView mRecyclerView;
-        @InjectView(R.id.filter_loading_view) ProgressBar mEmptyView;
+        @InjectView(R.id.loading_view) ProgressBar mEmptyView;
         @InjectView(R.id.toolbar) Toolbar mToolbar;
     }
 
@@ -133,7 +133,7 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
 
         recyclerView.setEmptyView(mDrawer.mEmptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.filter_line_divider)));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.line_divider)));
         mAdapter = new FilterAdapter(this);
         recyclerView.setAdapter(mAdapter);
     }

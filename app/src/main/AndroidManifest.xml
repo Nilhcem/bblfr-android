@@ -33,7 +33,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.baggers.map.BaggersMapActivity"/>
+        <activity android:name=".ui.baggers.cities.CitiesMapActivity"/>
+
+        <activity android:name=".ui.baggers.cities.fallback.CitiesFallbackActivity"/>
 
         <activity android:name=".ui.baggers.list.BaggersListActivity"/>
 

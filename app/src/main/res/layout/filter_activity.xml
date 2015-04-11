@@ -32,12 +32,11 @@
                 android:scrollbars="vertical"/>
 
             <!-- Loading View -->
-            <ProgressBar
-                android:id="@+id/filter_loading_view"
+            <include
+                layout="@layout/loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
+                android:layout_gravity="center"/>
         </FrameLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

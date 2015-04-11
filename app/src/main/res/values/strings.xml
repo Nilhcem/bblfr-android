@@ -20,6 +20,9 @@
     <string name="filter_toolbar_action">Filtrer</string>
     <string name="filter_header">Filtrer par tags</string>
 
+    <!-- Cities fallback -->
+    <string name="cities_fallback_toolbar_title">Sélectionnez une ville…</string>
+
     <!-- Search -->
     <string name="baggers_search_toolbar_title">Rechercher un Bagger</string>
 

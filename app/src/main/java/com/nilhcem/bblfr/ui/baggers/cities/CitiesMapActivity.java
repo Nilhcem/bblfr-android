@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.ui.baggers.map;
+package com.nilhcem.bblfr.ui.baggers.cities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,14 +30,14 @@ import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class BaggersMapActivity extends BaseMapActivity {
+public class CitiesMapActivity extends BaseMapActivity {
 
     private static final float DEFAULT_ZOOM = 10f;
 
     @Inject BaggersService mBaggersService;
 
     public static void launch(@NonNull Context context) {
-        Intent intent = new Intent(context, BaggersMapActivity.class);
+        Intent intent = new Intent(context, CitiesMapActivity.class);
         context.startActivity(intent);
     }
 

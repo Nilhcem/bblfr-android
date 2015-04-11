@@ -10,7 +10,7 @@ import com.nilhcem.bblfr.ui.BaseHeaderAdapter;
 
 import java.util.List;
 
-public class FilterAdapter extends BaseHeaderAdapter<Void, Tag, FilterHeaderView, FilterEntryView> implements View.OnClickListener {
+public class FilterAdapter extends BaseHeaderAdapter<String, Tag, FilterHeaderView, FilterEntryView> implements View.OnClickListener {
 
     public interface OnFilterChangeListener {
         void onFilterChanged(LongSparseArray<Tag> selectedTags);
@@ -40,8 +40,9 @@ public class FilterAdapter extends BaseHeaderAdapter<Void, Tag, FilterHeaderView
         view.setIsSelected(mSelectedTags.get(item.id) != null);
     }
 
-    public void updateItems(List<Tag> tags) {
-        super.updateItems(null, tags);
+    @Override
+    public void updateItems(List<Tag> items) {
+        super.updateItems(items, "");
         mSelectedTags.clear();
         mListener.onFilterChanged(mSelectedTags);
     }
