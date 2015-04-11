@@ -1,5 +1,7 @@
 package com.nilhcem.bblfr.model.locations.dao;
 
+import android.support.annotation.NonNull;
+
 import com.nilhcem.bblfr.model.locations.Audience;
 import com.nilhcem.bblfr.model.locations.Interest;
 import com.nilhcem.bblfr.model.locations.Location;
@@ -27,7 +29,7 @@ public class LocationsDao {
         return locations;
     }
 
-    private void fillLocationData(Location location) {
+    private void fillLocationData(@NonNull Location location) {
         location.audience = Select.from(Audience.class).where("audience.location_id=?", location.id).fetchSingle();
         location.interests = Select.from(Interest.class).innerJoin(LocationInterest.class).on("interests._id=locations_interests.interest_id").where("locations_interests.location_id=?", location.id).fetch();
     }

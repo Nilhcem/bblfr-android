@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.jobs.baggers;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.util.LongSparseArray;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
@@ -22,7 +23,7 @@ public class BaggersService {
     @Inject CitiesDao mCitiesDao;
     @Inject BaggersDao mBaggersDao;
 
-    public Observable<List<BaggersListEntry>> getBaggers(Context context, Long cityId, LongSparseArray<Tag> selectedTags) {
+    public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull LongSparseArray<Tag> selectedTags) {
         return Observable.defer(() -> {
             List<BaggersListEntry> entries = new ArrayList<>();
             List<Bagger> baggers = mBaggersDao.getBaggers(cityId, selectedTags);
@@ -34,7 +35,7 @@ public class BaggersService {
         });
     }
 
-    public Observable<List<Tag>> getBaggersTags(Long cityId) {
+    public Observable<List<Tag>> getBaggersTags(@NonNull Long cityId) {
         return Observable.defer(() -> {
             List<Tag> tags = mBaggersDao.getBaggersTags(cityId);
             return Observable.just(tags);

@@ -10,9 +10,8 @@ import android.widget.TextView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.jobs.splashscreen.ImportService;
-import com.nilhcem.bblfr.model.baggers.dao.CitiesDao;
 import com.nilhcem.bblfr.ui.BaseActivity;
-import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 
 import javax.inject.Inject;
 
@@ -25,7 +24,6 @@ import timber.log.Timber;
 public class SplashscreenActivity extends BaseActivity {
 
     @Inject ImportService mImportService;
-    @Inject CitiesDao mDao;
 
     @InjectView(R.id.splash_background) ViewGroup mBackground;
     @InjectView(R.id.splash_logo_container) ViewGroup mLogoContainer;
@@ -44,7 +42,7 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    BaggersListActivity.launch(this, mDao.getCities().get(10));
+                    BaggersMapActivity.launch(this);
                 });
         animateLogo();
     }
