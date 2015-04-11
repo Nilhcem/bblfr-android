@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.core.ui;
+package com.nilhcem.bblfr.core.ui.spannable;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

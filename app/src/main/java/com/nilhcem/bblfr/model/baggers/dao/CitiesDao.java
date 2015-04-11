@@ -17,6 +17,6 @@ public class CitiesDao {
     }
 
     public List<City> getCities() {
-        return Select.from(City.class).fetch();
+        return Select.from(City.class).orderBy("name ASC").fetch();
     }
 }

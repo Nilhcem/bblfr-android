@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.core.ui;
+package com.nilhcem.bblfr.core.ui.picasso;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

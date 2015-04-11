@@ -40,14 +40,18 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
             onBindHeaderView((HV) holder, mHeader);
         } else {
             onBindItemView((IV) holder, mItems.get(position - 1));
-            // "- 1" as we are taking header into account so all of our items are correctly positioned
+            // "- 1" as we are taking header into account so all of our items are correctly positioned.
         }
     }
 
     @Override
     public int getItemCount() {
+        if (mItems.size() == 0) {
+            // Empty view.
+            return 0;
+        }
+        // Items + 1 header.
         return mItems.size() + 1;
-        // "+ 1" for the header
     }
 
     @Override

@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.model.baggers.Tag;
@@ -23,7 +24,8 @@ import timber.log.Timber;
 
 public class BaggersListActivity extends FilterActivity {
 
-    @InjectView(R.id.baggers_list_recycler_view) RecyclerView mRecyclerView;
+    @InjectView(R.id.baggers_list_recycler_view) EmptyRecyclerView mRecyclerView;
+    @InjectView(R.id.baggers_list_loading_view) View mEmptyView;
 
     private BaggersListAdapter mAdapter;
 
@@ -59,6 +61,7 @@ public class BaggersListActivity extends FilterActivity {
     }
 
     private void initRecyclerView() {
+        mRecyclerView.setEmptyView(mEmptyView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaggersListAdapter();
         mRecyclerView.setAdapter(mAdapter);
@@ -69,6 +72,8 @@ public class BaggersListActivity extends FilterActivity {
         if (mSubscription != null && !mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }
+        mAdapter.updateItems(null, null);
+        mRecyclerView.scrollToPosition(0);
 
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
                 .subscribeOn(Schedulers.io())

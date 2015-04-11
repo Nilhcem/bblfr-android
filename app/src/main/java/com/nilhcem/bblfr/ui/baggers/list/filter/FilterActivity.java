@@ -2,12 +2,12 @@ package com.nilhcem.bblfr.ui.baggers.list.filter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.core.ui.SimpleDividerItemDecoration;
+import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
+import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
@@ -44,7 +46,8 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
     static class ViewHolder {
         @InjectView(R.id.filter_drawer_layout) DrawerLayout mLayout;
         @InjectView(R.id.filter_content_frame) FrameLayout mContent;
-        @InjectView(R.id.filter_recycler_view) RecyclerView mRecyclerView;
+        @InjectView(R.id.filter_recycler_view) EmptyRecyclerView mRecyclerView;
+        @InjectView(R.id.filter_loading_view) ProgressBar mEmptyView;
         @InjectView(R.id.toolbar) Toolbar mToolbar;
     }
 
@@ -122,13 +125,15 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
 
     private void injectSubLayout() {
         ViewGroup content = mDrawer.mContent;
-        RecyclerView recyclerView = mDrawer.mRecyclerView;
+        mDrawer.mEmptyView.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.primary_light), PorterDuff.Mode.SRC_ATOP);
+        EmptyRecyclerView recyclerView = mDrawer.mRecyclerView;
 
         content.removeAllViews();
         View subView = getLayoutInflater().inflate(mSubLayoutResId, null, true);
         content.addView(subView);
         ButterKnife.inject(this, subView);
 
+        recyclerView.setEmptyView(mDrawer.mEmptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.filter_line_divider)));
         mAdapter = new FilterAdapter(this);

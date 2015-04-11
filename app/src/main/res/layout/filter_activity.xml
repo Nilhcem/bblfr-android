@@ -19,13 +19,25 @@
             android:layout_height="match_parent"/>
 
         <!-- Filter Drawer -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/filter_recycler_view"
+        <FrameLayout
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:background="@color/primary_dark"
-            android:scrollbars="vertical"/>
+            android:background="@color/primary_dark">
 
+            <com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView
+                android:id="@+id/filter_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"/>
+
+            <!-- Loading View -->
+            <ProgressBar
+                android:id="@+id/filter_loading_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

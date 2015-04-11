@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.core.ui.RoundedTransformation;
+import com.nilhcem.bblfr.core.ui.picasso.RoundedTransformation;
 import com.nilhcem.bblfr.core.utils.IntentUtils;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 import com.squareup.picasso.Callback;

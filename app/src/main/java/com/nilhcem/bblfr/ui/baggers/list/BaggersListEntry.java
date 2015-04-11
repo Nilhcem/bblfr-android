@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.core.ui.CenteredImageSpan;
+import com.nilhcem.bblfr.core.ui.spannable.CenteredImageSpan;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.baggers.Bagger;
