@@ -7,6 +7,8 @@ import com.nilhcem.bblfr.ui.SecondActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
+import com.nilhcem.bblfr.ui.baggers.list.filter.FilterEntryView;
+import com.nilhcem.bblfr.ui.baggers.list.filter.FilterHeaderView;
 import com.nilhcem.bblfr.ui.baggers.map.BaggersMapActivity;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
@@ -31,6 +33,8 @@ import timber.log.Timber;
                 BaggersListActivity.class,
                 BaggersListHeaderView.class,
                 BaggersListEntryView.class,
+                FilterEntryView.class,
+                FilterHeaderView.class,
                 LocationsMapActivity.class,
                 SecondActivity.class
         }

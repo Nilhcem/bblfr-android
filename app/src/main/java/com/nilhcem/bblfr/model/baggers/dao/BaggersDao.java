@@ -7,19 +7,15 @@ import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.model.baggers.Session;
 import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.model.baggers.Website;
-import com.nilhcem.bblfr.model.locations.Audience;
-import com.nilhcem.bblfr.model.locations.Interest;
-import com.nilhcem.bblfr.model.locations.Location;
-import com.nilhcem.bblfr.model.locations.LocationInterest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ollie.query.Select;
+import ollie.util.QueryUtils;
 
 @Singleton
 public class BaggersDao {
@@ -63,5 +59,15 @@ public class BaggersDao {
 
         //websites
         bagger.websites = Select.from(Website.class).where("bagger_id=?", bagger.id).fetch();
+    }
+
+    /**
+     * Gets all the baggers tags for a specified city, sorted by tags popularity.
+     */
+    public List<Tag> getBaggersTags(Long cityId) {
+        // TODO: Draft - Make sure the query is correct and handle the nullable cityId.
+        List<Tag> tags;
+        tags = QueryUtils.rawQuery(Tag.class, "SELECT DISTINCT tags.* FROM baggers_tags INNER JOIN tags ON baggers_tags.tag_id = tags._id INNER JOIN baggers on baggers_tags.bagger_id = baggers._id INNER JOIN baggers_cities on baggers._id = baggers_cities.bagger_id WHERE baggers_cities.city_id = ? GROUP BY baggers_tags.tag_id ORDER BY COUNT(baggers_tags.tag_id) DESC", new String[] {Long.toString(cityId)});
+        return tags;
     }
 }

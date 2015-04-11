@@ -44,7 +44,7 @@ public class SplashscreenActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .subscribe(success -> {
                     Timber.d("Import successful: %b - %b", success.first, success.second);
-                    BaggersListActivity.launch(this, mDao.getCities().get(1));
+                    BaggersListActivity.launch(this, mDao.getCities().get(10));
                 });
         animateLogo();
     }

@@ -14,6 +14,10 @@
     <string name="baggers_list_contact_chooser_title">Contacter ce bagger par email</string>
     <string name="baggers_list_contact_email_subject">Contact pour un BBL</string>
 
+    <!-- Baggers filtering -->
+    <string name="filter_toolbar_action">Filtrer</string>
+    <string name="filter_header">Filtrer par tags</string>
+
     <!-- Search -->
     <string name="baggers_search_toolbar_title">Rechercher un Bagger</string>
 

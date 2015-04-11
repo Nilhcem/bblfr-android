@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.model.baggers.dao.BaggersDao;
 import com.nilhcem.bblfr.model.baggers.dao.CitiesDao;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntry;
@@ -29,6 +30,13 @@ public class BaggersService {
                 entries.add(new BaggersListEntry(context, bagger));
             }
             return Observable.just(entries);
+        });
+    }
+
+    public Observable<List<Tag>> getBaggersTags(Long cityId) {
+        return Observable.defer(() -> {
+            List<Tag> tags = mBaggersDao.getBaggersTags(cityId);
+            return Observable.just(tags);
         });
     }
 
