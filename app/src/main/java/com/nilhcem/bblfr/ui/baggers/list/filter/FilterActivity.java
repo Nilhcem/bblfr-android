@@ -20,10 +20,7 @@ import com.nilhcem.bblfr.core.ui.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
-import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.ui.BaseActivity;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,7 +31,7 @@ import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public abstract class FilterActivity extends BaseActivity {
+public abstract class FilterActivity extends BaseActivity implements FilterAdapter.OnFilterChangeListener {
 
     private static final String EXTRA_CITY = "mCity";
 
@@ -42,6 +39,7 @@ public abstract class FilterActivity extends BaseActivity {
 
     // A way to perform two ButterKnife injections (main + sub layouts) on the same instance
     private ViewHolder mDrawer;
+
     static class ViewHolder {
         @InjectView(R.id.filter_drawer_layout) DrawerLayout mLayout;
         @InjectView(R.id.filter_content_frame) FrameLayout mContent;
@@ -127,21 +125,12 @@ public abstract class FilterActivity extends BaseActivity {
         ButterKnife.inject(this, subView);
 
         mDrawer.mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mDrawer.mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.filter_line_divider)));
-
-
-
-
-
-
-        mAdapter = new FilterAdapter();
+        mAdapter = new FilterAdapter(this);
         mDrawer.mRecyclerView.setAdapter(mAdapter);
     }
 
     private void getDataFromExtra() {
         mCity = getIntent().getParcelableExtra(EXTRA_CITY);
     }
-
-    protected abstract void onFilterChanged(List<Tag> selectedTags);
 }

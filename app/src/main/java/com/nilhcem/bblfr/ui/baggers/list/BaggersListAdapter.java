@@ -3,17 +3,16 @@ package com.nilhcem.bblfr.ui.baggers.list;
 import android.view.ViewGroup;
 
 import com.nilhcem.bblfr.ui.BaseHeaderAdapter;
-import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-public class BaggersListAdapter extends BaseHeaderAdapter<String, BaggersListEntry> {
+public class BaggersListAdapter extends BaseHeaderAdapter<String, BaggersListEntry, BaggersListHeaderView, BaggersListEntryView> {
 
     @Override
-    protected BaseRecyclerViewHolder onCreateEntryView(ViewGroup parent) {
+    protected BaggersListEntryView onCreateItemView(ViewGroup parent) {
         return new BaggersListEntryView(parent);
     }
 
     @Override
-    protected BaseRecyclerViewHolder onCreateHeaderView(ViewGroup parent) {
+    protected BaggersListHeaderView onCreateHeaderView(ViewGroup parent) {
         return new BaggersListHeaderView(parent);
     }
 }

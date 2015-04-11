@@ -3,6 +3,7 @@ package com.nilhcem.bblfr.ui.baggers.list;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -39,10 +40,6 @@ public class BaggersListActivity extends FilterActivity {
         super.onCreate(savedInstanceState);
         setToolbarTitle();
         initRecyclerView();
-
-        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id))
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::onBaggersLoaded);
     }
 
     private void setToolbarTitle() {
@@ -68,7 +65,13 @@ public class BaggersListActivity extends FilterActivity {
     }
 
     @Override
-    protected void onFilterChanged(List<Tag> selectedTags) {
+    public void onFilterChanged(LongSparseArray<Tag> selectedTags) {
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
+        }
 
+        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::onBaggersLoaded);
     }
 }

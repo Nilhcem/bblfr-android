@@ -1,5 +1,7 @@
 package com.nilhcem.bblfr.model.baggers.dao;
 
+import android.support.v4.util.LongSparseArray;
+
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.BaggerCity;
 import com.nilhcem.bblfr.model.baggers.BaggerTag;
@@ -24,7 +26,11 @@ public class BaggersDao {
     public BaggersDao() {
     }
 
-    public List<Bagger> getBaggers(Long cityId) {
+    /**
+     * Gets all the baggers matching specified tags (if any) for a given city.
+     */
+    public List<Bagger> getBaggers(Long cityId, LongSparseArray<Tag> selectedTags) {
+        // TODO
         List<Bagger> baggers;
 
         if (cityId == null) {

@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BaseHeaderAdapter<H, I> extends RecyclerView.Adapter<BaseRecyclerViewHolder> {
+public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<H>, IV extends BaseRecyclerViewHolder<I>>
+        extends RecyclerView.Adapter<BaseRecyclerViewHolder> {
 
     @IntDef({TYPE_ITEM, TYPE_HEADER})
     @Retention(RetentionPolicy.SOURCE)
@@ -26,7 +27,7 @@ public abstract class BaseHeaderAdapter<H, I> extends RecyclerView.Adapter<BaseR
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            return onCreateEntryView(parent);
+            return onCreateItemView(parent);
         } else if (viewType == TYPE_HEADER) {
             return onCreateHeaderView(parent);
         }
@@ -36,9 +37,9 @@ public abstract class BaseHeaderAdapter<H, I> extends RecyclerView.Adapter<BaseR
     @Override
     public void onBindViewHolder(BaseRecyclerViewHolder holder, int position) {
         if (isPositionHeader(position)) {
-            holder.bindData(mHeader);
+            onBindHeaderView((HV) holder, mHeader);
         } else {
-            holder.bindData(mItems.get(position - 1));
+            onBindItemView((IV) holder, mItems.get(position - 1));
             // "- 1" as we are taking header into account so all of our items are correctly positioned
         }
     }
@@ -73,7 +74,15 @@ public abstract class BaseHeaderAdapter<H, I> extends RecyclerView.Adapter<BaseR
         return position == 0;
     }
 
-    protected abstract BaseRecyclerViewHolder onCreateEntryView(ViewGroup parent);
+    protected abstract IV onCreateItemView(ViewGroup parent);
 
-    protected abstract BaseRecyclerViewHolder onCreateHeaderView(ViewGroup parent);
+    protected abstract HV onCreateHeaderView(ViewGroup parent);
+
+    protected void onBindItemView(IV view, I item) {
+        view.bindData(item);
+    }
+
+    protected void onBindHeaderView(HV view, H header) {
+        view.bindData(header);
+    }
 }
