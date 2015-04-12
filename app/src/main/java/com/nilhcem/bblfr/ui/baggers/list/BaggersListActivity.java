@@ -13,21 +13,24 @@ import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.model.baggers.Tag;
-import com.nilhcem.bblfr.ui.baggers.list.filter.FilterActivity;
+import com.nilhcem.bblfr.ui.baggers.list.filter.TagsListActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+import icepick.Icicle;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class BaggersListActivity extends FilterActivity {
+public class BaggersListActivity extends TagsListActivity {
 
     @InjectView(R.id.baggers_list_recycler_view) EmptyRecyclerView mRecyclerView;
     @InjectView(R.id.loading_view) View mEmptyView;
 
     private BaggersListAdapter mAdapter;
+    @Icicle ArrayList<BaggersListEntry> mBaggers;
 
     public static void launch(@NonNull Context context, City city) {
         context.startActivity(createLaunchIntent(context, BaggersListActivity.class, city));
@@ -42,17 +45,25 @@ public class BaggersListActivity extends FilterActivity {
         super.onCreate(savedInstanceState);
         setToolbarTitle(0);
         initRecyclerView();
+
+        if (savedInstanceState != null) {
+            updateAdapter(mBaggers);
+        }
     }
 
     @Override
-    public void onFilterChanged(LongSparseArray<Tag> selectedTags) {
+    public void onFilterChanged(List<String> selectedTags) {
         unsubscribeSubscription();
         mAdapter.updateItems(null, null);
         mRecyclerView.scrollToPosition(0);
 
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::onBaggersLoaded);
+                .subscribe(baggersListEntries -> {
+                    Timber.d("Baggers loaded from DB");
+                    mBaggers = new ArrayList<>(baggersListEntries);
+                    updateAdapter(baggersListEntries);
+                });
     }
 
     private void setToolbarTitle(int nbBaggers) {
@@ -70,16 +81,17 @@ public class BaggersListActivity extends FilterActivity {
         getSupportActionBar().setTitle(title);
     }
 
-    private void onBaggersLoaded(List<BaggersListEntry> baggers) {
-        Timber.d("Baggers loaded from DB");
-        mAdapter.updateItems(baggers, NetworkUtils.getAbsoluteUrl(mCity.picture));
-        setToolbarTitle(baggers.size());
-    }
-
     private void initRecyclerView() {
         mRecyclerView.setEmptyView(mEmptyView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaggersListAdapter();
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void updateAdapter(List<BaggersListEntry> baggers) {
+        if (baggers != null && !baggers.isEmpty()) {
+            mAdapter.updateItems(baggers, NetworkUtils.getAbsoluteUrl(mCity.picture));
+            setToolbarTitle(baggers.size());
+        }
     }
 }

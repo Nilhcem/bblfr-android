@@ -34,10 +34,10 @@ public class BaggersDao {
     /**
      * Gets all the baggers matching specified tags (if any) for a given city.
      */
-    public List<Bagger> getBaggers(@NonNull Long cityId, @NonNull LongSparseArray<Tag> tags) {
+    public List<Bagger> getBaggers(@NonNull Long cityId, @NonNull List<String> tagsIds) {
         List<String> args = new ArrayList<>();
         args.add(Long.toString(cityId));
-        int nbTags = tags.size();
+        int nbTags = tagsIds.size();
 
         StringBuilder sql = new StringBuilder("SELECT DISTINCT baggers.* FROM baggers INNER JOIN baggers_cities ON baggers._id=baggers_cities.bagger_id");
         if (nbTags > 0) {
@@ -50,10 +50,7 @@ public class BaggersDao {
             sql.append(" AND baggers_tags.tag_id IN (");
             boolean addSeparator = false;
 
-            long tagId;
-            for (int i = 0; i < nbTags; i++) {
-                tagId = tags.keyAt(i);
-
+            for (String tagId : tagsIds) {
                 if (addSeparator) {
                     sql.append(",");
                 } else {
@@ -61,7 +58,7 @@ public class BaggersDao {
                 }
 
                 sql.append("?");
-                args.add(Long.toString(tagId));
+                args.add(tagId);
             }
             sql.append(")");
         }

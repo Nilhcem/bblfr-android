@@ -10,6 +10,7 @@ import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.model.baggers.dao.BaggersDao;
 import com.nilhcem.bblfr.model.baggers.dao.CitiesDao;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntry;
+import com.nilhcem.bblfr.ui.baggers.list.filter.TagsListEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class BaggersService {
     @Inject CitiesDao mCitiesDao;
     @Inject BaggersDao mBaggersDao;
 
-    public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull LongSparseArray<Tag> selectedTags) {
+    public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull List<String> selectedTags) {
         return Observable.defer(() -> {
             List<BaggersListEntry> entries = new ArrayList<>();
             List<Bagger> baggers = mBaggersDao.getBaggers(cityId, selectedTags);
@@ -35,10 +36,15 @@ public class BaggersService {
         });
     }
 
-    public Observable<List<Tag>> getBaggersTags(@NonNull Long cityId) {
+    public Observable<List<TagsListEntry>> getBaggersTags(@NonNull Long cityId) {
         return Observable.defer(() -> {
+            List<TagsListEntry> entries = new ArrayList<>();
             List<Tag> tags = mBaggersDao.getBaggersTags(cityId);
-            return Observable.just(tags);
+
+            for (Tag tag : tags) {
+                entries.add(new TagsListEntry(tag));
+            }
+            return Observable.just(entries);
         });
     }
 

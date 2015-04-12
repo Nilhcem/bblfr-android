@@ -25,16 +25,19 @@ import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseActivity;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import icepick.Icicle;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public abstract class FilterActivity extends BaseActivity implements FilterAdapter.OnFilterChangeListener {
+public abstract class TagsListActivity extends BaseActivity implements TagsListAdapter.OnFilterChangeListener {
 
     private static final String EXTRA_CITY = "mCity";
 
@@ -53,7 +56,9 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
 
     private final int mSubLayoutResId;
     private Subscription mTagsSubscription;
-    private FilterAdapter mAdapter;
+    private TagsListAdapter mAdapter;
+    @Icicle ArrayList<TagsListEntry> mTags;
+
     protected City mCity;
 
     public static Intent createLaunchIntent(@NonNull Context context, @NonNull Class clazz, City city) {
@@ -64,7 +69,7 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
         return intent;
     }
 
-    protected FilterActivity(int layoutResId) {
+    protected TagsListActivity(int layoutResId) {
         super(0);
         mSubLayoutResId = layoutResId;
     }
@@ -81,12 +86,17 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
     protected void onStart() {
         super.onStart();
 
-        mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersTags(mCity.id))
-                .subscribeOn(Schedulers.io())
-                .subscribe(tags -> {
-                    Timber.d("Tags loaded from database");
-                    mAdapter.updateItems(tags);
-                });
+        if (mTags == null) {
+            mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersTags(mCity.id))
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(tags -> {
+                        Timber.d("Tags loaded from database");
+                        mTags = new ArrayList<>(tags);
+                        mAdapter.updateItems(mTags, true);
+                    });
+        } else {
+            mAdapter.updateItems(mTags, false);
+        }
     }
 
     @Override
@@ -120,7 +130,7 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
 
     private void injectMainLayout() {
         mDrawer = new ViewHolder();
-        setContentView(R.layout.filter_activity);
+        setContentView(R.layout.tags_list_activity);
         ButterKnife.inject(mDrawer, this);
         setSupportActionBar(mDrawer.mToolbar);
         mDrawer.mLayout.setDrawerShadow(R.drawable.filter_drawer_shadow, GravityCompat.END);
@@ -139,7 +149,7 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
         recyclerView.setEmptyView(mDrawer.mEmptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.line_divider)));
-        mAdapter = new FilterAdapter(this);
+        mAdapter = new TagsListAdapter(this);
         recyclerView.setAdapter(mAdapter);
     }
 

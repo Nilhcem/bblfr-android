@@ -2,6 +2,8 @@ package com.nilhcem.bblfr.ui.baggers.list;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -25,7 +27,7 @@ import static com.nilhcem.bblfr.core.utils.CompatibilityUtils.getDrawable;
 import static com.nilhcem.bblfr.core.utils.StringUtils.ZERO_WIDTH_SPACE;
 import static com.nilhcem.bblfr.core.utils.StringUtils.addLineSeparator;
 
-public class BaggersListEntry {
+public class BaggersListEntry implements Parcelable {
 
     public final CharSequence name;
     public final CharSequence links;
@@ -126,4 +128,40 @@ public class BaggersListEntry {
         }
         return proper;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        TextUtils.writeToParcel(name, dest, flags);
+        TextUtils.writeToParcel(links, dest, flags);
+        TextUtils.writeToParcel(sessions, dest, flags);
+        TextUtils.writeToParcel(bio, dest, flags);
+        TextUtils.writeToParcel(locations, dest, flags);
+        dest.writeString(pictureUrl);
+        dest.writeString(email);
+    }
+
+    private BaggersListEntry(Parcel in) {
+        name = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        links = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        sessions = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        bio = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        locations = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        pictureUrl = in.readString();
+        email = in.readString();
+    }
+
+    public static final Parcelable.Creator<BaggersListEntry> CREATOR = new Parcelable.Creator<BaggersListEntry>() {
+        public BaggersListEntry createFromParcel(Parcel source) {
+            return new BaggersListEntry(source);
+        }
+
+        public BaggersListEntry[] newArray(int size) {
+            return new BaggersListEntry[size];
+        }
+    };
 }

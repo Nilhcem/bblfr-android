@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-public class FilterHeaderView extends BaseRecyclerViewHolder<String> {
+public class TagsListHeaderView extends BaseRecyclerViewHolder<String> {
 
-    public FilterHeaderView(ViewGroup parent) {
-        super(parent, R.layout.filter_list_header, false);
+    public TagsListHeaderView(ViewGroup parent) {
+        super(parent, R.layout.tags_list_header, false);
     }
 
     @Override
