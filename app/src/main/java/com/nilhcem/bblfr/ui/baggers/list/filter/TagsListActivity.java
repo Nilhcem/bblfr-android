@@ -59,7 +59,7 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
     private Subscription mTagsSubscription;
     private TagsListAdapter mAdapter;
 
-    @Icicle boolean mIsFiltered;
+    @Icicle protected boolean mIsFiltered;
     @Icicle ArrayList<TagsListEntry> mTags;
 
     protected City mCity;
@@ -134,7 +134,7 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
     @Override
     public void onBackPressed() {
         if (mIsFiltered) {
-            mAdapter.resetFilter();
+            resetFilter();
         } else {
             super.onBackPressed();
         }
@@ -143,6 +143,11 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
     @Override
     public void onFilterChanged(List<String> selectedTagsIds) {
         mIsFiltered = !selectedTagsIds.isEmpty();
+    }
+
+    protected void resetFilter() {
+        mIsFiltered = false;
+        mAdapter.resetFilter();
     }
 
     private void injectMainLayout() {

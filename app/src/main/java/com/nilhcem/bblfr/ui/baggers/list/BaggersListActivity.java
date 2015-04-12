@@ -67,12 +67,16 @@ public class BaggersListActivity extends TagsListActivity {
                 });
     }
 
+    @Override
+    protected void resetFilter() {
+        super.resetFilter();
+        setToolbarTitle(0);
+    }
+
     private void setToolbarTitle(int nbBaggers) {
         String title;
 
-        if (TextUtils.isEmpty(mCity.name)) {
-            title = getString(R.string.baggers_map_toolbar_title);
-        } else if (nbBaggers == 0) {
+        if (!mIsFiltered) {
             title = getString(R.string.baggers_list_toolbar_title, mCity.name);
         } else if (nbBaggers == 1) {
             title = getString(R.string.baggers_list_toolbar_title_one, mCity.name);
