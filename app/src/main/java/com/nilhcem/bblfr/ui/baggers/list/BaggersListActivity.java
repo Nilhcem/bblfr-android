@@ -1,18 +1,16 @@
 package com.nilhcem.bblfr.ui.baggers.list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.model.baggers.City;
-import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.ui.baggers.list.filter.TagsListActivity;
 
 import java.util.ArrayList;
@@ -32,8 +30,12 @@ public class BaggersListActivity extends TagsListActivity {
     private BaggersListAdapter mAdapter;
     @Icicle ArrayList<BaggersListEntry> mBaggers;
 
-    public static void launch(@NonNull Context context, City city) {
-        context.startActivity(createLaunchIntent(context, BaggersListActivity.class, city));
+    public static void launch(@NonNull Context context, City city, Integer flags) {
+        Intent intent = createLaunchIntent(context, BaggersListActivity.class, city);
+        if (flags != null) {
+            intent.addFlags(flags);
+        }
+        context.startActivity(intent);
     }
 
     public BaggersListActivity() {

@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.splashscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.ViewGroup;
@@ -129,12 +130,13 @@ public class SplashscreenActivity extends BaseActivity {
 
                         if (city == null) {
                             // First time the application is launched
-                            CitiesMapActivity.launch(this, hasPlayServices);
+                            CitiesMapActivity.launch(this, hasPlayServices, Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         } else {
                             // If user has already selected a city, or we found his nearest city
                             // via his location, directs the user to the baggers list for this city.
-                            BaggersListActivity.launch(this, city);
+                            BaggersListActivity.launch(this, city, Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         }
+                        overridePendingTransition(0, 0);
                     } else {
                         onImportError();
                     }

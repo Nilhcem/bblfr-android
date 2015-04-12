@@ -39,8 +39,11 @@ public class CitiesMapActivity extends BaseMapActivity {
     @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
 
-    public static void launch(@NonNull Context context, boolean hasPlayServices) {
+    public static void launch(@NonNull Context context, boolean hasPlayServices, Integer flags) {
         Intent intent = new Intent(context, hasPlayServices ? CitiesMapActivity.class : CitiesFallbackActivity.class);
+        if (flags != null) {
+            intent.addFlags(flags);
+        }
         context.startActivity(intent);
     }
 
@@ -83,7 +86,7 @@ public class CitiesMapActivity extends BaseMapActivity {
             Timber.d("City selected");
             City city = markerCities.get(marker);
             mPrefs.setFavoriteCity(city);
-            BaggersListActivity.launch(this, city);
+            BaggersListActivity.launch(this, city, null);
             return true;
         });
 

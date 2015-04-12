@@ -64,7 +64,7 @@ public class CitiesFallbackActivity extends BaseActivity implements CitiesFallba
     public void onCitySelected(City city) {
         Timber.d("City selected");
         mPrefs.setFavoriteCity(city);
-        BaggersListActivity.launch(this, city);
+        BaggersListActivity.launch(this, city, null);
     }
 
     private void initRecyclerView() {
