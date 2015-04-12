@@ -63,7 +63,7 @@ public class BaggersDao {
             sql.append(")");
         }
 
-        sql.append(" ORDER BY baggers._id ASC");
+        sql.append(" ORDER BY RANDOM()");
 
         List<Bagger> baggers = QueryUtils.rawQuery(Bagger.class, sql.toString(), args.toArray(new String[args.size()]));
 
