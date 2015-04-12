@@ -2,51 +2,42 @@ package com.nilhcem.bblfr.core.map;
 
 import android.content.Context;
 import android.location.Location;
-import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.nilhcem.bblfr.core.utils.NetworkUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class LocationProvider {
 
     private Location mLastLocation;
-    private GoogleApiClient mGoogleApiClient;
 
     @Inject
     public LocationProvider() {
     }
 
-    public synchronized void init(Context context) {
-        mGoogleApiClient = new GoogleApiClient.Builder(context)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
+    public synchronized void initSync(Context context) {
+        if (NetworkUtils.hasGooglePlayServices(context)) {
+            GoogleApiClient client = new GoogleApiClient.Builder(context)
+                    .addApi(LocationServices.API)
+                    .build();
+
+            ConnectionResult connectionResult = client.blockingConnect();
+            if (connectionResult.getErrorCode() == ConnectionResult.SUCCESS) {
+                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
+            }
+
+            if (client.isConnected()) {
+                client.disconnect();
+            }
+        }
     }
 
     public synchronized Location getLastKnownLocation() {
         return mLastLocation;
-    }
-
-    @Override
-    public synchronized void onConnected(Bundle bundle) {
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        mGoogleApiClient.disconnect();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        // Do nothing.
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        // Do nothing.
     }
 }

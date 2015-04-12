@@ -30,6 +30,8 @@ public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabase
         SQLiteDatabase database = Ollie.getDatabase();
         database.beginTransaction();
         try {
+            deleteExistingData(database);
+
             Map<String, City> citiesMap = saveCities(data.cities);
             Map<String, Tag> tagsMap = saveTags(data.baggers);
             saveBaggers(data.baggers, citiesMap, tagsMap);
@@ -37,6 +39,16 @@ public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabase
         } finally {
             database.endTransaction();
         }
+    }
+
+    private void deleteExistingData(SQLiteDatabase database) {
+        database.delete("baggers_tags", null, null);
+        database.delete("baggers_cities", null, null);
+        database.delete("sessions", null, null);
+        database.delete("websites", null, null);
+        database.delete("baggers", null, null);
+        database.delete("tags", null, null);
+        database.delete("cities", null, null);
     }
 
     private Map<String, City> saveCities(List<City> cities) {

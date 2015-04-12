@@ -1,13 +1,11 @@
 package com.nilhcem.bblfr.ui.baggers.cities.fallback;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
@@ -34,6 +32,7 @@ import timber.log.Timber;
  */
 public class CitiesFallbackActivity extends BaseActivity implements CitiesFallbackAdapter.OnCitySelectedListener {
 
+    @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
 
     @InjectView(R.id.cities_fallback_recycler_view) EmptyRecyclerView mRecyclerView;
@@ -45,17 +44,16 @@ public class CitiesFallbackActivity extends BaseActivity implements CitiesFallba
         super(R.layout.cities_fallback_activity);
     }
 
-    // Temporary
-    public static void launch(@NonNull Context context) {
-        Intent intent = new Intent(context, CitiesFallbackActivity.class);
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(R.string.cities_fallback_toolbar_title);
+        getSupportActionBar().setTitle(R.string.baggers_map_toolbar_title);
         initRecyclerView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersCities())
                 .subscribeOn(Schedulers.io())
@@ -63,8 +61,10 @@ public class CitiesFallbackActivity extends BaseActivity implements CitiesFallba
     }
 
     @Override
-    public void onCitySelected(City selectedCity) {
-        BaggersListActivity.launch(this, selectedCity);
+    public void onCitySelected(City city) {
+        Timber.d("City selected");
+        mPrefs.setFavoriteCity(city);
+        BaggersListActivity.launch(this, city);
     }
 
     private void initRecyclerView() {

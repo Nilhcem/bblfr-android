@@ -1,4 +1,4 @@
-package com.nilhcem.bblfr.jobs.splashscreen;
+package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
 import android.util.Pair;
 

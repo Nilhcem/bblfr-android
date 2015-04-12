@@ -45,9 +45,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     @Override
     protected void onStop() {
-        if (mSubscription != null) {
-            mSubscription.unsubscribe();
-        }
+        unsubscribeSubscription();
         super.onStop();
     }
 
@@ -55,5 +53,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Icepick.saveInstanceState(this, outState);
+    }
+
+    protected void unsubscribeSubscription() {
+        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
+        }
     }
 }

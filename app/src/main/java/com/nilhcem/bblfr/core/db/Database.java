@@ -8,8 +8,8 @@ import ollie.Ollie;
 
 public final class Database {
 
-    private static final String DB_NAME = "baggers.db";
-    private static final int DB_VERSION = 1;
+    public static final String NAME = "baggers.db";
+    private static final int VERSION = 1;
 
     private Database() {
         throw new UnsupportedOperationException();
@@ -17,8 +17,8 @@ public final class Database {
 
     public static void init(Context context) {
         Ollie.with(context)
-                .setName(DB_NAME)
-                .setVersion(DB_VERSION)
+                .setName(NAME)
+                .setVersion(VERSION)
                 .setLogLevel(BuildConfig.DEBUG ? Ollie.LogLevel.FULL : Ollie.LogLevel.NONE)
                 .init();
     }

@@ -5,9 +5,15 @@
     <!-- Splash Screen -->
     <string name="splash_title">Brown Bag Lunch</string>
     <string name="splash_subtitle"><![CDATA[Les meilleurs <em>experts</em>, pour un midi <em>chez vous</em>, gratuitement&nbsp;!]]></string>
+    <string name="splash_error_network_title">Connexion Internet requise</string>
+    <string name="splash_error_network_content">Une connexion à Internet est nécessaire au premier lancement pour télécharger les données de l\'application.\n\nVeuillez activer Internet et relancez ensuite l\'application.</string>
+    <string name="splash_error_unknown_title">Une erreur interne est survenue</string>
+    <string name="splash_error_unknown_content">Vérifiez que vous êtes bien connecté à Internet et relancez l\'application.\n\nSi cela ne fonctionne toujours pas, ce doit être un problème de notre côté. Dans ce cas, rééssayez ultérieurement.</string>
+    <string name="splash_error_button_prefs">Paramètres</string>
+    <string name="splash_error_button_exit">Quitter</string>
 
     <!-- Baggers -->
-    <string name="baggers_map_toolbar_title">Baggers à proximité</string>
+    <string name="baggers_map_toolbar_title">Sélectionnez une ville…</string>
     <string name="baggers_list_toolbar_title">Baggers à %s</string>
     <string name="baggers_list_toolbar_title_one">1 Bagger à %s</string>
     <string name="baggers_list_toolbar_title_many">%1$d Baggers à %2$s</string>
@@ -19,9 +25,6 @@
     <!-- Baggers filtering -->
     <string name="filter_toolbar_action">Filtrer</string>
     <string name="filter_header">Filtrer par tags</string>
-
-    <!-- Cities fallback -->
-    <string name="cities_fallback_toolbar_title">Sélectionnez une ville…</string>
 
     <!-- Search -->
     <string name="baggers_search_toolbar_title">Rechercher un Bagger</string>

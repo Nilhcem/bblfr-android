@@ -1,4 +1,6 @@
-package com.nilhcem.bblfr.jobs.splashscreen;
+package com.nilhcem.bblfr.jobs.splashscreen.importdata;
+
+import android.text.TextUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.model.JsonToDatabaseDao;
@@ -7,6 +9,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
 
 import rx.Observable;
 import timber.log.Timber;
@@ -45,6 +48,8 @@ public abstract class BaseImport<T> {
                 response = mClient.newCall(request).execute();
                 // Response starts with "var data = {", which we should remove.
                 json = response.body().string().replaceFirst("[^{]*", "");
+            } catch (InterruptedIOException e) {
+                Timber.e(e, "OMG");
             } catch (IOException e) {
                 Timber.e(e, "Error importing baggers");
             }
@@ -56,10 +61,13 @@ public abstract class BaseImport<T> {
 
     private T convertToJsonData(String json) {
         T jsonData = null;
-        try {
-            jsonData = mMapper.readValue(json, mClazz);
-        } catch (IOException e) {
-            Timber.e(e, "Error converting to a json object");
+
+        if (!TextUtils.isEmpty(json)) {
+            try {
+                jsonData = mMapper.readValue(json, mClazz);
+            } catch (IOException e) {
+                Timber.e(e, "Error converting to a json object");
+            }
         }
         return jsonData;
     }

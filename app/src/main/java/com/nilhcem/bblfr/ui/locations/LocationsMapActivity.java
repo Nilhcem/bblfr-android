@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.util.Pair;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -45,6 +45,11 @@ public class LocationsMapActivity extends BaseMapActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle(R.string.location_toolbar_title);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mSubscription = AppObservable.bindActivity(this,
                 Observable.zip(
@@ -52,7 +57,7 @@ public class LocationsMapActivity extends BaseMapActivity {
                         MapUtils.getGoogleMapObservable(mMapFragment),
                         Pair::create))
                 .subscribeOn(Schedulers.io())
-                .subscribe(pair -> onHostsLoaded(pair.first, pair.second));
+                .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onHostsLoaded(pair.first, pair.second)));
     }
 
     private void onHostsLoaded(List<Location> locations, GoogleMap map) {
@@ -63,8 +68,8 @@ public class LocationsMapActivity extends BaseMapActivity {
         Map<Marker, Location> markerLocations = new HashMap<>();
         for (Location location : locations) {
             Marker marker = map.addMarker(new MarkerOptions()
-                    .position(MapUtils.gpsToLatLng(location.gps))
-                    .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
+                            .position(MapUtils.gpsToLatLng(location.gps))
+                            .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
             );
             markers.add(marker);
             markerLocations.put(marker, location);

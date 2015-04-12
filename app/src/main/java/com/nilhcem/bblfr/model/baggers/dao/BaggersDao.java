@@ -3,7 +3,6 @@ package com.nilhcem.bblfr.model.baggers.dao;
 import android.support.annotation.NonNull;
 import android.support.v4.util.LongSparseArray;
 
-import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.BaggerCity;
 import com.nilhcem.bblfr.model.baggers.BaggerTag;
@@ -26,6 +25,10 @@ public class BaggersDao {
 
     @Inject
     public BaggersDao() {
+    }
+
+    public boolean hasData() {
+        return Select.from(Bagger.class).fetchSingle() != null;
     }
 
     /**
@@ -100,6 +103,6 @@ public class BaggersDao {
      */
     public List<Tag> getBaggersTags(@NonNull Long cityId) {
         String sql = "SELECT DISTINCT tags.* FROM baggers_tags INNER JOIN tags ON baggers_tags.tag_id=tags._id INNER JOIN baggers on baggers_tags.bagger_id=baggers._id INNER JOIN baggers_cities on baggers._id=baggers_cities.bagger_id WHERE baggers_cities.city_id=? GROUP BY baggers_tags.tag_id ORDER BY COUNT(baggers_tags.tag_id) DESC";
-        return QueryUtils.rawQuery(Tag.class, sql, new String[] {Long.toString(cityId)});
+        return QueryUtils.rawQuery(Tag.class, sql, new String[]{Long.toString(cityId)});
     }
 }

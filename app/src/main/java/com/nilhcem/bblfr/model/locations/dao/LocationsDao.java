@@ -21,6 +21,10 @@ public class LocationsDao {
     public LocationsDao() {
     }
 
+    public boolean hasData() {
+        return Select.from(Location.class).fetchSingle() != null;
+    }
+
     public List<Location> getLocations() {
         List<Location> locations = Select.from(Location.class).fetch();
         for (Location location : locations) {

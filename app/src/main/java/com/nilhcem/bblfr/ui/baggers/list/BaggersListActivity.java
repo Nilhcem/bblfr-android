@@ -46,9 +46,7 @@ public class BaggersListActivity extends FilterActivity {
 
     @Override
     public void onFilterChanged(LongSparseArray<Tag> selectedTags) {
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
-        }
+        unsubscribeSubscription();
         mAdapter.updateItems(null, null);
         mRecyclerView.scrollToPosition(0);
 

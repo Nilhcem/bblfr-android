@@ -75,6 +75,11 @@ public abstract class FilterActivity extends BaseActivity implements FilterAdapt
         getDataFromExtra();
         injectMainLayout();
         injectSubLayout();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersTags(mCity.id))
                 .subscribeOn(Schedulers.io())

@@ -16,7 +16,15 @@ public class CitiesDao {
     public CitiesDao() {
     }
 
+    public boolean hasData() {
+        return Select.from(City.class).fetchSingle() != null;
+    }
+
     public List<City> getCities() {
         return Select.from(City.class).orderBy("name ASC").fetch();
+    }
+
+    public City getCityByLatLng(String lat, String lng) {
+        return Select.from(City.class).where("lat=? AND lng=?", new String[] {lat, lng}).fetchSingle();
     }
 }

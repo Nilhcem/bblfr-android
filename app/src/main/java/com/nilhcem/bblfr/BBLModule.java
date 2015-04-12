@@ -3,6 +3,7 @@ package com.nilhcem.bblfr;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.map.LocationProvider;
+import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.ui.SecondActivity;
 import com.nilhcem.bblfr.ui.baggers.cities.fallback.CitiesFallbackActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
@@ -45,6 +46,10 @@ public class BBLModule {
 
     public BBLModule(BBLApplication app) {
         mApp = app;
+    }
+
+    @Provides @Singleton Preferences providePreferences() {
+        return new Preferences(mApp);
     }
 
     @Provides @Singleton OkHttpClient provideOkHttpClient() {

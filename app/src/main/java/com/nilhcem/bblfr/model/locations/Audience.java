@@ -7,7 +7,7 @@ import ollie.Model;
 import ollie.annotation.Column;
 import ollie.annotation.Table;
 
-@Table("audience")
+@Table("audiences")
 public class Audience extends Model {
 
     @JsonProperty

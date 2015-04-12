@@ -27,12 +27,21 @@ public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabase
         SQLiteDatabase database = Ollie.getDatabase();
         database.beginTransaction();
         try {
+            deleteExistingData(database);
+
             Map<String, Interest> interestsMap = saveInterests(data.locations);
             saveLocations(data.locations, interestsMap);
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();
         }
+    }
+
+    private void deleteExistingData(SQLiteDatabase database) {
+        database.delete("audiences", null, null);
+        database.delete("locations_interests", null, null);
+        database.delete("locations", null, null);
+        database.delete("interests", null, null);
     }
 
     private Map<String, Interest> saveInterests(List<Location> locations) {
