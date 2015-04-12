@@ -8,6 +8,8 @@
         android:id="@+id/baggers_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/baggers_list_container_padding"
+        android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
     <include

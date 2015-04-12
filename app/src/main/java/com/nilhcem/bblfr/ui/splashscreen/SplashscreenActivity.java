@@ -41,7 +41,6 @@ public class SplashscreenActivity extends BaseActivity {
     @Inject ImportService mImportService;
     @Inject CheckDataService mCheckDataService;
 
-    @InjectView(R.id.splash_background) ViewGroup mBackground;
     @InjectView(R.id.splash_logo_container) ViewGroup mLogoContainer;
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
     @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;

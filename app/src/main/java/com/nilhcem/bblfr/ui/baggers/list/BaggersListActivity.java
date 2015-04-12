@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.nilhcem.bblfr.R;
@@ -90,7 +91,12 @@ public class BaggersListActivity extends TagsListActivity {
 
     private void initRecyclerView() {
         mRecyclerView.setEmptyView(mEmptyView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        if (getResources().getBoolean(R.bool.baggers_list_staggered_mode)) {
+            mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        } else {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
         mAdapter = new BaggersListAdapter();
         mRecyclerView.setAdapter(mAdapter);
     }
