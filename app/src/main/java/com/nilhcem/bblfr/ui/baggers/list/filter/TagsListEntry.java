@@ -28,6 +28,10 @@ public class TagsListEntry implements Parcelable {
         mActivated = !mActivated;
     }
 
+    public void resetActivatedState() {
+        mActivated = false;
+    }
+
     public static List<String> getSelectedTagsIds(List<TagsListEntry> items) {
         List<String> selectedTagsIds = new ArrayList<>();
         for (TagsListEntry item : items) {

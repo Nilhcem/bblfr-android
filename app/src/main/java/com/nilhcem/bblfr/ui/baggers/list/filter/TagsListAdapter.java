@@ -37,6 +37,18 @@ public class TagsListAdapter extends BaseHeaderAdapter<String, TagsListEntry, Ta
         view.setOnClickListener(this);
     }
 
+    public void resetFilter() {
+        for (TagsListEntry item : mItems) {
+            item.resetActivatedState();
+        }
+        updateItems(mItems, true);
+    }
+
+    @Override
+    public void updateItems(List<TagsListEntry> items) {
+        this.updateItems(items, true);
+    }
+
     public void updateItems(List<TagsListEntry> items, boolean notifyOnFilterChange) {
         super.updateItems(items, "");
         if (notifyOnFilterChange) {

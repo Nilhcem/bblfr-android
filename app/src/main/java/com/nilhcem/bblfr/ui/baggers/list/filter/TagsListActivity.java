@@ -26,6 +26,7 @@ import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -57,6 +58,8 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
     private final int mSubLayoutResId;
     private Subscription mTagsSubscription;
     private TagsListAdapter mAdapter;
+
+    @Icicle boolean mIsFiltered;
     @Icicle ArrayList<TagsListEntry> mTags;
 
     protected City mCity;
@@ -92,7 +95,7 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
                     .subscribe(tags -> {
                         Timber.d("Tags loaded from database");
                         mTags = new ArrayList<>(tags);
-                        mAdapter.updateItems(mTags, true);
+                        mAdapter.updateItems(mTags);
                     });
         } else {
             mAdapter.updateItems(mTags, false);
@@ -126,6 +129,20 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsFiltered) {
+            mAdapter.resetFilter();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onFilterChanged(List<String> selectedTagsIds) {
+        mIsFiltered = !selectedTagsIds.isEmpty();
     }
 
     private void injectMainLayout() {

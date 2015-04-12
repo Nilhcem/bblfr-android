@@ -53,6 +53,7 @@ public class BaggersListActivity extends TagsListActivity {
 
     @Override
     public void onFilterChanged(List<String> selectedTags) {
+        super.onFilterChanged(selectedTags);
         unsubscribeSubscription();
         mAdapter.updateItems(null, null);
         mRecyclerView.scrollToPosition(0);
