@@ -23,6 +23,7 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
 
     protected H mHeader;
     protected List<I> mItems = Collections.emptyList();
+    private boolean mHasHeader;
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +40,7 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
         if (isPositionHeader(position)) {
             onBindHeaderView((HV) holder, mHeader);
         } else {
-            onBindItemView((IV) holder, mItems.get(position - (mHeader == null ? 0 : 1)));
+            onBindItemView((IV) holder, mItems.get(position - (mHasHeader ? 1 : 0)));
             // "- 1" as we are taking header into account so all of our items are correctly positioned.
         }
     }
@@ -51,7 +52,7 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
             return 0;
         }
         // Items + 1 header.
-        return mItems.size() + (mHeader == null ? 0 : 1);
+        return mItems.size() + (mHasHeader ? 1 : 0);
     }
 
     @Override
@@ -67,8 +68,13 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
         updateItems(items, null);
     }
 
-    public void updateItems(List<I> items, H header) {
-        mHeader = header;
+    public void updateItems(List<I> items, H headerData) {
+        updateItems(items, headerData, headerData != null);
+    }
+
+    public void updateItems(List<I> items, H headerData, boolean hasHeader) {
+        mHeader = headerData;
+        mHasHeader = hasHeader;
 
         if (items == null) {
             mItems = Collections.emptyList();
@@ -79,7 +85,7 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
     }
 
     private boolean isPositionHeader(int position) {
-        return mHeader != null && position == 0;
+        return mHasHeader && position == 0;
     }
 
     protected abstract IV onCreateItemView(ViewGroup parent);

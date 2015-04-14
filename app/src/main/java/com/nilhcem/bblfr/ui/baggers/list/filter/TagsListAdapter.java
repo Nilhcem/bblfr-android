@@ -9,7 +9,7 @@ import com.nilhcem.bblfr.ui.BaseHeaderAdapter;
 import java.util.Collections;
 import java.util.List;
 
-public class TagsListAdapter extends BaseHeaderAdapter<String, TagsListEntry, TagsListHeaderView, TagsListEntryView> implements View.OnClickListener {
+public class TagsListAdapter extends BaseHeaderAdapter<Void, TagsListEntry, TagsListHeaderView, TagsListEntryView> implements View.OnClickListener {
 
     public interface OnFilterChangeListener {
         void onFilterChanged(List<String> selectedTagsIds);
@@ -50,7 +50,7 @@ public class TagsListAdapter extends BaseHeaderAdapter<String, TagsListEntry, Ta
     }
 
     public void updateItems(List<TagsListEntry> items, boolean notifyOnFilterChange) {
-        super.updateItems(items, "");
+        super.updateItems(items, null, true);
         if (notifyOnFilterChange) {
             mListener.onFilterChanged(Collections.emptyList());
         }

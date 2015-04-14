@@ -10,7 +10,7 @@ import com.nilhcem.bblfr.ui.BaseHeaderAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigationDrawerAdapter extends BaseHeaderAdapter<String, NavigationDrawerEntry, NavigationDrawerHeaderView, NavigationDrawerEntryView> {
+public class NavigationDrawerAdapter extends BaseHeaderAdapter<Void, NavigationDrawerEntry, NavigationDrawerHeaderView, NavigationDrawerEntryView> {
 
     private NavigationDrawerEntry mSelectedItem;
 
@@ -27,7 +27,7 @@ public class NavigationDrawerAdapter extends BaseHeaderAdapter<String, Navigatio
             }
             entries.add(value);
         }
-        updateItems(entries, "");
+        updateItems(entries, null, true);
     }
 
     @Override

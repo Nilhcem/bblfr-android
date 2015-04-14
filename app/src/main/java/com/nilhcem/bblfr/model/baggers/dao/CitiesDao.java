@@ -25,6 +25,6 @@ public class CitiesDao {
     }
 
     public City getCityByLatLng(String lat, String lng) {
-        return Select.from(City.class).where("lat=? AND lng=?", new String[] {lat, lng}).fetchSingle();
+        return Select.from(City.class).where("lat=? AND lng=?", lat, lng).fetchSingle();
     }
 }

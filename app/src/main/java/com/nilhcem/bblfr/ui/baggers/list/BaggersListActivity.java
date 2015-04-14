@@ -51,7 +51,7 @@ public class BaggersListActivity extends TagsListActivity {
     public void onFilterChanged(List<String> selectedTags) {
         super.onFilterChanged(selectedTags);
         unsubscribe(mSubscription);
-        mAdapter.updateItems(null, null);
+        mAdapter.updateItems(null);
         mRecyclerView.scrollToPosition(0);
 
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
@@ -96,7 +96,7 @@ public class BaggersListActivity extends TagsListActivity {
 
     private void updateAdapter(List<BaggersListEntry> baggers) {
         if (baggers != null && !baggers.isEmpty()) {
-            mAdapter.updateItems(baggers, NetworkUtils.getAbsoluteUrl(mCity.picture));
+            mAdapter.updateItems(baggers, NetworkUtils.getAbsoluteUrl(mCity.picture), true);
             setToolbarTitle(baggers.size());
         }
     }

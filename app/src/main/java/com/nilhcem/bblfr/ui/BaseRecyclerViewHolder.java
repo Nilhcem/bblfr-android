@@ -16,14 +16,22 @@ import butterknife.ButterKnife;
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
     protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi) {
+        this(parent, resource, withDi, true);
+    }
+
+    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi, boolean withVi) {
         super(LayoutInflater.from(parent.getContext()).inflate(resource, parent, false));
-        ButterKnife.inject(this, itemView);
+        if (withVi) {
+            ButterKnife.inject(this, itemView);
+        }
         if (withDi) {
             BBLApplication.get(itemView.getContext()).inject(this);
         }
     }
 
-    public abstract void bindData(T data);
+    public void bindData(T data) {
+        // Should be implemented on sub-classes.
+    }
 
     public void setOnClickListener(View.OnClickListener l) {
         itemView.setOnClickListener(l);
