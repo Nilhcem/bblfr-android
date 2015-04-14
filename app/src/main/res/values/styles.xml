@@ -10,7 +10,9 @@
         <item name="android:textColorSecondary">@color/secondary_text</item>
         <item name="android:icon">@color/icons</item>
         <item name="android:divider">@color/divider</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
     <!-- Drawer -->

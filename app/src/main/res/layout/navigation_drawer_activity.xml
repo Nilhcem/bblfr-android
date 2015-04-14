@@ -9,14 +9,15 @@
     <FrameLayout
         android:id="@+id/navigation_content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"/>
 
     <!-- Navigation Drawer -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/navigation_drawer_view"
-        android:background="@color/white"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/white"
         android:scrollbars="vertical"/>
 </android.support.v4.widget.DrawerLayout>

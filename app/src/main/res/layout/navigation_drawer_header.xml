@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="@dimen/navigation_drawer_width"
-             android:layout_height="100dp"
-             android:background="@color/primary_darker">
+             android:layout_height="125dp"
+             android:paddingTop="25dp"
+             android:background="@color/primary">
 
     <!-- textSize in dp to make sure it always fits the layout -->
     <TextView
