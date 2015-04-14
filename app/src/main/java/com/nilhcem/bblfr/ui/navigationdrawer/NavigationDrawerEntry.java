@@ -9,11 +9,11 @@ import timber.log.Timber;
 
 public enum NavigationDrawerEntry {
 
-    FIND_BAGGER(R.string.drawer_find_bagger, 0),
-    CHANGE_CITY(R.string.drawer_choose_city, 0),
-    ABOUT(R.string.drawer_how_to, 0),
-    HOSTS(R.string.drawer_where_to, 0),
-    SETTINGS(R.string.drawer_settings, 0);
+    FIND_BAGGER(R.string.drawer_find_bagger, R.drawable.drawer_account_ic),
+    CHANGE_CITY(R.string.drawer_choose_city, R.drawable.drawer_map_ic),
+    ABOUT(R.string.drawer_how_to, R.drawable.drawer_idea_ic),
+    HOSTS(R.string.drawer_where_to, R.drawable.drawer_marker_ic),
+    SETTINGS(R.string.drawer_settings, R.drawable.drawer_settings_ic);
 
     public final int title;
     public final int drawable;

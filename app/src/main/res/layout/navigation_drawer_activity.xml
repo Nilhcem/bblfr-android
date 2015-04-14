@@ -14,8 +14,8 @@
     <!-- Navigation Drawer -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/navigation_drawer_view"
-        android:background="@color/primary_text"
-        android:layout_width="240dp"
+        android:background="@color/white"
+        android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:scrollbars="vertical"/>

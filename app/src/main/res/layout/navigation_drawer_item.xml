@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/navigation_drawer_container"
-              android:orientation="vertical"
-              android:background="@drawable/filter_item_background"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/navigation_drawer_entry_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:padding="18dp"
-        tools:text="@string/drawer_find_bagger"/>
-</LinearLayout>
+<TextView
+    android:id="@+id/navigation_drawer_entry_name"
+    style="@style/DrawerEntry"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:drawablePadding="16dp"
+    android:gravity="center_vertical"
+    android:paddingBottom="22dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="22dp"
+    tools:drawableLeft="@drawable/drawer_account_ic"
+    tools:text="@string/drawer_find_bagger"/>

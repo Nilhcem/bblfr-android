@@ -26,7 +26,7 @@ public class TagsListEntryView extends BaseRecyclerViewHolder<TagsListEntry> {
 
         boolean activated = mTag.isActivated();
         mContainer.setActivated(activated);
-        mName.setTextAppearance(itemView.getContext(), activated ? R.style.FilterEntry_Selected : R.style.FilterEntry);
+        mName.setTextAppearance(getContext(), activated ? R.style.FilterEntry_Selected : R.style.FilterEntry);
     }
 
     public TagsListEntry getTag() {

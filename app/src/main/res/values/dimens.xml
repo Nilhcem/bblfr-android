@@ -2,4 +2,6 @@
 <resources>
     <dimen name="baggers_list_cards_margin">2dp</dimen>
     <dimen name="baggers_list_container_padding">3dp</dimen>
+
+    <dimen name="navigation_drawer_width">280dp</dimen>
 </resources>

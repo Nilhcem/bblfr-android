@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.ui.navigationdrawer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.IntentCompat;
@@ -114,25 +113,24 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
 
         NavigationDrawerEntryView view = (NavigationDrawerEntryView) v.getTag();
         NavigationDrawerEntry entry = view.getEntry();
-        Context context = view.itemView.getContext();
 
         onNavigationDrawerEntryClicked(entry);
         if (!mSelectedDrawerItem.equals(entry)) {
             switch (entry) {
                 case CHANGE_CITY:
-                    mPendingDrawerIntent = CitiesMapActivity.createLaunchIntent(context, true);
+                    mPendingDrawerIntent = CitiesMapActivity.createLaunchIntent(this, true);
                     break;
                 case ABOUT:
-                    mPendingDrawerIntent = AboutActivity.createLaunchIntent(context);
+                    mPendingDrawerIntent = AboutActivity.createLaunchIntent(this);
                     break;
                 case HOSTS:
-                    mPendingDrawerIntent = LocationsMapActivity.createLaunchIntent(context);
+                    mPendingDrawerIntent = LocationsMapActivity.createLaunchIntent(this);
                     break;
                 case SETTINGS:
-                    mPendingDrawerIntent = SettingsActivity.createLaunchIntent(context);
+                    mPendingDrawerIntent = SettingsActivity.createLaunchIntent(this);
                     break;
                 default:
-                    mPendingDrawerIntent = BaggersListActivity.createLaunchIntent(context, mPrefs.getCity());
+                    mPendingDrawerIntent = BaggersListActivity.createLaunchIntent(this, mPrefs.getCity());
                     break;
             }
             mPendingDrawerIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);

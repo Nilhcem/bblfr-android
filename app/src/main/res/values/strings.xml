@@ -13,6 +13,7 @@
     <string name="splash_error_button_exit">Quitter</string>
 
     <!-- Navigation Drawer -->
+    <string name="drawer_title">Brown Bag Lunch</string>
     <string name="drawer_open">Ouvrir le menu</string>
     <string name="drawer_close">Fermer le menu</string>
     <string name="drawer_find_bagger">Trouver un expert à inviter</string>

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="@dimen/navigation_drawer_width"
+             android:layout_height="100dp"
+             android:background="@color/primary_darker">
 
+    <!-- textSize in dp to make sure it always fits the layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="4dp"
+        android:drawableLeft="@drawable/drawer_bbl_ic"
+        android:drawablePadding="4dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:singleLine="true"
+        android:text="@string/drawer_title"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:padding="18dp"
-        android:text="HEADERRRRRR"
-        android:layout_gravity="center_horizontal"/>
-</LinearLayout>
+        android:textSize="28dp"
+        android:textStyle="bold"/>
+</FrameLayout>

@@ -66,7 +66,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
 
     @OnClick(R.id.bagger_entry_invite_button)
     public void onInviteButtonClicked(Button button) {
-        Context context = itemView.getContext();
+        Context context = getContext();
         String chooser = context.getString(R.string.baggers_list_contact_chooser_title);
         String subject = context.getString(R.string.baggers_list_contact_email_subject);
         IntentUtils.startEmailIntent(context, chooser, (String) button.getTag(), subject);

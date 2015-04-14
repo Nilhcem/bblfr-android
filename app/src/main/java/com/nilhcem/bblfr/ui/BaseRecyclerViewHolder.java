@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui;
 
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,10 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
         if (withDi) {
             BBLApplication.get(itemView.getContext()).inject(this);
         }
+    }
+
+    protected Context getContext() {
+        return itemView.getContext();
     }
 
     public void bindData(T data) {
