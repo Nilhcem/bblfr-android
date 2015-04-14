@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.map.MapUtils;
 import com.nilhcem.bblfr.core.prefs.Preferences;
+import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseMapActivity;
@@ -39,12 +40,10 @@ public class CitiesMapActivity extends BaseMapActivity {
     @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
 
-    public static void launch(@NonNull Context context, boolean hasPlayServices, Integer flags) {
-        Intent intent = new Intent(context, hasPlayServices ? CitiesMapActivity.class : CitiesFallbackActivity.class);
-        if (flags != null) {
-            intent.addFlags(flags);
-        }
-        context.startActivity(intent);
+    public static Intent createLaunchIntent(@NonNull Context context, boolean withNavigationDrawer) {
+        Intent intent = new Intent(context, NetworkUtils.hasGooglePlayServices(context) ? CitiesMapActivity.class : CitiesFallbackActivity.class);
+        intent.putExtra(EXTRA_DISABLE_DRAWER, !withNavigationDrawer);
+        return intent;
     }
 
     @Override
@@ -86,7 +85,7 @@ public class CitiesMapActivity extends BaseMapActivity {
             Timber.d("City selected");
             City city = markerCities.get(marker);
             mPrefs.setFavoriteCity(city);
-            BaggersListActivity.launch(this, city, null);
+            startActivity(BaggersListActivity.createLaunchIntent(this, city));
             return true;
         });
 

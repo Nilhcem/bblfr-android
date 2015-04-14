@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +24,8 @@ import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
-import com.nilhcem.bblfr.ui.BaseActivity;
+import com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerActivity;
+import com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,33 +40,33 @@ import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public abstract class TagsListActivity extends BaseActivity implements TagsListAdapter.OnFilterChangeListener {
+public abstract class TagsListActivity extends NavigationDrawerActivity implements TagsListAdapter.OnFilterChangeListener {
 
     private static final String EXTRA_CITY = "mCity";
 
     @Inject protected BaggersService mBaggersService;
 
-    // A way to perform two ButterKnife injections (main + sub layouts) on the same instance
-    private ViewHolder mDrawer;
+    // A way to perform multiple ButterKnife injections on the same instance object.
+    private FilterDrawerViewHolder mFilterDrawer;
 
-    static class ViewHolder {
+    static class FilterDrawerViewHolder {
+        @InjectView(R.id.filter_container) ViewGroup mContainer;
         @InjectView(R.id.filter_drawer_layout) DrawerLayout mLayout;
         @InjectView(R.id.filter_content_frame) FrameLayout mContent;
-        @InjectView(R.id.filter_recycler_view) EmptyRecyclerView mRecyclerView;
+        @InjectView(R.id.filter_drawer_view) EmptyRecyclerView mRecyclerView;
         @InjectView(R.id.loading_view) ProgressBar mEmptyView;
         @InjectView(R.id.toolbar) Toolbar mToolbar;
     }
 
-    private final int mSubLayoutResId;
     private Subscription mTagsSubscription;
-    private TagsListAdapter mAdapter;
+    private TagsListAdapter mTagsAdapter;
 
     @Icicle protected boolean mIsFiltered;
     @Icicle ArrayList<TagsListEntry> mTags;
 
     protected City mCity;
 
-    public static Intent createLaunchIntent(@NonNull Context context, @NonNull Class clazz, City city) {
+    protected static Intent createLaunchIntent(@NonNull Context context, @NonNull Class clazz, City city) {
         Intent intent = new Intent(context, clazz);
         if (city != null) {
             intent.putExtra(EXTRA_CITY, city);
@@ -72,17 +74,11 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
         return intent;
     }
 
-    protected TagsListActivity(int layoutResId) {
-        super(0);
-        mSubLayoutResId = layoutResId;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getDataFromExtra();
-        injectMainLayout();
-        injectSubLayout();
+        setDataFromExtra();
+        initLayout();
     }
 
     @Override
@@ -95,18 +91,16 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
                     .subscribe(tags -> {
                         Timber.d("Tags loaded from database");
                         mTags = new ArrayList<>(tags);
-                        mAdapter.updateItems(mTags);
+                        mTagsAdapter.updateItems(mTags);
                     });
         } else {
-            mAdapter.updateItems(mTags, false);
+            mTagsAdapter.updateItems(mTags, false);
         }
     }
 
     @Override
     protected void onStop() {
-        if (mTagsSubscription != null) {
-            mTagsSubscription.unsubscribe();
-        }
+        unsubscribe(mTagsSubscription);
         super.onStop();
     }
 
@@ -119,21 +113,27 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_filter_baggers) {
-            DrawerLayout drawer = mDrawer.mLayout;
-            if (drawer.isDrawerOpen(GravityCompat.END)) {
+        DrawerLayout drawer = mFilterDrawer.mLayout;
+
+        if (drawer != null) {
+            if (item.getItemId() == R.id.action_filter_baggers) {
+                if (drawer.isDrawerOpen(GravityCompat.END)) {
+                    drawer.closeDrawer(GravityCompat.END);
+                } else {
+                    drawer.openDrawer(GravityCompat.END);
+                }
+                return true;
+            } else if (item.getItemId() == android.R.id.home && drawer.isDrawerVisible(GravityCompat.END)) {
                 drawer.closeDrawer(GravityCompat.END);
-            } else {
-                drawer.openDrawer(GravityCompat.END);
+                return super.onOptionsItemSelected(item);
             }
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        if (mIsFiltered) {
+        if (mIsFiltered && !isNavigationDrawerVisible()) {
             resetFilter();
         } else {
             super.onBackPressed();
@@ -145,37 +145,59 @@ public abstract class TagsListActivity extends BaseActivity implements TagsListA
         mIsFiltered = !selectedTagsIds.isEmpty();
     }
 
+    @Override
+    protected void onNavigationDrawerEntryClicked(NavigationDrawerEntry entry) {
+        super.onNavigationDrawerEntryClicked(entry);
+        if (mIsFiltered) {
+            resetFilter();
+        }
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        View inflated = LayoutInflater.from(this).inflate(layoutResID, mFilterDrawer.mContent, true);
+        ButterKnife.inject(this, inflated);
+        super.setContentView(mFilterDrawer.mContainer);
+    }
+
     protected void resetFilter() {
         mIsFiltered = false;
-        mAdapter.resetFilter();
+        mTagsAdapter.resetFilter();
     }
 
-    private void injectMainLayout() {
-        mDrawer = new ViewHolder();
-        setContentView(R.layout.tags_list_activity);
-        ButterKnife.inject(mDrawer, this);
-        setSupportActionBar(mDrawer.mToolbar);
-        mDrawer.mLayout.setDrawerShadow(R.drawable.filter_drawer_shadow, GravityCompat.END);
-    }
+    private void initLayout() {
+        mFilterDrawer = new FilterDrawerViewHolder();
+        View inflated = LayoutInflater.from(this).inflate(R.layout.tags_list_activity, getParentView(), false);
+        ButterKnife.inject(mFilterDrawer, inflated);
+        setSupportActionBar(mFilterDrawer.mToolbar);
 
-    private void injectSubLayout() {
-        ViewGroup content = mDrawer.mContent;
-        mDrawer.mEmptyView.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.primary_light), PorterDuff.Mode.SRC_ATOP);
-        EmptyRecyclerView recyclerView = mDrawer.mRecyclerView;
+        DrawerLayout drawer = mFilterDrawer.mLayout;
+        drawer.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                lockNavigationDrawer();
+            }
 
-        content.removeAllViews();
-        View subView = getLayoutInflater().inflate(mSubLayoutResId, null, true);
-        content.addView(subView);
-        ButterKnife.inject(this, subView);
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                unlockNavigationDrawer();
+            }
+        });
+        drawer.setDrawerShadow(R.drawable.drawer_shadow_end, GravityCompat.END);
 
-        recyclerView.setEmptyView(mDrawer.mEmptyView);
+        mFilterDrawer.mEmptyView.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.primary_light), PorterDuff.Mode.SRC_ATOP);
+
+        EmptyRecyclerView recyclerView = mFilterDrawer.mRecyclerView;
+        recyclerView.setEmptyView(mFilterDrawer.mEmptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(CompatibilityUtils.getDrawable(this, R.drawable.line_divider)));
-        mAdapter = new TagsListAdapter(this);
-        recyclerView.setAdapter(mAdapter);
+        mTagsAdapter = new TagsListAdapter(this);
+        recyclerView.setAdapter(mTagsAdapter);
     }
 
-    private void getDataFromExtra() {
+    private void setDataFromExtra() {
         mCity = getIntent().getParcelableExtra(EXTRA_CITY);
     }
 }

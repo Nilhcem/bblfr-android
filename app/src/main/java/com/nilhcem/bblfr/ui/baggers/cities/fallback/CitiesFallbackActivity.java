@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.ui.baggers.cities.fallback;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,8 +12,8 @@ import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
-import com.nilhcem.bblfr.ui.BaseActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
+import com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerActivity;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import timber.log.Timber;
  * for devices without Google Play Services)
  * </p>
  */
-public class CitiesFallbackActivity extends BaseActivity implements CitiesFallbackAdapter.OnCitySelectedListener {
+public class CitiesFallbackActivity extends NavigationDrawerActivity implements CitiesFallbackAdapter.OnCitySelectedListener {
 
     @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
@@ -40,13 +41,10 @@ public class CitiesFallbackActivity extends BaseActivity implements CitiesFallba
 
     private CitiesFallbackAdapter mAdapter;
 
-    public CitiesFallbackActivity() {
-        super(R.layout.cities_fallback_activity);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.cities_fallback_activity);
         getSupportActionBar().setTitle(R.string.baggers_map_toolbar_title);
         initRecyclerView();
     }
@@ -64,7 +62,7 @@ public class CitiesFallbackActivity extends BaseActivity implements CitiesFallba
     public void onCitySelected(City city) {
         Timber.d("City selected");
         mPrefs.setFavoriteCity(city);
-        BaggersListActivity.launch(this, city, null);
+        startActivity(BaggersListActivity.createLaunchIntent(this, city));
     }
 
     private void initRecyclerView() {

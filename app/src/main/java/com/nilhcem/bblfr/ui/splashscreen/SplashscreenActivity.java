@@ -23,13 +23,13 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static com.nilhcem.bblfr.core.utils.NetworkUtils.hasGooglePlayServices;
 import static com.nilhcem.bblfr.core.utils.NetworkUtils.isNetworkAvailable;
 
 public class SplashscreenActivity extends BaseActivity {
@@ -45,26 +45,13 @@ public class SplashscreenActivity extends BaseActivity {
     @InjectView(R.id.splash_subtitle) TextView mSubtitle;
     @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
-    public SplashscreenActivity() {
-        super(R.layout.splashscreen_activity);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splashscreen_activity);
+        ButterKnife.inject(this);
         mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));
-
-        // Animate logo
-        Animation localAnimation = AnimationUtils.loadAnimation(this, R.anim.splashscreen_logo);
-        mLogoContainer.clearAnimation();
-        mLogoContainer.setAnimation(localAnimation);
-        mLogoContainer.startAnimation(localAnimation);
-
-        if (mShimmerContainer != null) {
-            mShimmerContainer.setDuration(900);
-            mShimmerContainer.setBaseAlpha(0.65f);
-            mShimmerContainer.startShimmerAnimation();
-        }
+        animateLogo();
     }
 
     @Override
@@ -112,9 +99,7 @@ public class SplashscreenActivity extends BaseActivity {
      * Verifies data, then directs to the appropriate activity.
      */
     private void onAfterDataImported(boolean saveDownloadDate) {
-        boolean hasPlayServices = hasGooglePlayServices(this);
-
-        unsubscribeSubscription();
+        unsubscribe(mSubscription);
         mSubscription = AppObservable.bindActivity(this, mCheckDataService.checkData(this))
                 .subscribeOn(Schedulers.io())
                 .subscribe(result -> {
@@ -127,14 +112,18 @@ public class SplashscreenActivity extends BaseActivity {
                             mPrefs.setDownloadDate();
                         }
 
+                        Intent intent;
                         if (city == null) {
                             // First time the application is launched
-                            CitiesMapActivity.launch(this, hasPlayServices, Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            intent = CitiesMapActivity.createLaunchIntent(this, false);
                         } else {
                             // If user has already selected a city, or we found his nearest city
                             // via his location, directs the user to the baggers list for this city.
-                            BaggersListActivity.launch(this, city, Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            mPrefs.keepInMemory(city);
+                            intent = BaggersListActivity.createLaunchIntent(this, city);
                         }
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         overridePendingTransition(0, 0);
                     } else {
                         onImportError();
@@ -147,5 +136,18 @@ public class SplashscreenActivity extends BaseActivity {
         deleteDatabase(Database.NAME);
         mPrefs.reset();
         ErrorDialogFragment.create(!isNetworkAvailable(this)).show(getSupportFragmentManager(), ErrorDialogFragment.TAG);
+    }
+
+    private void animateLogo() {
+        Animation localAnimation = AnimationUtils.loadAnimation(this, R.anim.splashscreen_logo);
+        mLogoContainer.clearAnimation();
+        mLogoContainer.setAnimation(localAnimation);
+        mLogoContainer.startAnimation(localAnimation);
+
+        if (mShimmerContainer != null) {
+            mShimmerContainer.setDuration(900);
+            mShimmerContainer.setBaseAlpha(0.65f);
+            mShimmerContainer.startShimmerAnimation();
+        }
     }
 }

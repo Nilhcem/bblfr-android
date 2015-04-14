@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
 import icepick.Icepick;
@@ -17,13 +16,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     protected BBLApplication mApplication;
     protected Subscription mSubscription;
-    private final int mLayoutResId;
 
     @Optional @InjectView(R.id.toolbar) protected Toolbar mToolbar;
-
-    protected BaseActivity(int layoutResId) {
-        mLayoutResId = layoutResId;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +26,11 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         mApplication = BBLApplication.get(this);
         mApplication.inject(this);
-
-        if (mLayoutResId != 0) {
-            setContentView(mLayoutResId);
-            ButterKnife.inject(this);
-
-            if (mToolbar != null) {
-                setSupportActionBar(mToolbar);
-            }
-        }
     }
 
     @Override
     protected void onStop() {
-        unsubscribeSubscription();
+        unsubscribe(mSubscription);
         super.onStop();
     }
 
@@ -55,9 +40,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         Icepick.saveInstanceState(this, outState);
     }
 
-    protected void unsubscribeSubscription() {
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
+    protected void unsubscribe(Subscription subscription) {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
         }
     }
 }

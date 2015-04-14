@@ -36,9 +36,8 @@ public class LocationsMapActivity extends BaseMapActivity {
 
     @Inject LocationsService mLocationsService;
 
-    public static void launch(@NonNull Context context) {
-        Intent intent = new Intent(context, LocationsMapActivity.class);
-        context.startActivity(intent);
+    public static Intent createLaunchIntent(Context context) {
+        return new Intent(context, LocationsMapActivity.class);
     }
 
     @Override

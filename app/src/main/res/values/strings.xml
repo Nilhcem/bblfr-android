@@ -12,6 +12,15 @@
     <string name="splash_error_button_prefs">Paramètres</string>
     <string name="splash_error_button_exit">Quitter</string>
 
+    <!-- Navigation Drawer -->
+    <string name="drawer_open">Ouvrir le menu</string>
+    <string name="drawer_close">Fermer le menu</string>
+    <string name="drawer_find_bagger">Trouver un expert à inviter</string>
+    <string name="drawer_choose_city">Changer de ville</string>
+    <string name="drawer_how_to">Comment ça marche ?</string>
+    <string name="drawer_where_to">Où proposer un BBL ?</string>
+    <string name="drawer_settings">Paramètres</string>
+
     <!-- Baggers -->
     <string name="baggers_map_toolbar_title">Sélectionnez une ville…</string>
     <string name="baggers_list_toolbar_title">Brown Bag Lunch %s</string>

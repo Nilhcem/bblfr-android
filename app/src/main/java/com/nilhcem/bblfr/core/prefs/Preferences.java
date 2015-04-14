@@ -22,6 +22,9 @@ public class Preferences {
 
     private SharedPreferences mPrefs;
 
+    /* In-memory data */
+    private City mCity;
+
     @Inject
     public Preferences(Application app) {
         mPrefs = app.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -48,9 +51,18 @@ public class Preferences {
     public void setFavoriteCity(City city) {
         mPrefs.edit().putString(KEY_FAV_CITY_LAT, city.lat.toString()).apply();
         mPrefs.edit().putString(KEY_FAV_CITY_LNG, city.lng.toString()).apply();
+        keepInMemory(city);
     }
 
     public void reset() {
         mPrefs.edit().clear().apply();
+    }
+
+    public void keepInMemory(City city) {
+        mCity = city;
+    }
+
+    public City getCity() {
+        return mCity;
     }
 }

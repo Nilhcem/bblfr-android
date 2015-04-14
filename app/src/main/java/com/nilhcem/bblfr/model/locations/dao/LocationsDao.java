@@ -34,7 +34,7 @@ public class LocationsDao {
     }
 
     private void fillLocationData(@NonNull Location location) {
-        location.audience = Select.from(Audience.class).where("audience.location_id=?", location.id).fetchSingle();
+        location.audience = Select.from(Audience.class).where("audiences.location_id=?", location.id).fetchSingle();
         location.interests = Select.from(Interest.class).innerJoin(LocationInterest.class).on("interests._id=locations_interests.interest_id").where("locations_interests.location_id=?", location.id).fetch();
     }
 }

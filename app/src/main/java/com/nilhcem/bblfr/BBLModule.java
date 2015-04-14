@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.core.prefs.Preferences;
+import com.nilhcem.bblfr.ui.about.AboutActivity;
 import com.nilhcem.bblfr.ui.baggers.cities.CitiesMapActivity;
 import com.nilhcem.bblfr.ui.baggers.cities.fallback.CitiesFallbackActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
+import com.nilhcem.bblfr.ui.settings.SettingsActivity;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
@@ -33,7 +35,9 @@ import timber.log.Timber;
                 BaggersListActivity.class,
                 BaggersListHeaderView.class,
                 BaggersListEntryView.class,
-                LocationsMapActivity.class
+                LocationsMapActivity.class,
+                AboutActivity.class,
+                SettingsActivity.class
         }
 )
 public class BBLModule {

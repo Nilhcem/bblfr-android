@@ -31,21 +31,14 @@ public class BaggersListActivity extends TagsListActivity {
     private BaggersListAdapter mAdapter;
     @Icicle ArrayList<BaggersListEntry> mBaggers;
 
-    public static void launch(@NonNull Context context, City city, Integer flags) {
-        Intent intent = createLaunchIntent(context, BaggersListActivity.class, city);
-        if (flags != null) {
-            intent.addFlags(flags);
-        }
-        context.startActivity(intent);
-    }
-
-    public BaggersListActivity() {
-        super(R.layout.baggers_list_activity);
+    public static Intent createLaunchIntent(@NonNull Context context, City city) {
+        return TagsListActivity.createLaunchIntent(context, BaggersListActivity.class, city);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.baggers_list_activity);
         setToolbarTitle(0);
         initRecyclerView();
 
@@ -57,7 +50,7 @@ public class BaggersListActivity extends TagsListActivity {
     @Override
     public void onFilterChanged(List<String> selectedTags) {
         super.onFilterChanged(selectedTags);
-        unsubscribeSubscription();
+        unsubscribe(mSubscription);
         mAdapter.updateItems(null, null);
         mRecyclerView.scrollToPosition(0);
 

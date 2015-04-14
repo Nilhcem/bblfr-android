@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginTop="6dp"
-              android:layout_marginBottom="@dimen/baggers_list_cards_margin"
-              android:gravity="center_horizontal"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/baggers_list_city_header"
         android:layout_width="250dp"
         android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/baggers_list_cards_margin"
+        android:layout_marginTop="6dp"
         tools:src="@drawable/location_placeholder"/>
-</LinearLayout>
+</FrameLayout>

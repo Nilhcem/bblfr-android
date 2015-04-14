@@ -48,8 +48,6 @@ public abstract class BaseImport<T> {
                 response = mClient.newCall(request).execute();
                 // Response starts with "var data = {", which we should remove.
                 json = response.body().string().replaceFirst("[^{]*", "");
-            } catch (InterruptedIOException e) {
-                Timber.e(e, "OMG");
             } catch (IOException e) {
                 Timber.e(e, "Error importing baggers");
             }
