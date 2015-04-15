@@ -14,9 +14,9 @@ public class LocationsService {
     @Inject LocationsDao mDao;
 
     public Observable<List<Location>> getLocations() {
-        return Observable.defer(() -> {
-            List<Location> locations = mDao.getLocations();
-            return Observable.just(locations);
+        return Observable.create(subscriber -> {
+            subscriber.onNext(mDao.getLocations());
+            subscriber.onCompleted();
         });
     }
 }

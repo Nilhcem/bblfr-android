@@ -23,9 +23,9 @@ public class MapUtils {
     }
 
     public static Observable<GoogleMap> getGoogleMapObservable(MapFragment fragment) {
-        return Observable.defer(() -> {
-            GoogleMap map = fragment.getMap();
-            return Observable.just(map);
+        return Observable.create(subscriber -> {
+            subscriber.onNext(fragment.getMap());
+            subscriber.onCompleted();
         });
     }
 

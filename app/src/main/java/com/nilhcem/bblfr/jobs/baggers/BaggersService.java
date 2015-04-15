@@ -2,7 +2,6 @@ package com.nilhcem.bblfr.jobs.baggers;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.util.LongSparseArray;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.City;
@@ -25,33 +24,35 @@ public class BaggersService {
     @Inject BaggersDao mBaggersDao;
 
     public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull List<String> selectedTags) {
-        return Observable.defer(() -> {
+        return Observable.create(subscriber -> {
             List<BaggersListEntry> entries = new ArrayList<>();
             List<Bagger> baggers = mBaggersDao.getBaggers(cityId, selectedTags);
 
             for (Bagger bagger : baggers) {
                 entries.add(new BaggersListEntry(context, bagger));
             }
-            return Observable.just(entries);
+            subscriber.onNext(entries);
+            subscriber.onCompleted();
         });
     }
 
     public Observable<List<TagsListEntry>> getBaggersTags(@NonNull Long cityId) {
-        return Observable.defer(() -> {
+        return Observable.create(subscriber -> {
             List<TagsListEntry> entries = new ArrayList<>();
             List<Tag> tags = mBaggersDao.getBaggersTags(cityId);
 
             for (Tag tag : tags) {
                 entries.add(new TagsListEntry(tag));
             }
-            return Observable.just(entries);
+            subscriber.onNext(entries);
+            subscriber.onCompleted();
         });
     }
 
     public Observable<List<City>> getBaggersCities() {
-        return Observable.defer(() -> {
-            List<City> cities = mCitiesDao.getCities();
-            return Observable.just(cities);
+        return Observable.create(subscriber -> {
+            subscriber.onNext(mCitiesDao.getCities());
+            subscriber.onCompleted();
         });
     }
 }
