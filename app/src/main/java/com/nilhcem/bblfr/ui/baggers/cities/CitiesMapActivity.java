@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.map.MapUtils;
 import com.nilhcem.bblfr.core.prefs.Preferences;
-import com.nilhcem.bblfr.core.utils.NetworkUtils;
+import com.nilhcem.bblfr.core.utils.AppUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseMapActivity;
@@ -41,7 +41,7 @@ public class CitiesMapActivity extends BaseMapActivity {
     @Inject BaggersService mBaggersService;
 
     public static Intent createLaunchIntent(@NonNull Context context, boolean withNavigationDrawer) {
-        Intent intent = new Intent(context, NetworkUtils.hasGooglePlayServices(context) ? CitiesMapActivity.class : CitiesFallbackActivity.class);
+        Intent intent = new Intent(context, AppUtils.hasGooglePlayServices(context) ? CitiesMapActivity.class : CitiesFallbackActivity.class);
         intent.putExtra(EXTRA_DISABLE_DRAWER, !withNavigationDrawer);
         return intent;
     }

@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import ollie.Ollie;
 
-public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabaseDao<LocationsData> {
+public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao<LocationsData> {
 
     @Inject
     public JsonToDatabaseDao() {
@@ -37,7 +37,8 @@ public class JsonToDatabaseDao implements com.nilhcem.bblfr.model.JsonToDatabase
         }
     }
 
-    private void deleteExistingData(SQLiteDatabase database) {
+    @Override
+    public void deleteExistingData(SQLiteDatabase database) {
         database.delete("audiences", null, null);
         database.delete("locations_interests", null, null);
         database.delete("locations", null, null);

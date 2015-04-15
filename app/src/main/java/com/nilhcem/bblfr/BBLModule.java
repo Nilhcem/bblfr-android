@@ -12,6 +12,7 @@ import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
 import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
 import com.nilhcem.bblfr.ui.settings.SettingsActivity;
+import com.nilhcem.bblfr.ui.settings.SettingsFragment;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
@@ -37,7 +38,8 @@ import timber.log.Timber;
                 BaggersListEntryView.class,
                 LocationsMapActivity.class,
                 AboutActivity.class,
-                SettingsActivity.class
+                SettingsActivity.class,
+                SettingsFragment.class
         }
 )
 public class BBLModule {

@@ -25,10 +25,6 @@ public class NetworkUtils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static boolean hasGooglePlayServices(Context context) {
-        return GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
-    }
-
     public static String getAbsoluteUrl(String url) {
         String absoluteUrl = url;
 

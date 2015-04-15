@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="prefs_data"
+        android:title="@string/settings_data">
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_mode"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="prefs_about"
+        android:title="@string/settings_about">
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_app_version"
+            android:title="@string/settings_about_version_title"/>
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_rate_link"
+            android:summary="@string/settings_about_rate_summary"
+            android:title="@string/settings_about_rate_title"/>
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_dev_link"
+            android:summary="@string/settings_about_nilhcem_summary"
+            android:title="@string/settings_about_nilhcem_title"/>
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_bblfr_link"
+            android:summary="@string/settings_about_bblfr_summary"
+            android:title="@string/settings_about_bblfr_title"/>
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_sources_link"
+            android:summary="@string/settings_about_sources_summary"
+            android:title="@string/settings_about_sources_title"/>
+    </PreferenceCategory>
+</PreferenceScreen>

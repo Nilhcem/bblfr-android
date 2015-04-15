@@ -178,7 +178,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
             RecyclerView recyclerView = mNavigationDrawer.mRecyclerView;
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mDrawerAdapter = new NavigationDrawerAdapter(this, this);
+            mDrawerAdapter = new NavigationDrawerAdapter(this, mPrefs.isUsingHrMode(), this);
             recyclerView.setAdapter(mDrawerAdapter);
         } else {
             lockNavigationDrawer();

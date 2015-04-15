@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.map.MapUtils;
+import com.nilhcem.bblfr.core.utils.IntentUtils;
 import com.nilhcem.bblfr.jobs.locations.LocationsService;
 import com.nilhcem.bblfr.model.locations.Location;
 import com.nilhcem.bblfr.ui.BaseMapActivity;
@@ -81,8 +82,7 @@ public class LocationsMapActivity extends BaseMapActivity {
         map.setOnInfoWindowClickListener(marker -> {
             String website = markerLocations.get(marker).website;
             if (!TextUtils.isEmpty(website)) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
-                startActivity(browserIntent);
+                IntentUtils.startSiteIntent(this, website);
             }
         });
 

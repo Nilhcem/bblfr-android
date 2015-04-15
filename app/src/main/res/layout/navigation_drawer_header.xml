@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="@dimen/navigation_drawer_width"
              android:layout_height="125dp"
-             android:paddingTop="25dp"
-             android:background="@color/primary">
+             android:background="@color/primary"
+             android:paddingTop="25dp">
 
     <!-- textSize in dp to make sure it always fits the layout -->
     <TextView
@@ -21,4 +22,16 @@
         android:textColor="@color/white"
         android:textSize="28dp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/navigation_header_flavor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
+        tools:text="@string/drawer_flavor_hr"/>
 </FrameLayout>

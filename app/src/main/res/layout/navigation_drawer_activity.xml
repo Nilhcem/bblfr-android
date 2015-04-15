@@ -18,6 +18,6 @@
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
+        android:background="@color/app_background"
         android:scrollbars="vertical"/>
 </android.support.v4.widget.DrawerLayout>

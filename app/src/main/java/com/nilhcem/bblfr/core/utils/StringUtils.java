@@ -19,6 +19,10 @@ public class StringUtils {
         throw new UnsupportedOperationException();
     }
 
+    public static String appendOptional(String first, String second) {
+        return appendOptional(first, second, null);
+    }
+
     public static String appendOptional(String first, String second, String separator) {
         StringBuilder sb = new StringBuilder();
 
@@ -27,7 +31,7 @@ public class StringUtils {
         }
 
         if (!TextUtils.isEmpty(second)) {
-            if (sb.length() > 0) {
+            if (sb.length() > 0 && separator != null) {
                 sb.append(separator);
             }
             sb.append(second);
@@ -41,7 +45,7 @@ public class StringUtils {
 
         for (String entry : entries) {
             if (!TextUtils.isEmpty(entry)) {
-                if (addSeparatorFlag) {
+                if (addSeparatorFlag && separator != null) {
                     sb.append(separator);
                 } else {
                     addSeparatorFlag = true;

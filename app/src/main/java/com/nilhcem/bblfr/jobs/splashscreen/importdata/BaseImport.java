@@ -3,40 +3,41 @@ package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 import android.text.TextUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.model.JsonToDatabaseDao;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 
 import rx.Observable;
 import timber.log.Timber;
 
 public abstract class BaseImport<T> {
 
-    private String mUrl;
-    private Class<T> mClazz;
+    protected final Preferences mPrefs;
 
-    private OkHttpClient mClient;
-    private ObjectMapper mMapper;
-    private JsonToDatabaseDao<T> mDao;
+    private final Class<T> mClazz;
+    private final OkHttpClient mClient;
+    private final ObjectMapper mMapper;
+    private final JsonToDatabaseDao<T> mDao;
 
-    public BaseImport(OkHttpClient client, ObjectMapper mapper, JsonToDatabaseDao<T> dao, String url, Class<T> clazz) {
+    public BaseImport(Preferences prefs, OkHttpClient client, ObjectMapper mapper, JsonToDatabaseDao<T> dao, Class<T> clazz) {
+        mPrefs = prefs;
         mClient = client;
         mMapper = mapper;
         mDao = dao;
-
-        mUrl = url;
         mClazz = clazz;
     }
 
     public Observable<Boolean> importData() {
-        return getProperJson(mUrl).map(this::convertToJsonData).map(this::saveToDatabase);
+        return getProperJson(getUrl()).map(this::convertToJsonData).map(this::saveToDatabase);
     }
 
-    protected Observable<String> getProperJson(String url) {
+    protected abstract String getUrl();
+
+    private Observable<String> getProperJson(String url) {
         return Observable.create(subscriber -> {
             String json = null;
             Request request = new Request.Builder()
@@ -70,8 +71,12 @@ public abstract class BaseImport<T> {
         return jsonData;
     }
 
-    private Boolean saveToDatabase(T data) {
+    protected Boolean saveToDatabase(T data) {
         Boolean success = Boolean.FALSE;
+
+        if (mPrefs.shouldResetData()) {
+            mDao.deleteExistingData();
+        }
         if (data != null) {
             mDao.saveJsonToDatabase(data);
             success = Boolean.TRUE;

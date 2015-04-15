@@ -6,10 +6,9 @@
 
     <include layout="@layout/toolbar"/>
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/preferences_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="SETTINGS"
-        android:textSize="50sp"/>
+        android:background="@color/app_background"/>
 </LinearLayout>

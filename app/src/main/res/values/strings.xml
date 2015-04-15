@@ -21,6 +21,8 @@
     <string name="drawer_how_to">Comment ça marche ?</string>
     <string name="drawer_where_to">Où proposer un BBL ?</string>
     <string name="drawer_settings">Paramètres</string>
+    <string name="drawer_flavor_default"></string>
+    <string name="drawer_flavor_hr">RH</string>
 
     <!-- Baggers -->
     <string name="baggers_map_toolbar_title">Sélectionnez une ville…</string>
@@ -45,4 +47,25 @@
     <string name="location_contact"><![CDATA[<br /><b>Infos et contact&nbsp;:</b><br /> %s]]></string>
     <string name="location_audience"><![CDATA[<br /><b>Audience&nbsp;:</b><br /> %s]]></string>
     <string name="location_interests"><![CDATA[<br /><b>Centres d\'intérêts&nbsp;:</b><br /> %s]]></string>
+
+    <!-- Settings -->
+    <string name="settings_title">Paramètres</string>
+
+    <string name="settings_data">Données</string>
+    <string name="settings_data_hr_enter_title">Ressources Humaines</string>
+    <string name="settings_data_hr_enter_summary">Passer en mode BBL RH</string>
+
+    <string name="settings_data_hr_leave_title">Ressources Humaines</string>
+    <string name="settings_data_hr_leave_summary">Quitter le mode BBL RH</string>
+
+    <string name="settings_about">À propos</string>
+    <string name="settings_about_version_title">Version</string>
+    <string name="settings_about_rate_title">Notez l\'application</string>
+    <string name="settings_about_rate_summary">sur le Play Store</string>
+    <string name="settings_about_nilhcem_title">Développeur Android</string>
+    <string name="settings_about_nilhcem_summary">http://www.nilhcem.com/</string>
+    <string name="settings_about_bblfr_title">Brown bag lunch France</string>
+    <string name="settings_about_bblfr_summary">http://www.brownbaglunch.fr/</string>
+    <string name="settings_about_sources_title">Code source</string>
+    <string name="settings_about_sources_summary">https://github.com/Nilhcem/bblfr-android/</string>
 </resources>

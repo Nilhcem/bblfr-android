@@ -15,10 +15,12 @@ import javax.inject.Singleton;
 @Singleton
 public class Preferences {
 
-    private static final String PREFS_NAME = "bblfr";
+    public static final String PREFS_NAME = "bblfr";
     private static final String KEY_LAST_DOWNLOAD = "last_download_date";
     private static final String KEY_FAV_CITY_LAT = "city_lat";
     private static final String KEY_FAV_CITY_LNG = "city_lng";
+    private static final String KEY_HR_MODE = "hr_mode";
+    private static final String KEY_RESET_DB = "reset_db";
 
     private SharedPreferences mPrefs;
 
@@ -31,11 +33,14 @@ public class Preferences {
     }
 
     public long getLastDownloadDate() {
-        return mPrefs.getLong(KEY_LAST_DOWNLOAD, 0);
+        return mPrefs.getLong(KEY_LAST_DOWNLOAD, 0l);
     }
 
     public void setDownloadDate() {
-        mPrefs.edit().putLong(KEY_LAST_DOWNLOAD, new Date().getTime()).apply();
+        mPrefs.edit()
+                .putLong(KEY_LAST_DOWNLOAD, new Date().getTime())
+                .remove(KEY_RESET_DB)
+                .apply();
     }
 
     public Pair<String, String> getFavoriteCityLatLng() {
@@ -49,13 +54,20 @@ public class Preferences {
     }
 
     public void setFavoriteCity(City city) {
-        mPrefs.edit().putString(KEY_FAV_CITY_LAT, city.lat.toString()).apply();
-        mPrefs.edit().putString(KEY_FAV_CITY_LNG, city.lng.toString()).apply();
-        keepInMemory(city);
+        mPrefs.edit()
+                .putString(KEY_FAV_CITY_LAT, city.lat.toString())
+                .putString(KEY_FAV_CITY_LNG, city.lng.toString())
+                .apply();
     }
 
     public void reset() {
-        mPrefs.edit().clear().apply();
+        // keep KEY_HR_MODE value
+        mPrefs.edit()
+                .remove(KEY_LAST_DOWNLOAD)
+                .remove(KEY_FAV_CITY_LAT)
+                .remove(KEY_FAV_CITY_LNG)
+                .putBoolean(KEY_RESET_DB, true)
+                .apply();
     }
 
     public void keepInMemory(City city) {
@@ -64,5 +76,21 @@ public class Preferences {
 
     public City getCity() {
         return mCity;
+    }
+
+    public boolean isUsingHrMode() {
+        return mPrefs.getBoolean(KEY_HR_MODE, false);
+    }
+
+    public void toggleMode() {
+        mPrefs.edit()
+                .putBoolean(KEY_HR_MODE, !isUsingHrMode())
+                .remove(KEY_LAST_DOWNLOAD)
+                .putBoolean(KEY_RESET_DB, true)
+                .apply();
+    }
+
+    public boolean shouldResetData() {
+        return mPrefs.getBoolean(KEY_RESET_DB, false);
     }
 }

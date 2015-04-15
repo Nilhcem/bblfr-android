@@ -17,5 +17,7 @@ public class SettingsActivity extends NavigationDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+        getSupportActionBar().setTitle(R.string.settings_title);
+        getFragmentManager().beginTransaction().replace(R.id.preferences_fragment_container, new SettingsFragment()).commit();
     }
 }

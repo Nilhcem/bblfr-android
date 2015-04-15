@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nilhcem.bblfr.core.utils.NetworkUtils;
+import com.nilhcem.bblfr.core.utils.AppUtils;
 import com.nilhcem.bblfr.ui.BaseHeaderAdapter;
 
 import java.util.ArrayList;
@@ -14,12 +14,14 @@ public class NavigationDrawerAdapter extends BaseHeaderAdapter<Void, NavigationD
 
     private NavigationDrawerEntry mSelectedItem;
 
+    private final boolean mHrModeEnabled;
     private final View.OnClickListener mListener;
 
-    public NavigationDrawerAdapter(Context context, View.OnClickListener listener) {
+    public NavigationDrawerAdapter(Context context, boolean hrModeEnabled, View.OnClickListener listener) {
         mListener = listener;
+        mHrModeEnabled = hrModeEnabled;
 
-        boolean hasPlayServices = NetworkUtils.hasGooglePlayServices(context);
+        boolean hasPlayServices = AppUtils.hasGooglePlayServices(context);
         List<NavigationDrawerEntry> entries = new ArrayList<>();
         for (NavigationDrawerEntry value : NavigationDrawerEntry.values()) {
             if (!hasPlayServices && value.equals(NavigationDrawerEntry.HOSTS)) {
@@ -45,6 +47,12 @@ public class NavigationDrawerAdapter extends BaseHeaderAdapter<Void, NavigationD
         super.onBindItemView(view, item);
         view.setOnClickListener(mListener);
         view.setActivated(item.equals(mSelectedItem));
+    }
+
+    @Override
+    protected void onBindHeaderView(NavigationDrawerHeaderView view, Void header) {
+        super.onBindHeaderView(view, header);
+        view.setHrMode(mHrModeEnabled);
     }
 
     public void setSelectedItem(NavigationDrawerEntry selectedItem) {

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.core.db.Database;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.jobs.splashscreen.checkdata.CheckDataService;
 import com.nilhcem.bblfr.jobs.splashscreen.importdata.ImportService;
@@ -133,7 +132,6 @@ public class SplashscreenActivity extends BaseActivity {
 
     private void onImportError() {
         Timber.w("Network is unreachable or data is corrupted");
-        deleteDatabase(Database.NAME);
         mPrefs.reset();
         ErrorDialogFragment.create(!isNetworkAvailable(this)).show(getSupportFragmentManager(), ErrorDialogFragment.TAG);
     }

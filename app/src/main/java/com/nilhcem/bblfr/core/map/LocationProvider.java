@@ -6,7 +6,7 @@ import android.location.Location;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.nilhcem.bblfr.core.utils.NetworkUtils;
+import com.nilhcem.bblfr.core.utils.AppUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +21,7 @@ public class LocationProvider {
     }
 
     public synchronized void initSync(Context context) {
-        if (NetworkUtils.hasGooglePlayServices(context)) {
+        if (AppUtils.hasGooglePlayServices(context)) {
             GoogleApiClient client = new GoogleApiClient.Builder(context)
                     .addApi(LocationServices.API)
                     .build();

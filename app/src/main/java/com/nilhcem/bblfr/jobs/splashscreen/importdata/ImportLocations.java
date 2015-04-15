@@ -1,6 +1,8 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilhcem.bblfr.core.prefs.Preferences;
+import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.locations.LocationsData;
 import com.nilhcem.bblfr.model.locations.dao.JsonToDatabaseDao;
 import com.squareup.okhttp.OkHttpClient;
@@ -13,7 +15,12 @@ import static com.nilhcem.bblfr.BuildConfig.WS_LOCATIONS_URL;
 public class ImportLocations extends BaseImport<LocationsData> {
 
     @Inject
-    public ImportLocations(OkHttpClient client, ObjectMapper mapper, JsonToDatabaseDao dao) {
-        super(client, mapper, dao, WS_ENDPOINT + WS_LOCATIONS_URL, LocationsData.class);
+    public ImportLocations(Preferences prefs, OkHttpClient client, ObjectMapper mapper, JsonToDatabaseDao dao) {
+        super(prefs, client, mapper, dao, LocationsData.class);
+    }
+
+    @Override
+    protected String getUrl() {
+        return StringUtils.appendOptional(WS_ENDPOINT, WS_LOCATIONS_URL);
     }
 }
