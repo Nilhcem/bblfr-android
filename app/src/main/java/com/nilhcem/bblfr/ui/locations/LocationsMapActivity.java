@@ -2,9 +2,7 @@ package com.nilhcem.bblfr.ui.locations;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -48,9 +46,8 @@ public class LocationsMapActivity extends BaseMapActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    protected void loadMap() {
+        unsubscribe(mSubscription);
         mSubscription = AppObservable.bindActivity(this,
                 Observable.zip(
                         mLocationsService.getLocations(),
@@ -62,6 +59,7 @@ public class LocationsMapActivity extends BaseMapActivity {
 
     private void onHostsLoaded(List<Location> locations, GoogleMap map) {
         Timber.d("BBL Hosts loaded from DB");
+        onMapFinishedLoading();
 
         // Set the locations in the map.
         List<Marker> markers = new ArrayList<>();

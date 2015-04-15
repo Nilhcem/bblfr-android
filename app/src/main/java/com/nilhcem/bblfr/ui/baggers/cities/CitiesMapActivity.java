@@ -13,8 +13,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.map.MapUtils;
-import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.core.utils.AppUtils;
+import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.jobs.baggers.BaggersService;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseMapActivity;
@@ -37,11 +37,12 @@ public class CitiesMapActivity extends BaseMapActivity {
 
     private static final float DEFAULT_ZOOM = 10f;
 
-    @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
 
     public static Intent createLaunchIntent(@NonNull Context context, boolean withNavigationDrawer) {
-        Intent intent = new Intent(context, AppUtils.hasGooglePlayServices(context) ? CitiesMapActivity.class : CitiesFallbackActivity.class);
+        Intent intent = new Intent(context,
+                NetworkUtils.isNetworkAvailable(context) && AppUtils.hasGooglePlayServices(context)
+                        ? CitiesMapActivity.class : CitiesFallbackActivity.class);
         intent.putExtra(EXTRA_DISABLE_DRAWER, !withNavigationDrawer);
         return intent;
     }
@@ -53,9 +54,7 @@ public class CitiesMapActivity extends BaseMapActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    protected void loadMap() {
         mSubscription = AppObservable.bindActivity(this,
                 Observable.zip(
                         mBaggersService.getBaggersCities(),
@@ -67,6 +66,7 @@ public class CitiesMapActivity extends BaseMapActivity {
 
     private void onCitiesLoaded(List<City> cities, GoogleMap map) {
         Timber.d("BBL Cities loaded from DB");
+        onMapFinishedLoading();
 
         // Set the locations in the map.
         List<Marker> markers = new ArrayList<>();

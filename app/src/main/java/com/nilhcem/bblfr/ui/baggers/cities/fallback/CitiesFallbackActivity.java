@@ -33,7 +33,6 @@ import timber.log.Timber;
  */
 public class CitiesFallbackActivity extends NavigationDrawerActivity implements CitiesFallbackAdapter.OnCitySelectedListener {
 
-    @Inject Preferences mPrefs;
     @Inject BaggersService mBaggersService;
 
     @InjectView(R.id.cities_fallback_recycler_view) EmptyRecyclerView mRecyclerView;
@@ -52,7 +51,6 @@ public class CitiesFallbackActivity extends NavigationDrawerActivity implements 
     @Override
     protected void onStart() {
         super.onStart();
-
         mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersCities())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::onCitiesLoaded);

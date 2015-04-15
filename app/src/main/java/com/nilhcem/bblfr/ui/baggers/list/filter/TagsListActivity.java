@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
@@ -199,5 +200,8 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
 
     private void setDataFromExtra() {
         mCity = getIntent().getParcelableExtra(EXTRA_CITY);
+        if (mCity == null) {
+            Timber.e("City must not be null");
+        }
     }
 }

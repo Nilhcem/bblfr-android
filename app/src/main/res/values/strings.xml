@@ -41,6 +41,10 @@
     <!-- Search -->
     <string name="baggers_search_toolbar_title">Rechercher un Bagger</string>
 
+    <!-- Map -->
+    <string name="map_network_issue">Erreur lors du chargement de la carte.\nVérifiez votre connexion Internet et réessayez.</string>
+    <string name="map_reload_button">Recharger</string>
+
     <!-- Locations -->
     <string name="location_toolbar_title">Où proposer un BBL ?</string>
     <string name="location_name"><![CDATA[<u>%s</u>]]></string>

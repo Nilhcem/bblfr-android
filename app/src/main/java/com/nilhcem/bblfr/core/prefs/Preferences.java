@@ -58,6 +58,7 @@ public class Preferences {
                 .putString(KEY_FAV_CITY_LAT, city.lat.toString())
                 .putString(KEY_FAV_CITY_LNG, city.lng.toString())
                 .apply();
+        keepInMemory(city);
     }
 
     public void reset() {

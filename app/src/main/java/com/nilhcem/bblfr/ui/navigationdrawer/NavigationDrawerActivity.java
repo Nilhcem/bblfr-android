@@ -31,7 +31,7 @@ import timber.log.Timber;
 
 public abstract class NavigationDrawerActivity extends BaseActivity implements View.OnClickListener {
 
-    @Inject Preferences mPrefs;
+    @Inject protected Preferences mPrefs;
 
     private static final String EXTRA_DRAWER_ITEM = "mSelectedDrawerItem";
     protected static final String EXTRA_DISABLE_DRAWER = "mDisableDrawer";
@@ -79,10 +79,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
             if (NavigationDrawerEntry.FIND_BAGGER.equals(mSelectedDrawerItem)) {
                 super.onBackPressed();
             } else {
-                finish();
                 Intent intent = BaggersListActivity.createLaunchIntent(this, mPrefs.getCity());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivityWithoutTransition(intent);
+                finish();
             }
         }
     }
