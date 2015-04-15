@@ -3,14 +3,13 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@drawable/drawer_item_background"
+              android:background="@drawable/drawer_item_bg"
               android:orientation="vertical">
 
     <TextView
         android:id="@+id/cities_fallback_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/drawer_item_background"
         android:fontFamily="sans-serif-condensed"
         android:padding="16dp"
         android:textColor="@color/primary"
