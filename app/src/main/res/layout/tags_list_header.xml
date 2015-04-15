@@ -10,4 +10,4 @@
     android:text="@string/filter_header"
     android:textColor="@color/white"
     android:textSize="16sp"
-    tools:background="@color/primary_dark"/>
+    tools:background="@color/primary_darker"/>

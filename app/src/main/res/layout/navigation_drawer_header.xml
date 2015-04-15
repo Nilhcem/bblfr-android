@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="@dimen/navigation_drawer_width"
              android:layout_height="125dp"
-             android:background="@color/primary"
+             android:background="@color/primary_dark"
              android:paddingTop="25dp">
 
     <!-- textSize in dp to make sure it always fits the layout -->

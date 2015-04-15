@@ -7,7 +7,7 @@
     </item>
     <item>
         <ripple android:color="?attr/colorControlHighlight">
-            <item android:drawable="@color/primary_dark"/>
+            <item android:drawable="@color/primary_darker"/>
         </ripple>
     </item>
 </selector>
