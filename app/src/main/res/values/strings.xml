@@ -64,12 +64,12 @@
 
     <string name="settings_about">À propos</string>
     <string name="settings_about_version_title">Version</string>
-    <string name="settings_about_rate_title">Notez l\'application</string>
-    <string name="settings_about_rate_summary">sur le Play Store</string>
-    <string name="settings_about_nilhcem_title">Développeur Android</string>
-    <string name="settings_about_nilhcem_summary">http://www.nilhcem.com/</string>
     <string name="settings_about_bblfr_title">Brown bag lunch France</string>
     <string name="settings_about_bblfr_summary">http://www.brownbaglunch.fr/</string>
+    <string name="settings_about_rate_title">Notez l\'application</string>
+    <string name="settings_about_rate_summary">sur le Play Store</string>
     <string name="settings_about_sources_title">Code source</string>
     <string name="settings_about_sources_summary">https://github.com/Nilhcem/bblfr-android/</string>
+    <string name="settings_about_nilhcem_title">Fait maison par</string>
+    <string name="settings_about_nilhcem_summary">http://www.nilhcem.com/</string>
 </resources>

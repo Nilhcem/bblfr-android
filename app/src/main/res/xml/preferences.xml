@@ -20,26 +20,26 @@
 
         <Preference
             android:icon="@null"
-            android:key="prefs_rate_link"
-            android:summary="@string/settings_about_rate_summary"
-            android:title="@string/settings_about_rate_title"/>
-
-        <Preference
-            android:icon="@null"
-            android:key="prefs_dev_link"
-            android:summary="@string/settings_about_nilhcem_summary"
-            android:title="@string/settings_about_nilhcem_title"/>
-
-        <Preference
-            android:icon="@null"
             android:key="prefs_bblfr_link"
             android:summary="@string/settings_about_bblfr_summary"
             android:title="@string/settings_about_bblfr_title"/>
 
         <Preference
             android:icon="@null"
+            android:key="prefs_rate_link"
+            android:summary="@string/settings_about_rate_summary"
+            android:title="@string/settings_about_rate_title"/>
+
+        <Preference
+            android:icon="@null"
             android:key="prefs_sources_link"
             android:summary="@string/settings_about_sources_summary"
             android:title="@string/settings_about_sources_title"/>
+
+        <Preference
+            android:icon="@null"
+            android:key="prefs_dev_link"
+            android:summary="@string/settings_about_nilhcem_summary"
+            android:title="@string/settings_about_nilhcem_title"/>
     </PreferenceCategory>
 </PreferenceScreen>
