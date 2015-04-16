@@ -56,10 +56,8 @@
     <string name="settings_title">Paramètres</string>
 
     <string name="settings_data">Données</string>
-    <string name="settings_data_hr_enter_title">Ressources Humaines</string>
+    <string name="settings_data_hr_title">Ressources Humaines</string>
     <string name="settings_data_hr_enter_summary">Passer en mode BBL RH</string>
-
-    <string name="settings_data_hr_leave_title">Ressources Humaines</string>
     <string name="settings_data_hr_leave_summary">Quitter le mode BBL RH</string>
 
     <string name="settings_about">À propos</string>

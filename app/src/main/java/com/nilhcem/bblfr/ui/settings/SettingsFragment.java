@@ -43,13 +43,8 @@ public class SettingsFragment extends PreferenceFragment {
 
     private void initMode() {
         Preference modePref = findPreference("prefs_mode");
-        if (mPrefs.isUsingHrMode()) {
-            modePref.setTitle(getString(R.string.settings_data_hr_leave_title));
-            modePref.setSummary(getString(R.string.settings_data_hr_leave_summary));
-        } else {
-            modePref.setTitle(getString(R.string.settings_data_hr_enter_title));
-            modePref.setSummary(getString(R.string.settings_data_hr_enter_summary));
-        }
+        modePref.setTitle(getString(R.string.settings_data_hr_title));
+        modePref.setSummary(getString(mPrefs.isUsingHrMode() ? R.string.settings_data_hr_leave_summary : R.string.settings_data_hr_enter_summary));
 
         modePref.setOnPreferenceClickListener(preference -> {
             Timber.d("Change mode");
