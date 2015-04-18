@@ -13,7 +13,7 @@
         android:scrollbars="vertical"/>
 
     <include
-        layout="@layout/loading"
+        layout="@layout/inc_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>

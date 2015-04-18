@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/inc_toolbar"/>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/filter_drawer_layout"
@@ -33,7 +33,7 @@
 
             <!-- Loading View -->
             <include
-                layout="@layout/loading"
+                layout="@layout/inc_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
