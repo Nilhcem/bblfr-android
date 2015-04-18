@@ -102,4 +102,6 @@ dependencies {
 
     compile 'com.github.frankiesardo:icepick:2.3.6'
     provided 'com.github.frankiesardo:icepick-processor:2.3.6'
+
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
 }

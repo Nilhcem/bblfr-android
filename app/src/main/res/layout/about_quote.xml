@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/maps_error_container"
+    android:id="@+id/about_last_step_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="4dp"
-    android:visibility="gone"
-    tools:visibility="visible">
+    android:padding="12dp"
+    tools:background="@color/app_background">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="@string/map_network_issue"
+        android:text="@string/about_quote_content"
         android:textColor="@color/primary_text"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/about_quote_text_size"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="10dp"
+        android:text="@string/about_quote_author"
+        android:textSize="14sp"/>
 
     <Button
-        android:id="@+id/maps_error_button"
+        android:id="@+id/about_see_article"
         style="@style/LightThemeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/map_reload_button"/>
+        android:layout_marginTop="8dp"
+        android:text="@string/about_quote_link"/>
 </LinearLayout>

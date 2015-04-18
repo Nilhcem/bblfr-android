@@ -23,28 +23,30 @@
             android:id="@+id/about_steps_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:minWidth="@dimen/about_pic_width">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/about_viewpager"
                     android:layout_width="@dimen/about_pic_width"
                     android:layout_height="@dimen/about_pic_height"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="right"
                     android:background="@drawable/about_image_border"/>
             </FrameLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -53,7 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:gravity="center"
                     android:textColor="@color/primary_dark"
                     android:textSize="26sp"
                     android:textStyle="bold"
@@ -64,7 +65,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:gravity="center"
                     android:paddingTop="8dp"
                     android:textColor="@color/primary_darker"
                     android:textSize="@dimen/about_step_text_size"

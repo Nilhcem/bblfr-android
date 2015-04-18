@@ -101,11 +101,10 @@
 
             <Button
                 android:id="@+id/bagger_entry_invite_button"
+                style="@style/LightThemeButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/baggers_invite_button"
-                android:text="@string/baggers_list_contact_button"
-                android:textColor="@color/white"/>
+                android:text="@string/baggers_list_contact_button"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

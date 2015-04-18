@@ -4,4 +4,10 @@
     <dimen name="baggers_list_container_padding">3dp</dimen>
 
     <dimen name="navigation_drawer_width">280dp</dimen>
+
+    <!-- About BBL -->
+    <dimen name="about_pic_width">168dp</dimen>
+    <dimen name="about_pic_height">125.33dp</dimen>
+    <dimen name="about_step_text_size">16sp</dimen>
+    <dimen name="about_quote_text_size">16sp</dimen>
 </resources>

@@ -52,6 +52,18 @@
     <string name="location_audience"><![CDATA[<br /><b>Audience&nbsp;:</b><br /> %s]]></string>
     <string name="location_interests"><![CDATA[<br /><b>Centres d\'intérêts&nbsp;:</b><br /> %s]]></string>
 
+    <!-- About -->
+    <string name="about_title">Comment ça marche ?</string>
+    <string name="about_step1_title">1. Trouver un orateur</string>
+    <string name="about_step1_content">Trouver un expert près de chez vous ayant un sujet qui vous intéresse.\nContactez-le pour définir une date.</string>
+    <string name="about_step2_title">2. Lui acheter à manger</string>
+    <string name="about_step2_content">L\'expert apporte ses connaissances, vous la nourriture ;)</string>
+    <string name="about_step3_title">3. Passer un bon moment</string>
+    <string name="about_step3_content">Profiter de la présence de l\'expert pour approfondir un sujet et à le rendre plus concret dans le cadre de votre entreprise.</string>
+    <string name="about_quote_content">\"À chaque fois, le public a apprécié la qualité des présentations, et de mon côté en tant qu\'organisateur, j\'apprécie de voir leur enthousiasme.\nLeur nombre ne cesse d\'ailleurs de croitre, passant de 20 à 25, et peut-être même d\'avantage pour les prochaines sessions.\"</string>
+    <string name="about_quote_author">Romain Linsolas</string>
+    <string name="about_quote_link">Consulter l\'article</string>
+
     <!-- Settings -->
     <string name="settings_title">Paramètres</string>
 

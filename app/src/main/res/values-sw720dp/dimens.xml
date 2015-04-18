@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- About BBL -->
+    <dimen name="about_pic_width">378dp</dimen>
+    <dimen name="about_pic_height">282dp</dimen>
+</resources>
