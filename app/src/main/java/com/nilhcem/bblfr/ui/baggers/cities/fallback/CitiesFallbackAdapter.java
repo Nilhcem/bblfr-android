@@ -35,7 +35,7 @@ public class CitiesFallbackAdapter extends BaseHeaderAdapter<Void, City, BaseRec
     @Override
     public void onClick(View v) {
         CitiesFallbackEntryView view = (CitiesFallbackEntryView) v.getTag();
-        City city = view.getCity();
+        City city = view.getData();
         mListener.onCitySelected(city);
     }
 }

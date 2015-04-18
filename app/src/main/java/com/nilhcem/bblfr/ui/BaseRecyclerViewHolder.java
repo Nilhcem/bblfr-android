@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
+    private T mData;
+
     protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi) {
         this(parent, resource, withDi, true);
     }
@@ -36,6 +38,11 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
 
     public void bindData(T data) {
         // Should be implemented on sub-classes.
+        mData = data;
+    }
+
+    public T getData() {
+        return mData;
     }
 
     public void setOnClickListener(View.OnClickListener l) {

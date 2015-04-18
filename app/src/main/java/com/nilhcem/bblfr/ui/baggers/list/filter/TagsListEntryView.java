@@ -13,23 +13,17 @@ public class TagsListEntryView extends BaseRecyclerViewHolder<TagsListEntry> {
     @InjectView(R.id.filter_entry_layout) ViewGroup mContainer;
     @InjectView(R.id.filter_entry_name) TextView mName;
 
-    private TagsListEntry mTag;
-
     public TagsListEntryView(ViewGroup parent) {
         super(parent, R.layout.tags_list_item, false);
     }
 
     @Override
     public void bindData(TagsListEntry data) {
+        super.bindData(data);
         mName.setText(data.name);
-        mTag = data;
 
-        boolean activated = mTag.isActivated();
+        boolean activated = data.isActivated();
         mContainer.setActivated(activated);
         mName.setTextAppearance(getContext(), activated ? R.style.FilterEntry_Selected : R.style.FilterEntry);
-    }
-
-    public TagsListEntry getTag() {
-        return mTag;
     }
 }

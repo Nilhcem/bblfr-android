@@ -44,6 +44,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
 
     @Override
     public void bindData(@NonNull BaggersListEntry data) {
+        super.bindData(data);
         setTextIfAny(mName, data.name);
         setTextIfAny(mLinks, data.links);
         setTextIfAny(mSessions, data.sessions);

@@ -112,7 +112,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
         }
 
         NavigationDrawerEntryView view = (NavigationDrawerEntryView) v.getTag();
-        NavigationDrawerEntry entry = view.getEntry();
+        NavigationDrawerEntry entry = view.getData();
 
         onNavigationDrawerEntryClicked(entry);
         if (!mSelectedDrawerItem.equals(entry)) {

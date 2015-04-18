@@ -16,7 +16,6 @@ public class NavigationDrawerEntryView extends BaseRecyclerViewHolder<Navigation
     @InjectView(R.id.navigation_drawer_entry_name) TextView mName;
 
     private Drawable mDrawable;
-    private NavigationDrawerEntry mEntry;
 
     public NavigationDrawerEntryView(ViewGroup parent) {
         super(parent, R.layout.navigation_drawer_item, false);
@@ -24,13 +23,9 @@ public class NavigationDrawerEntryView extends BaseRecyclerViewHolder<Navigation
 
     @Override
     public void bindData(NavigationDrawerEntry data) {
+        super.bindData(data);
         mName.setText(data.title);
-        mEntry = data;
-        mDrawable = CompatibilityUtils.getDrawable(getContext(), mEntry.drawable);
-    }
-
-    public NavigationDrawerEntry getEntry() {
-        return mEntry;
+        mDrawable = CompatibilityUtils.getDrawable(getContext(), data.drawable);
     }
 
     public void setActivated(boolean activated) {

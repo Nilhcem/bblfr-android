@@ -61,7 +61,7 @@ public class TagsListAdapter extends BaseHeaderAdapter<Void, TagsListEntry, Tags
         TagsListEntryView view = (TagsListEntryView) v.getTag();
 
         // Toggle selected tag, then notify.
-        view.getTag().toggleActivatedState();
+        view.getData().toggleActivatedState();
         notifyItemChanged(view.getAdapterPosition());
         mListener.onFilterChanged(TagsListEntry.getSelectedTagsIds(mItems));
     }

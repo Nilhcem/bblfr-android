@@ -25,6 +25,7 @@ public class BaggersListHeaderView extends BaseRecyclerViewHolder<String> {
 
     @Override
     public void bindData(String data) {
+        super.bindData(data);
         if (data == null) {
             return;
         }
