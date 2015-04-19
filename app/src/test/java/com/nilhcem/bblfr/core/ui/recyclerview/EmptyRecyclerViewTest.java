@@ -8,8 +8,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmptyRecyclerViewTest {
@@ -19,8 +19,8 @@ public class EmptyRecyclerViewTest {
 
     @Before
     public void setup() {
-        emptyView = new View(Robolectric.application);
-        recyclerView = new EmptyRecyclerView(Robolectric.application);
+        emptyView = new View(RuntimeEnvironment.application);
+        recyclerView = new EmptyRecyclerView(RuntimeEnvironment.application);
         recyclerView.setEmptyView(emptyView);
     }
 

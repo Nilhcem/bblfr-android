@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Date;
 
@@ -31,8 +32,8 @@ public class PreferencesTest {
 
     @Before
     public void setup() {
-        prefs = new Preferences(Robolectric.application);
-        sharedPrefs = Robolectric.application.getSharedPreferences(Preferences.PREFS_NAME, Context.MODE_PRIVATE);
+        prefs = new Preferences(RuntimeEnvironment.application);
+        sharedPrefs = RuntimeEnvironment.application.getSharedPreferences(Preferences.PREFS_NAME, Context.MODE_PRIVATE);
     }
 
     @Test

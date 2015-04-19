@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collections;
 
@@ -38,7 +38,7 @@ public class BaseHeaderAdapterTest {
     public void should_create_item_viewholder() {
         // Given
         int viewType = BaseHeaderAdapter.TYPE_ITEM;
-        ViewGroup parent = new FrameLayout(Robolectric.application);
+        ViewGroup parent = new FrameLayout(RuntimeEnvironment.application);
 
         // When
         adapter.onCreateViewHolder(parent, viewType);
@@ -52,7 +52,7 @@ public class BaseHeaderAdapterTest {
     public void should_create_header_viewholder() {
         // Given
         int viewType = BaseHeaderAdapter.TYPE_HEADER;
-        ViewGroup parent = new FrameLayout(Robolectric.application);
+        ViewGroup parent = new FrameLayout(RuntimeEnvironment.application);
 
         // When
         adapter.onCreateViewHolder(parent, viewType);

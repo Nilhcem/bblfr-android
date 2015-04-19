@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIntent;
 
@@ -36,9 +37,9 @@ public class IntentUtilsTest {
         IntentUtils.startEmailIntent(activity, title, recipient, subject);
 
         // Then
-        ShadowActivity shadowActivity = Robolectric.shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Robolectric.shadowOf(startedIntent);
+        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
         Intent mailExtra = (Intent) shadowIntent.getParcelableExtra(Intent.EXTRA_INTENT);
 
         assertThat(shadowIntent.getStringExtra(Intent.EXTRA_TITLE)).isEqualTo(title);
@@ -56,9 +57,9 @@ public class IntentUtilsTest {
         IntentUtils.startSiteIntent(activity, site);
 
         // Then
-        ShadowActivity shadowActivity = Robolectric.shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Robolectric.shadowOf(startedIntent);
+        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
 
         assertThat(shadowIntent.getAction()).isEqualTo(Intent.ACTION_VIEW);
         assertThat(shadowIntent.getDataString()).isEqualTo(site);
@@ -70,9 +71,9 @@ public class IntentUtilsTest {
         IntentUtils.restartApp(activity);
 
         // Then
-        ShadowActivity shadowActivity = Robolectric.shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Robolectric.shadowOf(startedIntent);
+        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
 
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(SplashscreenActivity.class.getName());
         assertThat(shadowIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
