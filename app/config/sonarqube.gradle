@@ -1,0 +1,22 @@
+apply plugin: 'sonar-runner'
+
+sonarRunner {
+    sonarProperties {
+        def appProject = project(':app')
+        def androidProjectDir = appProject.projectDir
+
+        property 'sonar.projectKey', 'bblfr-android'
+        property 'sonar.projectName', 'Brown Bag Lunch France (Android)'
+        property 'sonar.projectVersion', appProject.android.defaultConfig.versionName
+
+        property 'sonar.host.url', 'http://localhost:9000'
+        property 'sonar.jdbc.url', 'jdbc:h2:tcp://localhost:9092/sonar'
+        property 'sonar.jdbc.username', 'sonar'
+        property 'sonar.jdbc.password', 'sonar'
+
+        property 'sonar.dynamicAnalysis', 'reuseReports'
+
+        properties["sonar.sources"] = "$androidProjectDir/src/main/java"
+        properties["sonar.jacoco.excludes"] = ["android/**/*.java"]
+    }
+}

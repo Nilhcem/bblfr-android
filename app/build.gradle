@@ -15,6 +15,7 @@ repositories {
 
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply from: 'config/sonarqube.gradle'
 
 android {
     compileSdkVersion 22
