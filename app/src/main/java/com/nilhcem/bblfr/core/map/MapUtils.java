@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.List;
 
 import rx.Observable;
+import timber.log.Timber;
 
 public class MapUtils {
 
@@ -37,12 +38,13 @@ public class MapUtils {
     public static void moveToCurrentLocation(GoogleMap map, List<Marker> markers, Location lastLocation, float zoom) {
         map.setMyLocationEnabled(true);
 
-        Location location = lastLocation;
-        if (location == null && markers != null && !markers.isEmpty()) {
+        if (lastLocation == null && markers != null && !markers.isEmpty()) {
             moveToMarkerBounds(map, markers);
-        } else {
-            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        } else if (lastLocation != null) {
+            LatLng currentLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoom));
+        } else {
+            Timber.w("Both lastLocation and markers are null");
         }
     }
 

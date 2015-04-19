@@ -18,12 +18,12 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
     public @interface ViewType {
     }
 
-    protected static final int TYPE_ITEM = 1;
-    protected static final int TYPE_HEADER = 2;
+    static final int TYPE_ITEM = 1;
+    static final int TYPE_HEADER = 2;
 
     protected H mHeader;
     protected List<I> mItems = Collections.emptyList();
-    private boolean mHasHeader;
+    boolean mHasHeader;
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -58,7 +58,7 @@ public abstract class BaseImport<T> {
         });
     }
 
-    private T convertToJsonData(String json) {
+    T convertToJsonData(String json) {
         T jsonData = null;
 
         if (!TextUtils.isEmpty(json)) {

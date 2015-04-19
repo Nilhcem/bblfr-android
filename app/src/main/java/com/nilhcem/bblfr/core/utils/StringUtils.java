@@ -43,14 +43,16 @@ public class StringUtils {
         StringBuilder sb = new StringBuilder();
         boolean addSeparatorFlag = false;
 
-        for (String entry : entries) {
-            if (!TextUtils.isEmpty(entry)) {
-                if (addSeparatorFlag && separator != null) {
-                    sb.append(separator);
-                } else {
-                    addSeparatorFlag = true;
+        if (entries != null) {
+            for (String entry : entries) {
+                if (!TextUtils.isEmpty(entry)) {
+                    if (addSeparatorFlag && separator != null) {
+                        sb.append(separator);
+                    } else {
+                        addSeparatorFlag = true;
+                    }
+                    sb.append(entry);
                 }
-                sb.append(entry);
             }
         }
         return sb.toString();

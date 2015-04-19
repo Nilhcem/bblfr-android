@@ -16,16 +16,16 @@ import javax.inject.Singleton;
 public class Preferences {
 
     public static final String PREFS_NAME = "bblfr";
-    private static final String KEY_LAST_DOWNLOAD = "last_download_date";
-    private static final String KEY_FAV_CITY_LAT = "city_lat";
-    private static final String KEY_FAV_CITY_LNG = "city_lng";
-    private static final String KEY_HR_MODE = "hr_mode";
-    private static final String KEY_RESET_DB = "reset_db";
+    static final String KEY_LAST_DOWNLOAD = "last_download_date";
+    static final String KEY_FAV_CITY_LAT = "city_lat";
+    static final String KEY_FAV_CITY_LNG = "city_lng";
+    static final String KEY_HR_MODE = "hr_mode";
+    static final String KEY_RESET_DB = "reset_db";
 
     private SharedPreferences mPrefs;
 
     /* In-memory data */
-    private City mCity;
+    City mCity;
 
     @Inject
     public Preferences(Application app) {

@@ -16,6 +16,7 @@ repositories {
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply from: 'config/sonarqube.gradle'
+apply from: 'config/unit-tests.gradle'
 
 android {
     compileSdkVersion 22
@@ -47,15 +48,12 @@ android {
         exclude 'META-INF/ASL2.0'
     }
 
-    lintOptions {
-        abortOnError false
-    }
-
     buildTypes {
         debug {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
         }
         release {
             minifyEnabled true
@@ -72,6 +70,10 @@ android {
             buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"rh/js/baggers.js"'
             buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 

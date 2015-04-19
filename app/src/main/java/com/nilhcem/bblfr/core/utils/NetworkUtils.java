@@ -27,7 +27,7 @@ public class NetworkUtils {
         String absoluteUrl = url;
 
         if (!TextUtils.isEmpty(absoluteUrl) && !absoluteUrl.startsWith("http")) {
-            absoluteUrl = BuildConfig.WS_ENDPOINT + absoluteUrl;
+            absoluteUrl = StringUtils.appendOptional(BuildConfig.WS_ENDPOINT, absoluteUrl);
         }
         return absoluteUrl;
     }

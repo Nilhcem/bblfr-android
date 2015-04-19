@@ -63,7 +63,7 @@ public class CheckDataService {
         });
     }
 
-    private City findClosestCity(Location location, List<City> cities) {
+    City findClosestCity(Location location, List<City> cities) {
         City closestCity = null;
         float closestDistance = Float.MAX_VALUE;
 
