@@ -33,7 +33,7 @@ public class Preferences {
     }
 
     public long getLastDownloadDate() {
-        return mPrefs.getLong(KEY_LAST_DOWNLOAD, 0l);
+        return mPrefs.getLong(KEY_LAST_DOWNLOAD, 0L);
     }
 
     public void setDownloadDate() {

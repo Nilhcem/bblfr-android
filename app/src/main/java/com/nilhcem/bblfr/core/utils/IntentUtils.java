@@ -10,6 +10,8 @@ import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 
 import java.util.Locale;
 
+import timber.log.Timber;
+
 public class IntentUtils {
 
     private static final String MAILTO_SCHEME = "mailto";
@@ -33,6 +35,7 @@ public class IntentUtils {
         try {
             startSiteIntent(context, String.format(Locale.US, "market://details?id=%s", BuildConfig.APPLICATION_ID));
         } catch (ActivityNotFoundException e) {
+            Timber.d(e, "Can't find market using 'market://' scheme. Use Play Store URL instead");
             startSiteIntent(context, String.format(Locale.US, "http://play.google.com/store/apps/details?id=%s", BuildConfig.APPLICATION_ID));
         }
     }

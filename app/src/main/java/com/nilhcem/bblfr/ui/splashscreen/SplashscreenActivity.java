@@ -34,7 +34,7 @@ import static com.nilhcem.bblfr.core.utils.NetworkUtils.isNetworkAvailable;
 public class SplashscreenActivity extends BaseActivity {
 
     // Download data at most once a day (1 * 24 * 60 * 60 * 1000).
-    private static final long DOWNLOAD_DATA_INTERVAL = 86_400_000l;
+    private static final long DOWNLOAD_DATA_INTERVAL = 86_400_000L;
 
     @Inject Preferences mPrefs;
     @Inject ImportService mImportService;
@@ -110,24 +110,27 @@ public class SplashscreenActivity extends BaseActivity {
                             Timber.d("Keep data download date");
                             mPrefs.setDownloadDate();
                         }
-
-                        Intent intent;
-                        if (city == null) {
-                            // First time the application is launched
-                            intent = CitiesMapActivity.createLaunchIntent(this, false);
-                        } else {
-                            // If user has already selected a city, or we found his nearest city
-                            // via his location, directs the user to the baggers list for this city.
-                            mPrefs.keepInMemory(city);
-                            intent = BaggersListActivity.createLaunchIntent(this, city);
-                        }
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(0, 0);
+                        startNextActivity(city);
                     } else {
                         onImportError();
                     }
                 }, throwable -> onImportError());
+    }
+
+    private void startNextActivity(City city) {
+        Intent intent;
+        if (city == null) {
+            // First time the application is launched
+            intent = CitiesMapActivity.createLaunchIntent(this, false);
+        } else {
+            // If user has already selected a city, or we found his nearest city
+            // via his location, directs the user to the baggers list for this city.
+            mPrefs.keepInMemory(city);
+            intent = BaggersListActivity.createLaunchIntent(this, city);
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     private void onImportError() {

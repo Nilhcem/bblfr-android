@@ -1,7 +1,6 @@
 package com.nilhcem.bblfr.model.baggers.dao;
 
 import android.support.annotation.NonNull;
-import android.support.v4.util.LongSparseArray;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.BaggerCity;

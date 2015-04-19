@@ -5,8 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.nilhcem.bblfr.BuildConfig;
 
 import java.util.Locale;
@@ -28,10 +26,8 @@ public class NetworkUtils {
     public static String getAbsoluteUrl(String url) {
         String absoluteUrl = url;
 
-        if (!TextUtils.isEmpty(absoluteUrl)) {
-            if (!absoluteUrl.startsWith("http")) {
-                absoluteUrl = BuildConfig.WS_ENDPOINT + absoluteUrl;
-            }
+        if (!TextUtils.isEmpty(absoluteUrl) && !absoluteUrl.startsWith("http")) {
+            absoluteUrl = BuildConfig.WS_ENDPOINT + absoluteUrl;
         }
         return absoluteUrl;
     }

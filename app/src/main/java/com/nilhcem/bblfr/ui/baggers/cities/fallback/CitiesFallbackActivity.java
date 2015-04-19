@@ -1,12 +1,10 @@
 package com.nilhcem.bblfr.ui.baggers.cities.fallback;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.nilhcem.bblfr.R;
-import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;

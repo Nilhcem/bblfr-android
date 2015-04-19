@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nilhcem.bblfr.BBLApplication;
-import com.squareup.picasso.Picasso;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 

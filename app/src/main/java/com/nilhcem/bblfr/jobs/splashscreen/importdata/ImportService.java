@@ -2,8 +2,6 @@ package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
 import android.util.Pair;
 
-import com.nilhcem.bblfr.core.prefs.Preferences;
-
 import javax.inject.Inject;
 
 import rx.Observable;

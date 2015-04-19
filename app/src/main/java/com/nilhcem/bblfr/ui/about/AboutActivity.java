@@ -67,7 +67,7 @@ public class AboutActivity extends NavigationDrawerActivity {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             float alpha = getAlpha(positionOffset);
-            if (position < mMaxPosition - 1 || position == mMaxPosition - 1 && positionOffset == 0) {
+            if (position < mMaxPosition - 1 || position == mMaxPosition - 1 && Float.floatToRawIntBits(positionOffset) == 0) {
                 mStepsContainer.setAlpha(1);
                 mLastStepContainer.setVisibility(View.GONE);
 
@@ -77,7 +77,7 @@ public class AboutActivity extends NavigationDrawerActivity {
             } else {
                 mLastStepContainer.setVisibility(View.VISIBLE);
 
-                if (positionOffset == 0.0f) {
+                if (Float.floatToRawIntBits(positionOffset) == 0) {
                     mStepsContainer.setAlpha(0);
                     mLastStepContainer.setAlpha(1);
                 } else if (positionOffset < 0.5f) {

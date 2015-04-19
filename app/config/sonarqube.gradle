@@ -14,8 +14,6 @@ sonarRunner {
         property 'sonar.jdbc.username', 'sonar'
         property 'sonar.jdbc.password', 'sonar'
 
-        property 'sonar.dynamicAnalysis', 'reuseReports'
-
         properties["sonar.sources"] = "$androidProjectDir/src/main/java"
         properties["sonar.jacoco.excludes"] = ["android/**/*.java"]
     }

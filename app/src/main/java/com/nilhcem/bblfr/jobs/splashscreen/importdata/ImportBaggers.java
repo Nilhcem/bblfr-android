@@ -9,8 +9,6 @@ import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-
 import static com.nilhcem.bblfr.BuildConfig.WS_BAGGERS_HR_URL;
 import static com.nilhcem.bblfr.BuildConfig.WS_BAGGERS_URL;
 import static com.nilhcem.bblfr.BuildConfig.WS_ENDPOINT;
@@ -24,6 +22,6 @@ public class ImportBaggers extends BaseImport<BaggersData> {
 
     @Override
     protected String getUrl() {
-        return StringUtils.appendOptional(WS_ENDPOINT, (mPrefs.isUsingHrMode() ? WS_BAGGERS_HR_URL : WS_BAGGERS_URL));
+        return StringUtils.appendOptional(WS_ENDPOINT, mPrefs.isUsingHrMode() ? WS_BAGGERS_HR_URL : WS_BAGGERS_URL);
     }
 }

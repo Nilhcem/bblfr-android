@@ -47,7 +47,7 @@ public abstract class BaseHeaderAdapter<H, I, HV extends BaseRecyclerViewHolder<
 
     @Override
     public int getItemCount() {
-        if (mItems.size() == 0) {
+        if (mItems.isEmpty()) {
             // Empty view.
             return 0;
         }

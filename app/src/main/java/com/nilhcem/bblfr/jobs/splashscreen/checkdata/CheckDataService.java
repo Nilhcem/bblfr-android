@@ -43,7 +43,6 @@ public class CheckDataService {
     private Observable<City> getFavoriteCity(Context context) {
         return Observable.create(subscriber -> {
             mProvider.initSync(context);
-
             City city = null;
 
             Pair<String, String> latLng = mPrefs.getFavoriteCityLatLng();
@@ -55,12 +54,10 @@ public class CheckDataService {
             if (city == null) {
                 Timber.d("Try to find the closest city");
                 city = findClosestCity(mProvider.getLastKnownLocation(), mCitiesDao.getCities());
-
                 if (city != null) {
                     mPrefs.setFavoriteCity(city);
                 }
             }
-
             subscriber.onNext(city);
             subscriber.onCompleted();
         });
