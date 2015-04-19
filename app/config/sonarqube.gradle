@@ -3,7 +3,8 @@ apply plugin: 'sonar-runner'
 sonarRunner {
     sonarProperties {
         def appProject = project(':app')
-        def androidProjectDir = appProject.projectDir
+        def appProjectDir = appProject.projectDir
+        def appProjectBuildDir = appProject.buildDir
 
         property 'sonar.projectKey', 'bblfr-android'
         property 'sonar.projectName', 'Brown Bag Lunch France (Android)'
@@ -14,7 +15,15 @@ sonarRunner {
         property 'sonar.jdbc.username', 'sonar'
         property 'sonar.jdbc.password', 'sonar'
 
-        properties["sonar.sources"] = "$androidProjectDir/src/main/java"
+        property 'sonar.core.codeCoveragePlugin', 'jacoco'
+        property 'sonar.junit.reportsPath', "$appProjectBuildDir/test-results/realDebug"
+        property 'sonar.jacoco.reportPath', "$appProjectBuildDir/jacoco/testRealDebug.exec"
+
+        properties["sonar.projectBaseDir"] = appProjectBuildDir
+        properties["sonar.sources"] = "$appProjectDir/src/main/java"
+        properties["sonar.tests"] = "$appProjectDir/src/test/java"
+        //properties["sonar.java.binaries"] = "$appProjectBuildDir/intermediates/classes/real/debug"
         properties["sonar.jacoco.excludes"] = ["android/**/*.java"]
+        properties["sonar.coverage.exclusions"] = ["android/**/*.java"]
     }
 }
