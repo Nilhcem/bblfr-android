@@ -11,5 +11,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/baggers_list_cards_margin"
         android:layout_marginTop="6dp"
+        android:contentDescription="@null"
         tools:src="@drawable/location_placeholder"/>
 </FrameLayout>

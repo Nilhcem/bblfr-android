@@ -3,6 +3,6 @@
     <!-- About BBL -->
     <dimen name="about_pic_width">252dp</dimen>
     <dimen name="about_pic_height">188dp</dimen>
-    <dimen name="about_step_text_size">20dp</dimen>
+    <dimen name="about_step_text_size">20sp</dimen>
     <dimen name="about_quote_text_size">18sp</dimen>
 </resources>

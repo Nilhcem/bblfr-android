@@ -6,7 +6,6 @@
              android:background="@color/primary_dark"
              android:paddingTop="25dp">
 
-    <!-- textSize in dp to make sure it always fits the layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +20,8 @@
         android:text="@string/drawer_title"
         android:textColor="@color/white"
         android:textSize="28dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        tools:ignore="SpUsage"/>
 
     <TextView
         android:id="@+id/navigation_header_flavor"
@@ -33,5 +33,6 @@
         android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold|italic"
+        tools:ignore="SpUsage"
         tools:text="@string/drawer_flavor_hr"/>
 </FrameLayout>
