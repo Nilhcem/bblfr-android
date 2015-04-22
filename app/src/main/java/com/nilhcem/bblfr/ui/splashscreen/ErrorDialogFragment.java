@@ -1,12 +1,12 @@
 package com.nilhcem.bblfr.ui.splashscreen;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 
 import com.nilhcem.bblfr.R;
 
@@ -34,16 +34,15 @@ public class ErrorDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(mNetworkIssue ? R.string.splash_error_network_title : R.string.splash_error_unknown_title)
                 .setMessage(mNetworkIssue ? R.string.splash_error_network_content : R.string.splash_error_unknown_content)
                 .setPositiveButton(R.string.splash_error_button_exit, (dialog, which) -> exit(getActivity(), dialog))
                 .setNegativeButton(R.string.splash_error_button_prefs, (dialog, which) -> {
                     startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
                     exit(getActivity(), dialog);
-                });
-
-        return alertDialogBuilder.create();
+                })
+                .create();
     }
 
     private void exit(FragmentActivity activity, DialogInterface dialog) {
