@@ -23,7 +23,7 @@ public class IntentUtilsTest {
 
     @Before
     public void setup() {
-        activity = Robolectric.buildActivity(Activity.class).create().get();
+        activity = Robolectric.setupActivity(Activity.class);
     }
 
     @Test

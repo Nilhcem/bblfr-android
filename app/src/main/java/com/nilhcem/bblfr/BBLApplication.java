@@ -6,6 +6,7 @@ import android.content.Context;
 import com.nilhcem.bblfr.core.db.Database;
 import com.nilhcem.bblfr.core.log.ReleaseTree;
 
+import dagger.Module;
 import dagger.ObjectGraph;
 import timber.log.Timber;
 
@@ -34,7 +35,11 @@ public class BBLApplication extends Application {
     }
 
     private void initObjectGraph() {
-        mObjectGraph = ObjectGraph.create(new BBLModule(this));
+        mObjectGraph = ObjectGraph.create(getModules());
+    }
+
+    Object[] getModules() {
+        return new Object[]{new BBLModule(this)};
     }
 
     public void inject(Object target) {
