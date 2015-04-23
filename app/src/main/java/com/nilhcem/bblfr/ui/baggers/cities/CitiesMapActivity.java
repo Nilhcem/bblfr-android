@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Pair;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -61,7 +62,11 @@ public class CitiesMapActivity extends BaseMapActivity {
                         MapUtils.getGoogleMapObservable(mMapFragment),
                         Pair::create))
                 .subscribeOn(Schedulers.io())
-                .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onCitiesLoaded(pair.first, pair.second)));
+                .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onCitiesLoaded(pair.first, pair.second)), error -> {
+                    Timber.e(error, "Error getting baggers cities");
+                    Toast.makeText(CitiesMapActivity.this, R.string.baggers_map_error, Toast.LENGTH_SHORT).show();
+                    finish();
+                });
     }
 
     private void onCitiesLoaded(List<City> cities, GoogleMap map) {

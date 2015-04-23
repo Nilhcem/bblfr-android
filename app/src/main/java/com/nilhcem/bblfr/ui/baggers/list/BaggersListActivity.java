@@ -69,7 +69,7 @@ public class BaggersListActivity extends TagsListActivity {
         setToolbarTitle(0);
     }
 
-    private void setToolbarTitle(int nbBaggers) {
+    void setToolbarTitle(int nbBaggers) {
         String title;
 
         if (!mIsFiltered) {

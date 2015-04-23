@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AboutPagerAdapter extends PagerAdapter {
 
-    private List<AboutPagerStepEntry> mEntries;
+    private final List<AboutPagerStepEntry> mEntries;
 
     public AboutPagerAdapter() {
         mEntries = new ArrayList<>();
