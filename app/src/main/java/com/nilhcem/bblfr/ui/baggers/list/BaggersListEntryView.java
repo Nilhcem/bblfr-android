@@ -73,7 +73,7 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
         IntentUtils.startEmailIntent(context, chooser, (String) button.getTag(), subject);
     }
 
-    private void setTextIfAny(TextView textview, CharSequence text) {
+    void setTextIfAny(TextView textview, CharSequence text) {
         if (TextUtils.isEmpty(text)) {
             textview.setVisibility(View.GONE);
         } else {
