@@ -70,6 +70,14 @@ android {
             buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"rh/js/baggers.js"'
             buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
         }
+
+        // Mock server for instrumentation tests.
+        mock {
+            buildConfigField 'String', 'WS_ENDPOINT', '"http://' + getLocalIp() + ':8990/"'
+            buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
+            buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"rh/js/baggers.js"'
+            buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
+        }
     }
 
     lintOptions {
@@ -107,4 +115,16 @@ dependencies {
     provided 'com.github.frankiesardo:icepick-processor:2.3.6'
 
     compile 'com.viewpagerindicator:library:2.4.1@aar'
+}
+
+def getLocalIp() {
+    for (NetworkInterface iface : NetworkInterface.getNetworkInterfaces()) {
+        for (InetAddress addr : iface.getInetAddresses()) {
+            // exclude loopback address
+            def ip = addr.hostAddress
+            if (ip != '127.0.0.1' && ip.length() <= 15) {
+                return ip
+            }
+        }
+    }
 }
