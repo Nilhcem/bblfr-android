@@ -131,7 +131,9 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
 
     @Override
     public void onBackPressed() {
-        if (mIsFiltered && !isNavigationDrawerVisible()) {
+        if (mFilterDrawer.mLayout.isDrawerVisible(GravityCompat.END)) {
+            mFilterDrawer.mLayout.closeDrawer(GravityCompat.END);
+        } else if (mIsFiltered && !isNavigationDrawerVisible()) {
             resetFilter();
         } else {
             super.onBackPressed();

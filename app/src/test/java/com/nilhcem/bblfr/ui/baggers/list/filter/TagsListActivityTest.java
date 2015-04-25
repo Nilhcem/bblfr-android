@@ -25,6 +25,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -69,7 +70,7 @@ public class TagsListActivityTest {
     }
 
     @Test
-    public void should_open_tags_drawer_when_clicking_on_menu_icon() {
+    public void should_open_filter_drawer_when_clicking_on_menu_icon() {
         // Given
         MenuItem item = new RoboMenuItem(R.id.action_filter_baggers);
 
@@ -94,15 +95,31 @@ public class TagsListActivityTest {
     }
 
     @Test
-    public void should_reset_filters_if_any_on_back_pressed() {
+    public void should_close_filter_drawer_when_pressing_back_if_visible() {
         // Given
         activity.onFilterChanged(Arrays.asList(new String[]{"Android"}));
+        when(drawer.isDrawerVisible(GravityCompat.END)).thenReturn(true);
+
+        // When
+        activity.onBackPressed();
+
+        // Then
+        assertThat(activity.mIsFiltered).isTrue();
+        verify(drawer).closeDrawer(GravityCompat.END);
+    }
+
+    @Test
+    public void should_reset_filters_if_any_on_back_pressed_when_drawer_is_not_visible() {
+        // Given
+        activity.onFilterChanged(Arrays.asList(new String[]{"Android"}));
+        when(drawer.isDrawerVisible(GravityCompat.END)).thenReturn(false);
 
         // When
         activity.onBackPressed();
 
         // Then
         assertThat(activity.mIsFiltered).isFalse();
+        verify(drawer, times(0)).closeDrawer(GravityCompat.END);
     }
 
     @Test
