@@ -48,7 +48,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     private NavigationDrawerEntry mSelectedDrawerItem;
 
     // A way to perform multiple ButterKnife injections on the same instance object.
-    private NavigationDrawerViewHolder mNavigationDrawer;
+    NavigationDrawerViewHolder mNavigationDrawer;
 
     static class NavigationDrawerViewHolder {
         @InjectView(R.id.navigation_drawer_layout) DrawerLayout mLayout;

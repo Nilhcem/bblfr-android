@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
@@ -25,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,7 +50,7 @@ public class TagsListActivityTest {
         activity.mFilterDrawer = holder;
 
         tagsAdapter = new TagsListAdapter(selectedTagsIds -> {});
-        tagsAdapter = Mockito.spy(tagsAdapter);
+        tagsAdapter = spy(tagsAdapter);
         activity.mTagsAdapter = tagsAdapter;
     }
 
@@ -77,7 +77,7 @@ public class TagsListActivityTest {
         activity.onOptionsItemSelected(item);
 
         // Then
-        Mockito.verify(drawer).openDrawer(GravityCompat.END);
+        verify(drawer).openDrawer(GravityCompat.END);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class TagsListActivityTest {
         activity.onOptionsItemSelected(item);
 
         // Then
-        Mockito.verify(drawer).closeDrawer(GravityCompat.END);
+        verify(drawer).closeDrawer(GravityCompat.END);
     }
 
     @Test

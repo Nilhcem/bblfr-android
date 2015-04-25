@@ -8,11 +8,12 @@ import com.nilhcem.bblfr.model.baggers.City;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RuntimeEnvironment;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(BBLRobolectricTestRunner.class)
@@ -32,7 +33,7 @@ public class CitiesFallbackAdapterTest {
         // Given
         City city = new City();
         city.name = "Franconville";
-        CitiesFallbackEntryView entryView = Mockito.mock(CitiesFallbackEntryView.class);
+        CitiesFallbackEntryView entryView = mock(CitiesFallbackEntryView.class);
         when(entryView.getData()).thenReturn(city);
         View view = new View(RuntimeEnvironment.application);
         view.setTag(entryView);
@@ -41,7 +42,7 @@ public class CitiesFallbackAdapterTest {
         adapter.onClick(view);
 
         // Then
-        Mockito.verify(listener).onCitySelected(city);
+        verify(listener).onCitySelected(city);
     }
 
     public static class TestOnCitySelectedListener implements CitiesFallbackAdapter.OnCitySelectedListener {

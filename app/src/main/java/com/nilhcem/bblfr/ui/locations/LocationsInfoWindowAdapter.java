@@ -61,7 +61,7 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         return mLayout;
     }
 
-    private void setHtmlTextIfNotEmpty(TextView textView, String text) {
+    void setHtmlTextIfNotEmpty(TextView textView, String text) {
         if (TextUtils.isEmpty(text)) {
             textView.setVisibility(View.GONE);
         } else {
