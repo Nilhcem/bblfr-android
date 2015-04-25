@@ -122,7 +122,7 @@ def getLocalIp() {
         for (InetAddress addr : iface.getInetAddresses()) {
             // exclude loopback address
             def ip = addr.hostAddress
-            if (ip != '127.0.0.1' && ip.length() <= 15) {
+            if (ip != '127.0.0.1' && ip.length() <= 15 && ip.startsWith('192.')) {
                 return ip
             }
         }
