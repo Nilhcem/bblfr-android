@@ -73,9 +73,10 @@ public class BBLModule {
     }
 
     @Provides @Singleton Picasso providePicasso(OkHttpClient client) {
-        return new Picasso.Builder(mApp)
-                .downloader(new OkHttpDownloader(client))
-                .listener((picasso, uri, e) -> Timber.e(e, "Failed to load image: %s", uri))
-                .build();
+        Picasso.Builder builder = new Picasso.Builder(mApp).downloader(new OkHttpDownloader(client));
+        if (BuildConfig.DEBUG) {
+            builder.listener((picasso, uri, e) -> Timber.e(e, "Failed to load image: %s", uri));
+        }
+        return builder.build();
     }
 }
