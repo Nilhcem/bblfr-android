@@ -174,13 +174,13 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
         super.setContentView(R.layout.navigation_drawer_activity);
         ButterKnife.inject(mNavigationDrawer, this);
 
-        if (mHasNavigationDrawer) {
-            RecyclerView recyclerView = mNavigationDrawer.mRecyclerView;
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mDrawerAdapter = new NavigationDrawerAdapter(this, mPrefs.isUsingHrMode(), this);
-            recyclerView.setAdapter(mDrawerAdapter);
-        } else {
+        RecyclerView recyclerView = mNavigationDrawer.mRecyclerView;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mDrawerAdapter = new NavigationDrawerAdapter(this, mPrefs.isUsingHrMode(), this);
+        recyclerView.setAdapter(mDrawerAdapter);
+
+        if (!mHasNavigationDrawer) {
             lockNavigationDrawer();
         }
     }
