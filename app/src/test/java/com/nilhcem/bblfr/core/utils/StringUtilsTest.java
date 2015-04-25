@@ -4,9 +4,10 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import edu.emory.mathcs.backport.java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class StringUtilsTest {
 
     @Test

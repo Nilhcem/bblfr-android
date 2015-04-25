@@ -3,20 +3,20 @@ package com.nilhcem.bblfr.core.utils;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIntent;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class IntentUtilsTest {
 
     private Activity activity;

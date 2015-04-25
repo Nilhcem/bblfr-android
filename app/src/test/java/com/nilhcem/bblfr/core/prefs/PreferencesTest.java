@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.model.baggers.City;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Date;
@@ -24,7 +23,7 @@ import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_RESET_DB;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressLint("CommitPrefEdits")
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class PreferencesTest {
 
     private Preferences prefs;

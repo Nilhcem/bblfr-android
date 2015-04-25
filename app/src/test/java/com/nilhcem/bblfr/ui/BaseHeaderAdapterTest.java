@@ -3,13 +3,14 @@ package com.nilhcem.bblfr.ui;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collections;
@@ -22,7 +23,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class BaseHeaderAdapterTest {
 
     @Spy TestBaseHeaderAdapter adapter;

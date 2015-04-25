@@ -2,15 +2,15 @@ package com.nilhcem.bblfr.ui.baggers.list.filter;
 
 import android.os.Parcel;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.model.baggers.Tag;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class TagsListEntryTest {
 
     @Test

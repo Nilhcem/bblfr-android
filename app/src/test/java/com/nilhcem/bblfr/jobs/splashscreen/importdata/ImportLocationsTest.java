@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 
@@ -8,11 +9,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class ImportLocationsTest {
 
     @Mock Preferences prefs;

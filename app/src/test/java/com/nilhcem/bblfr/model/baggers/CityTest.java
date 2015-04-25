@@ -2,13 +2,14 @@ package com.nilhcem.bblfr.model.baggers;
 
 import android.os.Parcel;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class CityTest {
 
     @Test

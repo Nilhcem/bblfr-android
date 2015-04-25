@@ -3,6 +3,7 @@ package com.nilhcem.bblfr.core.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.BuildConfig;
 
 import org.junit.Before;
@@ -11,12 +12,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(BBLRobolectricTestRunner.class)
 public class NetworkUtilsTest {
 
     @Mock Context context;
