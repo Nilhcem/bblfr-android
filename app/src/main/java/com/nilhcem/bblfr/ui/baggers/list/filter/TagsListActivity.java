@@ -47,7 +47,7 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     @Inject protected BaggersService mBaggersService;
 
     // A way to perform multiple ButterKnife injections on the same instance object.
-    private FilterDrawerViewHolder mFilterDrawer;
+    FilterDrawerViewHolder mFilterDrawer;
 
     static class FilterDrawerViewHolder {
         @InjectView(R.id.filter_container) ViewGroup mContainer;
@@ -59,18 +59,16 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     }
 
     private Subscription mTagsSubscription;
-    private TagsListAdapter mTagsAdapter;
+    TagsListAdapter mTagsAdapter;
 
     @Icicle protected boolean mIsFiltered;
     @Icicle ArrayList<TagsListEntry> mTags;
 
     protected City mCity;
 
-    protected static Intent createLaunchIntent(@NonNull Context context, @NonNull Class clazz, City city) {
+    protected static Intent createLaunchIntent(@NonNull Context context, @NonNull Class clazz, @NonNull City city) {
         Intent intent = new Intent(context, clazz);
-        if (city != null) {
-            intent.putExtra(EXTRA_CITY, city);
-        }
+        intent.putExtra(EXTRA_CITY, city);
         return intent;
     }
 
