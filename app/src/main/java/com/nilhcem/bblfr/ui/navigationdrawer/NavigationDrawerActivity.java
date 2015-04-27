@@ -47,7 +47,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     /* The MenuDrawerItem corresponding to the actual activity (useful for highlighting the selected category) */
     private NavigationDrawerEntry mSelectedDrawerItem;
 
-    // A way to perform multiple ButterKnife injections on the same instance object.
+    /* A way to perform multiple ButterKnife injections on the same instance object */
     NavigationDrawerViewHolder mNavigationDrawer;
 
     static class NavigationDrawerViewHolder {
