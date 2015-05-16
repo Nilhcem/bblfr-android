@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-printmapping out.map
+
 # TODO: should optimize this
 -keep public class com.nilhcem.bblfr.** { *; }
 
