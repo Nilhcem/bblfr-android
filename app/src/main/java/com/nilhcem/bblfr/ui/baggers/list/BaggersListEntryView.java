@@ -52,17 +52,21 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
         setTextIfAny(mLocations, data.locations);
         mContactButton.setTag(data.email);
 
-        mPicasso.load(data.pictureUrl).transform(new RoundedTransformation(4, 0)).noFade().into(mPicture, new Callback() {
-            @Override
-            public void onSuccess() {
-                mPicture.setVisibility(View.VISIBLE);
-            }
+        if (TextUtils.isEmpty(data.pictureUrl)) {
+            mPicture.setVisibility(View.GONE);
+        } else {
+            mPicasso.load(data.pictureUrl).transform(new RoundedTransformation(4, 0)).noFade().into(mPicture, new Callback() {
+                @Override
+                public void onSuccess() {
+                    mPicture.setVisibility(View.VISIBLE);
+                }
 
-            @Override
-            public void onError() {
-                mPicture.setVisibility(View.GONE);
-            }
-        });
+                @Override
+                public void onError() {
+                    mPicture.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     @OnClick(R.id.bagger_entry_invite_button)
