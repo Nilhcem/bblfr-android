@@ -118,12 +118,13 @@ dependencies {
 }
 
 def getLocalIp() {
-    for (NetworkInterface iface : NetworkInterface.getNetworkInterfaces()) {
-        for (InetAddress addr : iface.getInetAddresses()) {
-            // exclude loopback address
-            def ip = addr.hostAddress
-            if (ip != '127.0.0.1' && ip.length() <= 15 && ip.startsWith('192.')) {
-                return ip
+    for (NetworkInterface iface : NetworkInterface.networkInterfaces) {
+        for (InetAddress addr : iface.inetAddresses) {
+            if (!addr.isLoopbackAddress()) {
+                def ip = addr.hostAddress
+                if (ip.startsWith('192.')) {
+                    return ip
+                }
             }
         }
     }
