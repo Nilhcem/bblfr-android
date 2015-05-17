@@ -1,19 +1,11 @@
-package com.nilhcem.bblfr;
+package com.nilhcem.bblfr.core.dagger;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilhcem.bblfr.BBLApplication;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.map.LocationProvider;
 import com.nilhcem.bblfr.core.prefs.Preferences;
-import com.nilhcem.bblfr.ui.about.AboutActivity;
-import com.nilhcem.bblfr.ui.baggers.cities.CitiesMapActivity;
-import com.nilhcem.bblfr.ui.baggers.cities.fallback.CitiesFallbackActivity;
-import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
-import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
-import com.nilhcem.bblfr.ui.baggers.list.BaggersListHeaderView;
-import com.nilhcem.bblfr.ui.locations.LocationsMapActivity;
-import com.nilhcem.bblfr.ui.settings.SettingsActivity;
-import com.nilhcem.bblfr.ui.settings.SettingsFragment;
-import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
@@ -27,21 +19,7 @@ import dagger.Module;
 import dagger.Provides;
 import timber.log.Timber;
 
-@Module(
-        injects = {
-                LocationProvider.class,
-                SplashscreenActivity.class,
-                CitiesMapActivity.class,
-                CitiesFallbackActivity.class,
-                BaggersListActivity.class,
-                BaggersListHeaderView.class,
-                BaggersListEntryView.class,
-                LocationsMapActivity.class,
-                AboutActivity.class,
-                SettingsActivity.class,
-                SettingsFragment.class
-        }
-)
+@Module
 public class BBLModule {
 
     private static final int DISK_CACHE_SIZE = 52_428_800; // 50MB (50 * 1024 * 1024)
@@ -50,6 +28,10 @@ public class BBLModule {
 
     public BBLModule(BBLApplication app) {
         mApp = app;
+    }
+
+    @Provides @Singleton LocationProvider provideLocationProvider() {
+        return new LocationProvider();
     }
 
     @Provides @Singleton Preferences providePreferences() {

@@ -14,7 +14,7 @@ public class CitiesFallbackEntryView extends BaseRecyclerViewHolder<City> {
     @InjectView(R.id.cities_fallback_item_name) TextView mName;
 
     public CitiesFallbackEntryView(ViewGroup parent) {
-        super(parent, R.layout.cities_fallback_item, false);
+        super(parent, R.layout.cities_fallback_item);
     }
 
     @Override

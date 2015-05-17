@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.ui.recyclerview.SimpleDividerItemDecoration;
@@ -41,6 +42,7 @@ public class CitiesFallbackActivity extends NavigationDrawerActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BBLApplication.get(this).component().inject(this);
         setContentView(R.layout.cities_fallback_activity);
         getSupportActionBar().setTitle(R.string.baggers_map_toolbar_title);
         initRecyclerView();

@@ -16,7 +16,7 @@ public enum AboutPagerStepEntry {
     public final int content;
     public final int image;
 
-    private AboutPagerStepEntry(@StringRes int titleRes, @StringRes int contentRes, @DrawableRes int imageRes) {
+    AboutPagerStepEntry(@StringRes int titleRes, @StringRes int contentRes, @DrawableRes int imageRes) {
         title = titleRes;
         content = contentRes;
         image = imageRes;

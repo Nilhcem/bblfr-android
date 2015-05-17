@@ -3,16 +3,17 @@ package com.nilhcem.bblfr;
 import android.app.Application;
 import android.content.Context;
 
+import com.nilhcem.bblfr.core.dagger.BBLComponent;
+import com.nilhcem.bblfr.core.dagger.BBLModule;
+import com.nilhcem.bblfr.core.dagger.DaggerBBLComponent;
 import com.nilhcem.bblfr.core.db.Database;
 import com.nilhcem.bblfr.core.log.ReleaseTree;
 
-import dagger.Module;
-import dagger.ObjectGraph;
 import timber.log.Timber;
 
 public class BBLApplication extends Application {
 
-    private ObjectGraph mObjectGraph;
+    private BBLComponent mComponent;
 
     public static BBLApplication get(Context context) {
         return (BBLApplication) context.getApplicationContext();
@@ -22,8 +23,12 @@ public class BBLApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initLogger();
-        initObjectGraph();
+        initGraph();
         Database.init(this);
+    }
+
+    public BBLComponent component() {
+        return mComponent;
     }
 
     private void initLogger() {
@@ -34,15 +39,9 @@ public class BBLApplication extends Application {
         }
     }
 
-    private void initObjectGraph() {
-        mObjectGraph = ObjectGraph.create(getModules());
-    }
-
-    Object[] getModules() {
-        return new Object[]{new BBLModule(this)};
-    }
-
-    public void inject(Object target) {
-        mObjectGraph.inject(target);
+    private void initGraph() {
+        mComponent = DaggerBBLComponent.builder()
+                .bBLModule(new BBLModule(this))
+                .build();
     }
 }

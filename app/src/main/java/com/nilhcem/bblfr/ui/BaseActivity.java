@@ -23,9 +23,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
-
         mApplication = BBLApplication.get(this);
-        mApplication.inject(this);
     }
 
     @Override

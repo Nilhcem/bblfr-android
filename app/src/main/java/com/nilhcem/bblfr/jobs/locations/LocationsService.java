@@ -11,7 +11,12 @@ import rx.Observable;
 
 public class LocationsService {
 
-    @Inject LocationsDao mDao;
+    private final LocationsDao mDao;
+
+    @Inject
+    public LocationsService(LocationsDao dao) {
+        mDao = dao;
+    }
 
     public Observable<List<Location>> getLocations() {
         return Observable.create(subscriber -> {

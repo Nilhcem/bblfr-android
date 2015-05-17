@@ -8,8 +8,14 @@ import rx.Observable;
 
 public class ImportService {
 
-    @Inject ImportBaggers mBaggersService;
-    @Inject ImportLocations mLocationsService;
+    private final ImportBaggers mBaggersService;
+    private final ImportLocations mLocationsService;
+
+    @Inject
+    public ImportService(ImportBaggers importBaggers, ImportLocations importLocations) {
+        mBaggersService = importBaggers;
+        mLocationsService = importLocations;
+    }
 
     public Observable<Pair<Boolean, Boolean>> importData() {
         return Observable.zip(

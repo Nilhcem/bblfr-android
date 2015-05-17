@@ -3,12 +3,18 @@ package com.nilhcem.bblfr.jobs.splashscreen.checkdata;
 import android.location.Location;
 
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.core.map.LocationProvider;
+import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.model.baggers.dao.BaggersDao;
+import com.nilhcem.bblfr.model.baggers.dao.CitiesDao;
+import com.nilhcem.bblfr.model.locations.dao.LocationsDao;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -16,17 +22,24 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class CheckDataServiceTest {
 
     @Mock Location location;
-    private CheckDataService service = new CheckDataService();
+    private CheckDataService service;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        service = new CheckDataService(
+                mock(Preferences.class),
+                mock(CitiesDao.class),
+                mock(BaggersDao.class),
+                mock(LocationsDao.class),
+                mock(LocationProvider.class));
     }
 
     @Test

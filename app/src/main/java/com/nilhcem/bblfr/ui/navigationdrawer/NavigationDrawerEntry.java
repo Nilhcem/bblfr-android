@@ -18,7 +18,7 @@ public enum NavigationDrawerEntry {
     public final int title;
     public final int drawable;
 
-    private NavigationDrawerEntry(@StringRes int titleRes, @DrawableRes int drawableRes) {
+    NavigationDrawerEntry(@StringRes int titleRes, @DrawableRes int drawableRes) {
         title = titleRes;
         drawable = drawableRes;
     }

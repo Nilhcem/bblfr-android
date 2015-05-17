@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.map.MapUtils;
 import com.nilhcem.bblfr.core.utils.AppUtils;
@@ -51,6 +52,7 @@ public class CitiesMapActivity extends BaseMapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BBLApplication.get(this).component().inject(this);
         getSupportActionBar().setTitle(R.string.baggers_map_toolbar_title);
     }
 

@@ -7,25 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nilhcem.bblfr.BBLApplication;
-
 import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
     private T mData;
 
-    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi) {
-        this(parent, resource, withDi, true);
+    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource) {
+        this(parent, resource, true);
     }
 
-    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withDi, boolean withVi) {
+    protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withVi) {
         super(LayoutInflater.from(parent.getContext()).inflate(resource, parent, false));
         if (withVi) {
             ButterKnife.inject(this, itemView);
-        }
-        if (withDi) {
-            BBLApplication.get(itemView.getContext()).inject(this);
         }
     }
 

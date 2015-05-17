@@ -8,17 +8,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.nilhcem.bblfr.core.utils.AppUtils;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-@Singleton
 public class LocationProvider {
 
     private Location mLastLocation;
-
-    @Inject
-    public LocationProvider() {
-    }
 
     public synchronized void initSync(Context context) {
         if (AppUtils.hasGooglePlayServices(context)) {

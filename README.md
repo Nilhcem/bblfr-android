@@ -715,7 +715,7 @@ Public License instead of this License.  But first, please read
 [BBLFR Android screenshots]: http://nilhcem.github.com/screenshots/bblfr-android.png
 [RxJava]: https://github.com/ReactiveX/RxJava
 [Ollie]: https://github.com/pardom/Ollie
-[Dagger]: http://square.github.com/dagger
+[Dagger]: http://google.github.io/dagger
 [Butterknife]: http://jakewharton.github.com/butterknife
 [IcePick]: https://github.com/frankiesardo/icepick
 [OkHTTP]: https://github.com/square/okhttp

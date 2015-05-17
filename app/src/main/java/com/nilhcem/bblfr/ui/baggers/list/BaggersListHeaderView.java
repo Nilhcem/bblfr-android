@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 import com.squareup.picasso.Callback;
@@ -20,7 +21,8 @@ public class BaggersListHeaderView extends BaseRecyclerViewHolder<String> {
     @InjectView(R.id.baggers_list_city_header) ImageView mCityImage;
 
     public BaggersListHeaderView(ViewGroup parent) {
-        super(parent, R.layout.baggers_list_header, true);
+        super(parent, R.layout.baggers_list_header);
+        BBLApplication.get(parent.getContext()).component().inject(this);
     }
 
     @Override

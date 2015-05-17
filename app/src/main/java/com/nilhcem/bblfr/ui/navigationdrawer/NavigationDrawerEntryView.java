@@ -18,7 +18,7 @@ public class NavigationDrawerEntryView extends BaseRecyclerViewHolder<Navigation
     private Drawable mDrawable;
 
     public NavigationDrawerEntryView(ViewGroup parent) {
-        super(parent, R.layout.navigation_drawer_item, false);
+        super(parent, R.layout.navigation_drawer_item);
     }
 
     @Override

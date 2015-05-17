@@ -13,7 +13,7 @@ public class NavigationDrawerHeaderView extends BaseRecyclerViewHolder<Void> {
     @InjectView(R.id.navigation_header_flavor) TextView mFlavor;
 
     public NavigationDrawerHeaderView(ViewGroup parent) {
-        super(parent, R.layout.navigation_drawer_header, false);
+        super(parent, R.layout.navigation_drawer_header);
     }
 
     public void setHrMode(boolean hrMode) {

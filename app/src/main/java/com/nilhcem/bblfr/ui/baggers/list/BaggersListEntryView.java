@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.picasso.RoundedTransformation;
 import com.nilhcem.bblfr.core.utils.IntentUtils;
@@ -35,7 +36,8 @@ public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntr
     @InjectView(R.id.bagger_entry_invite_button) Button mContactButton;
 
     public BaggersListEntryView(ViewGroup parent) {
-        super(parent, R.layout.baggers_list_item, true);
+        super(parent, R.layout.baggers_list_item);
+        BBLApplication.get(parent.getContext()).component().inject(this);
 
         mBio.setMovementMethod(LinkMovementMethod.getInstance());
         mLinks.setMovementMethod(LinkMovementMethod.getInstance());

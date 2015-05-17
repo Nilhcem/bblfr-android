@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.ui.BaseActivity;
@@ -61,6 +62,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BBLApplication.get(this).component().inject(this);
         setDataFromExtra();
         initLayout();
     }
@@ -129,6 +131,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
                 case SETTINGS:
                     mPendingDrawerIntent = SettingsActivity.createLaunchIntent(this);
                     break;
+                case FIND_BAGGER:
                 default:
                     mPendingDrawerIntent = BaggersListActivity.createLaunchIntent(this, mPrefs.getCity());
                     break;

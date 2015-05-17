@@ -14,7 +14,7 @@ public class TagsListEntryView extends BaseRecyclerViewHolder<TagsListEntry> {
     @InjectView(R.id.filter_entry_name) TextView mName;
 
     public TagsListEntryView(ViewGroup parent) {
-        super(parent, R.layout.tags_list_item, false);
+        super(parent, R.layout.tags_list_item);
     }
 
     @Override

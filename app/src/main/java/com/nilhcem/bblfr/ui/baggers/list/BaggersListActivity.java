@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.recyclerview.EmptyRecyclerView;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
@@ -38,6 +39,8 @@ public class BaggersListActivity extends TagsListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BBLApplication.get(this).component().inject(this);
+
         setContentView(R.layout.baggers_list_activity);
         setToolbarTitle(0);
         initRecyclerView();

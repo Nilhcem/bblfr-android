@@ -20,11 +20,20 @@ import timber.log.Timber;
 
 public class CheckDataService {
 
-    @Inject Preferences mPrefs;
-    @Inject CitiesDao mCitiesDao;
-    @Inject BaggersDao mBaggersDao;
-    @Inject LocationsDao mLocationsDao;
-    @Inject LocationProvider mProvider;
+    private final Preferences mPrefs;
+    private final CitiesDao mCitiesDao;
+    private final BaggersDao mBaggersDao;
+    private final LocationsDao mLocationsDao;
+    private final LocationProvider mProvider;
+
+    @Inject
+    public CheckDataService(Preferences prefs, CitiesDao citiesDao, BaggersDao baggersDao, LocationsDao locationsDao, LocationProvider locationProvider) {
+        mPrefs = prefs;
+        mCitiesDao = citiesDao;
+        mBaggersDao = baggersDao;
+        mLocationsDao = locationsDao;
+        mProvider = locationProvider;
+    }
 
     public Observable<Pair<Boolean, City>> checkData(Context context) {
         return Observable.zip(

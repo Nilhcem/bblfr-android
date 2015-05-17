@@ -8,6 +8,6 @@ import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 public class TagsListHeaderView extends BaseRecyclerViewHolder<Void> {
 
     public TagsListHeaderView(ViewGroup parent) {
-        super(parent, R.layout.tags_list_header, false, false);
+        super(parent, R.layout.tags_list_header, false);
     }
 }

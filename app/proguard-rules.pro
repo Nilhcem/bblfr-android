@@ -18,7 +18,7 @@
 
 -printmapping out.map
 
-# TODO: should optimize this
+# Application
 -keep public class com.nilhcem.bblfr.** { *; }
 
 # Appcompat
@@ -39,19 +39,6 @@
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
-
-# Dagger
--keepclassmembers,allowobfuscation class * {
-    @javax.inject.* *;
-    @dagger.* *;
-    <init>();
-}
--keep class javax.inject.** { *; }
--keep class **$$ModuleAdapter
--keep class **$$InjectAdapter
--keep class **$$StaticInjection
--keep class dagger.** { *; }
--dontwarn dagger.internal.codegen.*
 
 # Icepick
 -dontwarn icepick.**

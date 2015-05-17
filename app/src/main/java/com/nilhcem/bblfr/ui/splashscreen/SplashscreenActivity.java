@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.jobs.splashscreen.checkdata.CheckDataService;
@@ -47,6 +48,7 @@ public class SplashscreenActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BBLApplication.get(this).component().inject(this);
         setContentView(R.layout.splashscreen_activity);
         ButterKnife.inject(this);
         mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));

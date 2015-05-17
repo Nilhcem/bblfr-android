@@ -20,8 +20,14 @@ import rx.Observable;
 
 public class BaggersService {
 
-    @Inject CitiesDao mCitiesDao;
-    @Inject BaggersDao mBaggersDao;
+    private final CitiesDao mCitiesDao;
+    private final BaggersDao mBaggersDao;
+
+    @Inject
+    public BaggersService(CitiesDao citiesDao, BaggersDao baggersDao) {
+        mCitiesDao = citiesDao;
+        mBaggersDao = baggersDao;
+    }
 
     public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull List<String> selectedTags) {
         return Observable.create(subscriber -> {
