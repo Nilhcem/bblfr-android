@@ -11,7 +11,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
 
-    testCompile('org.robolectric:robolectric:3.0-rc2') {
+    testCompile('org.robolectric:robolectric:3.0') {
         exclude module: 'support-v4'
         exclude module: 'commons-logging'
         exclude module: 'httpclient'
