@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -34,8 +34,8 @@ public class CitiesFallbackActivity extends NavigationDrawerActivity implements 
 
     @Inject BaggersService mBaggersService;
 
-    @InjectView(R.id.cities_fallback_recycler_view) EmptyRecyclerView mRecyclerView;
-    @InjectView(R.id.loading_view) View mEmptyView;
+    @Bind(R.id.cities_fallback_recycler_view) EmptyRecyclerView mRecyclerView;
+    @Bind(R.id.loading_view) View mEmptyView;
 
     private CitiesFallbackAdapter mAdapter;
 

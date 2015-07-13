@@ -12,7 +12,7 @@ import com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerActivity;
 
 import javax.inject.Inject;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 public abstract class BaseMapActivity extends NavigationDrawerActivity {
@@ -20,7 +20,8 @@ public abstract class BaseMapActivity extends NavigationDrawerActivity {
     protected MapFragment mMapFragment;
 
     @Inject protected LocationProvider mLocationProvider;
-    @InjectView(R.id.maps_error_container) ViewGroup mErrorContainer;
+
+    @Bind(R.id.maps_error_container) ViewGroup mErrorContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

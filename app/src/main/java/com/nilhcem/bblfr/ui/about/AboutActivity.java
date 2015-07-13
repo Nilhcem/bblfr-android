@@ -13,7 +13,7 @@ import com.nilhcem.bblfr.core.utils.IntentUtils;
 import com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 import icepick.Icicle;
 
@@ -21,15 +21,15 @@ public class AboutActivity extends NavigationDrawerActivity {
 
     private static final String ARTICLE_URL = "http://linsolas.github.io/blog/2013/02/09/lancez-vous-dans-les-brown-bag-lunches/";
 
-    @InjectView(R.id.about_layout_container) ViewGroup mLayoutContainer;
-    @InjectView(R.id.about_steps_container) ViewGroup mStepsContainer;
-    @InjectView(R.id.about_last_step_container) ViewGroup mLastStepContainer;
+    @Bind(R.id.about_layout_container) ViewGroup mLayoutContainer;
+    @Bind(R.id.about_steps_container) ViewGroup mStepsContainer;
+    @Bind(R.id.about_last_step_container) ViewGroup mLastStepContainer;
 
-    @InjectView(R.id.about_viewpager) ViewPager mViewPager;
-    @InjectView(R.id.about_viewpager_indicator) CirclePageIndicator mViewPagerIndicator;
+    @Bind(R.id.about_viewpager) ViewPager mViewPager;
+    @Bind(R.id.about_viewpager_indicator) CirclePageIndicator mViewPagerIndicator;
 
-    @InjectView(R.id.about_title) TextView mTitle;
-    @InjectView(R.id.about_content) TextView mContent;
+    @Bind(R.id.about_title) TextView mTitle;
+    @Bind(R.id.about_content) TextView mContent;
 
     private int[] mTitlesIds = AboutPagerStepEntry.getTitles();
     private int[] mContentIds = AboutPagerStepEntry.getContents();

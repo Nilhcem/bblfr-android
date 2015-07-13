@@ -7,11 +7,11 @@ import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class CitiesFallbackEntryView extends BaseRecyclerViewHolder<City> {
 
-    @InjectView(R.id.cities_fallback_item_name) TextView mName;
+    @Bind(R.id.cities_fallback_item_name) TextView mName;
 
     public CitiesFallbackEntryView(ViewGroup parent) {
         super(parent, R.layout.cities_fallback_item);

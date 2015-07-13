@@ -26,8 +26,8 @@ import com.nilhcem.bblfr.ui.settings.SettingsActivity;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import timber.log.Timber;
 
 public abstract class NavigationDrawerActivity extends BaseActivity implements View.OnClickListener {
@@ -52,9 +52,9 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     NavigationDrawerViewHolder mNavigationDrawer;
 
     static class NavigationDrawerViewHolder {
-        @InjectView(R.id.navigation_drawer_layout) DrawerLayout mLayout;
-        @InjectView(R.id.navigation_content_frame) FrameLayout mContent;
-        @InjectView(R.id.navigation_drawer_view) RecyclerView mRecyclerView;
+        @Bind(R.id.navigation_drawer_layout) DrawerLayout mLayout;
+        @Bind(R.id.navigation_content_frame) FrameLayout mContent;
+        @Bind(R.id.navigation_drawer_view) RecyclerView mRecyclerView;
     }
 
     private NavigationDrawerAdapter mDrawerAdapter;
@@ -154,7 +154,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     public void setContentView(int layoutResID) {
         // Override setContentView to have a specific view injection in the drawer layout.
         View inflated = LayoutInflater.from(this).inflate(layoutResID, getParentView(), false);
-        ButterKnife.inject(this, inflated);
+        ButterKnife.bind(this, inflated);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
         }
@@ -172,10 +172,17 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
         initNavigationDrawer();
     }
 
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(mNavigationDrawer);
+        ButterKnife.unbind(this);
+        super.onDestroy();
+    }
+
     private void initLayout() {
         mNavigationDrawer = new NavigationDrawerViewHolder();
         super.setContentView(R.layout.navigation_drawer_activity);
-        ButterKnife.inject(mNavigationDrawer, this);
+        ButterKnife.bind(mNavigationDrawer, this);
 
         RecyclerView recyclerView = mNavigationDrawer.mRecyclerView;
         recyclerView.setHasFixedSize(true);

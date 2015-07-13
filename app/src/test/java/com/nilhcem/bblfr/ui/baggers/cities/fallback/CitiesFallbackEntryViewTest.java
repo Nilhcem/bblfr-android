@@ -5,7 +5,6 @@ import android.widget.FrameLayout;
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.model.baggers.City;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

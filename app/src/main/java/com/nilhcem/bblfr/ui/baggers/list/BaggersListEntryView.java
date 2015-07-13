@@ -20,20 +20,20 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 public class BaggersListEntryView extends BaseRecyclerViewHolder<BaggersListEntry> {
 
     @Inject Picasso mPicasso;
 
-    @InjectView(R.id.bagger_entry_name) TextView mName;
-    @InjectView(R.id.bagger_entry_links) TextView mLinks;
-    @InjectView(R.id.bagger_entry_bio) TextView mBio;
-    @InjectView(R.id.bagger_entry_sessions) TextView mSessions;
-    @InjectView(R.id.bagger_entry_locations) TextView mLocations;
-    @InjectView(R.id.bagger_entry_picture) ImageView mPicture;
-    @InjectView(R.id.bagger_entry_invite_button) Button mContactButton;
+    @Bind(R.id.bagger_entry_name) TextView mName;
+    @Bind(R.id.bagger_entry_links) TextView mLinks;
+    @Bind(R.id.bagger_entry_bio) TextView mBio;
+    @Bind(R.id.bagger_entry_sessions) TextView mSessions;
+    @Bind(R.id.bagger_entry_locations) TextView mLocations;
+    @Bind(R.id.bagger_entry_picture) ImageView mPicture;
+    @Bind(R.id.bagger_entry_invite_button) Button mContactButton;
 
     public BaggersListEntryView(ViewGroup parent) {
         super(parent, R.layout.baggers_list_item);

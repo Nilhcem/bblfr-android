@@ -20,16 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-    @InjectView(R.id.info_window_name) TextView mName;
-    @InjectView(R.id.info_window_address) TextView mAddress;
-    @InjectView(R.id.info_window_contact) TextView mContact;
-    @InjectView(R.id.info_window_audience) TextView mAudience;
-    @InjectView(R.id.info_window_interests) TextView mInterests;
+    @Bind(R.id.info_window_name) TextView mName;
+    @Bind(R.id.info_window_address) TextView mAddress;
+    @Bind(R.id.info_window_contact) TextView mContact;
+    @Bind(R.id.info_window_audience) TextView mAudience;
+    @Bind(R.id.info_window_interests) TextView mInterests;
 
     private View mLayout;
     private Context mContext;
@@ -39,7 +39,7 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         mContext = context;
         mLocations = markerLocations;
         mLayout = LayoutInflater.from(context).inflate(R.layout.map_locations_info_window, null);
-        ButterKnife.inject(this, mLayout);
+        ButterKnife.bind(this, mLayout);
     }
 
     @Override
@@ -59,6 +59,12 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         setHtmlTextIfNotEmpty(mInterests, formatInterestsText(data.interests));
 
         return mLayout;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        ButterKnife.unbind(this);
+        super.finalize();
     }
 
     void setHtmlTextIfNotEmpty(TextView textView, String text) {

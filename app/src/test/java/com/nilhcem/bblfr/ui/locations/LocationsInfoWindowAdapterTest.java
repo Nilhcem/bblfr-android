@@ -1,8 +1,6 @@
 package com.nilhcem.bblfr.ui.locations;
 
-import android.opengl.Visibility;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.Marker;
@@ -10,13 +8,11 @@ import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.model.locations.Audience;
 import com.nilhcem.bblfr.model.locations.Interest;
 import com.nilhcem.bblfr.model.locations.Location;
-import com.nilhcem.bblfr.ui.baggers.list.BaggersListEntryView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
@@ -25,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class LocationsInfoWindowAdapterTest {

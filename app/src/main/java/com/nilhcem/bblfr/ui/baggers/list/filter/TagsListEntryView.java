@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class TagsListEntryView extends BaseRecyclerViewHolder<TagsListEntry> {
 
-    @InjectView(R.id.filter_entry_layout) ViewGroup mContainer;
-    @InjectView(R.id.filter_entry_name) TextView mName;
+    @Bind(R.id.filter_entry_layout) ViewGroup mContainer;
+    @Bind(R.id.filter_entry_name) TextView mName;
 
     public TagsListEntryView(ViewGroup parent) {
         super(parent, R.layout.tags_list_item);

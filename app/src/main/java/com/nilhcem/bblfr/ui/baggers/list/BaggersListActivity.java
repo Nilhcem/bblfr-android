@@ -18,7 +18,7 @@ import com.nilhcem.bblfr.ui.baggers.list.filter.TagsListActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import icepick.Icicle;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
@@ -26,8 +26,8 @@ import timber.log.Timber;
 
 public class BaggersListActivity extends TagsListActivity {
 
-    @InjectView(R.id.baggers_list_recycler_view) EmptyRecyclerView mRecyclerView;
-    @InjectView(R.id.loading_view) View mEmptyView;
+    @Bind(R.id.baggers_list_recycler_view) EmptyRecyclerView mRecyclerView;
+    @Bind(R.id.loading_view) View mEmptyView;
 
     private BaggersListAdapter mAdapter;
     @Icicle ArrayList<BaggersListEntry> mBaggers;

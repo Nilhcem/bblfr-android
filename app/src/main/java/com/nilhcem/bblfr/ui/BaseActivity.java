@@ -1,23 +1,23 @@
 package com.nilhcem.bblfr.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 
-import butterknife.InjectView;
-import butterknife.Optional;
+import butterknife.Bind;
 import icepick.Icepick;
 import rx.Subscription;
 
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected BBLApplication mApplication;
     protected Subscription mSubscription;
 
-    @Optional @InjectView(R.id.toolbar) protected Toolbar mToolbar;
+    @Nullable @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

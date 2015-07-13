@@ -12,13 +12,13 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class BaggersListHeaderView extends BaseRecyclerViewHolder<String> {
 
     @Inject Picasso mPicasso;
 
-    @InjectView(R.id.baggers_list_city_header) ImageView mCityImage;
+    @Bind(R.id.baggers_list_city_header) ImageView mCityImage;
 
     public BaggersListHeaderView(ViewGroup parent) {
         super(parent, R.layout.baggers_list_header);

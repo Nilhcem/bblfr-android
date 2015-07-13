@@ -32,8 +32,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import icepick.Icicle;
 import rx.Subscription;
 import rx.android.app.AppObservable;
@@ -50,12 +50,12 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     FilterDrawerViewHolder mFilterDrawer;
 
     static class FilterDrawerViewHolder {
-        @InjectView(R.id.filter_container) ViewGroup mContainer;
-        @InjectView(R.id.filter_drawer_layout) DrawerLayout mLayout;
-        @InjectView(R.id.filter_content_frame) FrameLayout mContent;
-        @InjectView(R.id.filter_drawer_view) EmptyRecyclerView mRecyclerView;
-        @InjectView(R.id.loading_view) ProgressBar mEmptyView;
-        @InjectView(R.id.toolbar) Toolbar mToolbar;
+        @Bind(R.id.filter_container) ViewGroup mContainer;
+        @Bind(R.id.filter_drawer_layout) DrawerLayout mLayout;
+        @Bind(R.id.filter_content_frame) FrameLayout mContent;
+        @Bind(R.id.filter_drawer_view) EmptyRecyclerView mRecyclerView;
+        @Bind(R.id.loading_view) ProgressBar mEmptyView;
+        @Bind(R.id.toolbar) Toolbar mToolbar;
     }
 
     private Subscription mTagsSubscription;
@@ -156,8 +156,14 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     @Override
     public void setContentView(int layoutResID) {
         View inflated = LayoutInflater.from(this).inflate(layoutResID, mFilterDrawer.mContent, true);
-        ButterKnife.inject(this, inflated);
+        ButterKnife.bind(this, inflated);
         super.setContentView(mFilterDrawer.mContainer);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(mFilterDrawer);
+        super.onDestroy();
     }
 
     protected void resetFilter() {
@@ -168,7 +174,7 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     private void initLayout() {
         mFilterDrawer = new FilterDrawerViewHolder();
         View inflated = LayoutInflater.from(this).inflate(R.layout.tags_list_activity, getParentView(), false);
-        ButterKnife.inject(mFilterDrawer, inflated);
+        ButterKnife.bind(mFilterDrawer, inflated);
         setSupportActionBar(mFilterDrawer.mToolbar);
 
         DrawerLayout drawer = mFilterDrawer.mLayout;

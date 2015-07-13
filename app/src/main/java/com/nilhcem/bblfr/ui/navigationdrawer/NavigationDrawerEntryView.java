@@ -9,11 +9,11 @@ import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class NavigationDrawerEntryView extends BaseRecyclerViewHolder<NavigationDrawerEntry> {
 
-    @InjectView(R.id.navigation_drawer_entry_name) TextView mName;
+    @Bind(R.id.navigation_drawer_entry_name) TextView mName;
 
     private Drawable mDrawable;
 

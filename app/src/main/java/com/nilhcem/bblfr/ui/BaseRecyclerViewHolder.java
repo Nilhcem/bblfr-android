@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
     private T mData;
+    private boolean mWithVi;
 
     protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource) {
         this(parent, resource, true);
@@ -20,8 +21,17 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
     protected BaseRecyclerViewHolder(ViewGroup parent, @LayoutRes int resource, boolean withVi) {
         super(LayoutInflater.from(parent.getContext()).inflate(resource, parent, false));
         if (withVi) {
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
+            mWithVi = true;
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        if (mWithVi) {
+            ButterKnife.unbind(this);
+        }
+        super.finalize();
     }
 
     protected Context getContext() {

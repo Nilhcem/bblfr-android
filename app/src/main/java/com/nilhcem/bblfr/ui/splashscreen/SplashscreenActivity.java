@@ -2,6 +2,7 @@ package com.nilhcem.bblfr.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,9 +24,8 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.Optional;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -41,16 +41,16 @@ public class SplashscreenActivity extends BaseActivity {
     @Inject ImportService mImportService;
     @Inject CheckDataService mCheckDataService;
 
-    @InjectView(R.id.splash_logo_container) ViewGroup mLogoContainer;
-    @InjectView(R.id.splash_subtitle) TextView mSubtitle;
-    @Optional @InjectView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
+    @Bind(R.id.splash_logo_container) ViewGroup mLogoContainer;
+    @Bind(R.id.splash_subtitle) TextView mSubtitle;
+    @Nullable @Bind(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BBLApplication.get(this).component().inject(this);
         setContentView(R.layout.splashscreen_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));
         animateLogo();
     }
@@ -76,6 +76,12 @@ public class SplashscreenActivity extends BaseActivity {
         }
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(this);
+        super.onDestroy();
     }
 
     /**
