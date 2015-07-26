@@ -66,17 +66,22 @@ android {
         // Should be the default flavor.
         real {
             buildConfigField 'String', 'WS_ENDPOINT', '"http://www.brownbaglunch.fr/"'
-            buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
-            buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"rh/js/baggers.js"'
             buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
+
+            buildConfigField 'String', 'WS_DATA_ENDPOINT', '"http://data.brownbaglunch.fr/"'
+            buildConfigField 'String', 'WS_BAGGERS_URL', '"baggers.js"'
+            buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"baggers-rh.js"'
         }
 
         // Mock server for instrumentation tests.
         mock {
-            buildConfigField 'String', 'WS_ENDPOINT', '"http://' + getLocalIp() + ':8990/"'
+            def endpoint = '"http://' + getLocalIp() + ':8990/"'
+            buildConfigField 'String', 'WS_ENDPOINT', endpoint
+            buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
+
+            buildConfigField 'String', 'WS_DATA_ENDPOINT', endpoint
             buildConfigField 'String', 'WS_BAGGERS_URL', '"js/baggers.js"'
             buildConfigField 'String', 'WS_BAGGERS_HR_URL', '"rh/js/baggers.js"'
-            buildConfigField 'String', 'WS_LOCATIONS_URL', '"js/bbl-locations.js"'
         }
     }
 
