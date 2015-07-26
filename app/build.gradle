@@ -90,30 +90,30 @@ retrolambda {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:cardview-v7:22.2.0'
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:recyclerview-v7:$supportVersion"
+    compile "com.android.support:cardview-v7:$supportVersion"
 
     compile 'com.jakewharton.timber:timber:3.1.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0'
     compile 'io.reactivex:rxandroid:0.25.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile 'com.google.android.gms:play-services-location:7.5.0'
-    compile 'com.google.android.gms:play-services-maps:7.5.0'
+    compile "com.google.android.gms:play-services-location:$gmsVersion"
+    compile "com.google.android.gms:play-services-maps:$gmsVersion"
 
-    compile 'com.google.dagger:dagger:2.0.1'
-    provided 'com.google.dagger:dagger-compiler:2.0.1'
+    compile "com.google.dagger:dagger:$daggerVersion"
+    provided "com.google.dagger:dagger-compiler:$daggerVersion"
     compile 'javax.annotation:javax.annotation-api:1.2'
 
-    compile 'com.michaelpardo:ollie:0.3.1'
-    provided 'com.michaelpardo:ollie-compiler:0.3.1'
+    compile "com.michaelpardo:ollie:$ollieVersion"
+    provided "com.michaelpardo:ollie-compiler:$ollieVersion"
 
-    compile 'com.github.frankiesardo:icepick:2.3.6'
-    provided 'com.github.frankiesardo:icepick-processor:2.3.6'
+    compile "com.github.frankiesardo:icepick:$icepickVersion"
+    provided "com.github.frankiesardo:icepick-processor:$icepickVersion"
 
     compile 'com.viewpagerindicator:library:2.4.1@aar'
 }
