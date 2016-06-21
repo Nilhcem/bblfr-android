@@ -29,7 +29,7 @@ public class BaggersListEntryTest {
     @Before
     public void setup() {
         Website website = new Website();
-        website.href = "http://www.nilhcem.com";
+        website.url = "http://www.nilhcem.com";
 
         Session session = new Session();
         session.title = "Work hard,";
@@ -39,11 +39,11 @@ public class BaggersListEntryTest {
         bagger.name = "Gautier";
         bagger.picture = "http://www.nilhcem.com/img.jpg";
         bagger.websites = Arrays.asList(new Website[]{website});
-        bagger.twitter = "Nilhcem";
         bagger.sessions = Arrays.asList(new Session[]{session});
         bagger.bio = "Software Craftsman";
         bagger.location = "Franconville";
-        bagger.mail = "me@example.com";
+        bagger.contacts.twitter = "Nilhcem";
+        bagger.contacts.mail = "me@example.com";
 
         entry = new BaggersListEntry(RuntimeEnvironment.application, bagger);
     }
