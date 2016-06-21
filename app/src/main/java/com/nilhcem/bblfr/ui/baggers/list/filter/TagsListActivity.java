@@ -84,7 +84,7 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
         super.onStart();
 
         if (mTags == null) {
-            mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersTags(mCity.id))
+            mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getSessionsTags(mCity.id))
                     .subscribeOn(Schedulers.io())
                     .subscribe(tags -> {
                         Timber.d("Tags loaded from database");

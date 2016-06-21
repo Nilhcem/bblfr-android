@@ -40,11 +40,11 @@ public class BaggersListEntry implements Parcelable {
     public BaggersListEntry(Context context, Bagger bagger) {
         name = bagger.name;
         pictureUrl = NetworkUtils.getAbsoluteUrl(bagger.picture);
-        links = linksToSpannable(context, bagger.websites, bagger.twitter);
+        links = linksToSpannable(context, bagger.websites, bagger.contacts.twitter);
         sessions = sessionsToSpannable(context, bagger.sessions);
         bio = htmlTextToSpannable(bagger.bio);
         locations = locationsToSpannable(context, bagger.location);
-        email = toProperEmail(bagger.mail);
+        email = toProperEmail(bagger.contacts.mail);
     }
 
     private Spanned htmlTextToSpannable(String source) {
@@ -101,7 +101,7 @@ public class BaggersListEntry implements Parcelable {
         if (websites != null) {
             Drawable icon = getDrawable(context, R.drawable.baggers_link_ic);
             for (Website website : websites) {
-                addLinkToSpannable(sb, icon, StringUtils.createSpannedHtmlLink(website.title, website.href));
+                addLinkToSpannable(sb, icon, StringUtils.createSpannedHtmlLink(website.name, website.url));
             }
         }
 

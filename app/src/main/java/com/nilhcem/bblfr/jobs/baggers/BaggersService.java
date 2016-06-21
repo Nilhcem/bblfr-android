@@ -42,10 +42,10 @@ public class BaggersService {
         });
     }
 
-    public Observable<List<TagsListEntry>> getBaggersTags(@NonNull Long cityId) {
+    public Observable<List<TagsListEntry>> getSessionsTags(@NonNull Long cityId) {
         return Observable.create(subscriber -> {
             List<TagsListEntry> entries = new ArrayList<>();
-            List<Tag> tags = mBaggersDao.getBaggersTags(cityId);
+            List<Tag> tags = mBaggersDao.getSessionsTags(cityId);
 
             for (Tag tag : tags) {
                 entries.add(new TagsListEntry(tag));

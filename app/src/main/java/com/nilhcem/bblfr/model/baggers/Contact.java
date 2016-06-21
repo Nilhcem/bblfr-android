@@ -7,16 +7,16 @@ import ollie.Model;
 import ollie.annotation.Column;
 import ollie.annotation.Table;
 
-@Table("websites")
-public class Website extends Model {
+@Table("contacts")
+public class Contact extends Model {
 
     @JsonProperty
-    @Column("name")
-    public String name;
+    @Column("twitter")
+    public String twitter;
 
     @JsonProperty
-    @Column("url")
-    public String url;
+    @Column("mail")
+    public String mail;
 
     @JsonIgnore
     @Column("bagger_id")

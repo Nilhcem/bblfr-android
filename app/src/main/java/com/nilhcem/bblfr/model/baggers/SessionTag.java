@@ -4,17 +4,17 @@ import ollie.Model;
 import ollie.annotation.Column;
 import ollie.annotation.Table;
 
-@Table("baggers_tags")
-public class BaggerTag extends Model {
+@Table("sessions_tags")
+public class SessionTag extends Model {
 
-    @Column("bagger_id")
-    public Bagger bagger;
+    @Column("session_id")
+    public Session session;
 
     @Column("tag_id")
     public Tag tag;
 
-    public BaggerTag(Bagger bagger, Tag tag) {
-        this.bagger = bagger;
+    public SessionTag(Session session, Tag tag) {
+        this.session = session;
         this.tag = tag;
     }
 }

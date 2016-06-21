@@ -3,12 +3,13 @@ package com.nilhcem.bblfr.model.baggers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 public class BaggersData {
 
     @JsonProperty
-    public List<Bagger> baggers;
+    public List<Bagger> speakers;
 
     @JsonProperty
-    public List<City> cities;
+    public Map<String, City> cities;
 }

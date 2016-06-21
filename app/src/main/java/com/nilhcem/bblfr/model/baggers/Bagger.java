@@ -27,18 +27,6 @@ public class Bagger extends Model {
     public List<Website> websites;
 
     @JsonProperty
-    @Column("twitter")
-    public String twitter;
-
-    @JsonProperty
-    @Column("contact")
-    public String contact;
-
-    @JsonProperty
-    @Column("mail")
-    public String mail;
-
-    @JsonProperty
     @Column("location")
     public String location;
 
@@ -46,8 +34,8 @@ public class Bagger extends Model {
     public List<Session> sessions;
 
     @JsonProperty
-    public List<String> tags;
+    public List<String> cities;
 
     @JsonProperty
-    public List<String> cities;
+    public Contact contacts;
 }

@@ -4,9 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.BaggerCity;
-import com.nilhcem.bblfr.model.baggers.BaggerTag;
 import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.model.baggers.Contact;
 import com.nilhcem.bblfr.model.baggers.Session;
+import com.nilhcem.bblfr.model.baggers.SessionTag;
 import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.model.baggers.Website;
 
@@ -40,13 +41,13 @@ public class BaggersDao {
 
         StringBuilder sql = new StringBuilder("SELECT DISTINCT baggers.* FROM baggers INNER JOIN baggers_cities ON baggers._id=baggers_cities.bagger_id");
         if (nbTags > 0) {
-            sql.append(" INNER JOIN baggers_tags ON baggers._id=baggers_tags.bagger_id");
+            sql.append(" INNER JOIN sessions ON baggers._id=sessions.bagger_id INNER JOIN sessions_tags ON sessions._id=sessions_tags.session_id");
         }
 
         sql.append(" WHERE baggers_cities.city_id=?");
 
         if (nbTags > 0) {
-            sql.append(" AND baggers_tags.tag_id IN (");
+            sql.append(" AND sessions_tags.tag_id IN (");
             boolean addSeparator = false;
 
             for (String tagId : tagsIds) {
@@ -73,6 +74,9 @@ public class BaggersDao {
     }
 
     private void fillBaggerData(@NonNull Bagger bagger) {
+        // contacts
+        bagger.contacts = Select.from(Contact.class).where("contacts.bagger_id=?", bagger.id).fetchSingle();
+
         // cities
         List<City> cities = Select.from(City.class).innerJoin(BaggerCity.class).on("cities._id=baggers_cities.city_id").where("baggers_cities.bagger_id=?", bagger.id).fetch();
         bagger.cities = new ArrayList<>();
@@ -84,10 +88,12 @@ public class BaggersDao {
         bagger.sessions = Select.from(Session.class).where("bagger_id=?", bagger.id).fetch();
 
         // tags
-        List<Tag> tags = Select.from(Tag.class).innerJoin(BaggerTag.class).on("tags._id=baggers_tags.tag_id").where("baggers_tags.bagger_id=?", bagger.id).fetch();
-        bagger.tags = new ArrayList<>();
-        for (Tag tag : tags) {
-            bagger.tags.add(tag.name);
+        for (Session session : bagger.sessions) {
+            List<Tag> tags = Select.from(Tag.class).innerJoin(SessionTag.class).on("tags._id=sessions_tags.tag_id").where("sessions_tags.session_id=?", session.id).fetch();
+            session.tags = new ArrayList<>();
+            for (Tag tag : tags) {
+                session.tags.add(tag.name);
+            }
         }
 
         // websites
@@ -95,10 +101,10 @@ public class BaggersDao {
     }
 
     /**
-     * Gets all the baggers tags for a specified city, sorted by tags popularity.
+     * Gets all the sessions tags for a specified city, sorted by tags popularity.
      */
-    public List<Tag> getBaggersTags(@NonNull Long cityId) {
-        String sql = "SELECT DISTINCT tags.* FROM baggers_tags INNER JOIN tags ON baggers_tags.tag_id=tags._id INNER JOIN baggers on baggers_tags.bagger_id=baggers._id INNER JOIN baggers_cities on baggers._id=baggers_cities.bagger_id WHERE baggers_cities.city_id=? GROUP BY baggers_tags.tag_id ORDER BY COUNT(baggers_tags.tag_id) DESC";
+    public List<Tag> getSessionsTags(@NonNull Long cityId) {
+        String sql = "SELECT DISTINCT tags.* FROM sessions_tags INNER JOIN tags ON sessions_tags.tag_id=tags._id INNER JOIN sessions ON sessions_tags.session_id=sessions._id INNER JOIN baggers_cities ON sessions.bagger_id=baggers_cities.bagger_id WHERE baggers_cities.city_id=? GROUP BY sessions_tags.tag_id ORDER BY COUNT(sessions_tags.tag_id) DESC";
         return QueryUtils.rawQuery(Tag.class, sql, new String[]{Long.toString(cityId)});
     }
 }

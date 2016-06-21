@@ -4,10 +4,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.BaggerCity;
-import com.nilhcem.bblfr.model.baggers.BaggerTag;
 import com.nilhcem.bblfr.model.baggers.BaggersData;
 import com.nilhcem.bblfr.model.baggers.City;
+import com.nilhcem.bblfr.model.baggers.Contact;
 import com.nilhcem.bblfr.model.baggers.Session;
+import com.nilhcem.bblfr.model.baggers.SessionTag;
 import com.nilhcem.bblfr.model.baggers.Tag;
 import com.nilhcem.bblfr.model.baggers.Website;
 
@@ -32,9 +33,9 @@ public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao
         try {
             deleteExistingData(database);
 
-            Map<String, City> citiesMap = saveCities(data.cities);
-            Map<String, Tag> tagsMap = saveTags(data.baggers);
-            saveBaggers(data.baggers, citiesMap, tagsMap);
+            saveCities(data.cities);
+            Map<String, Tag> tagsMap = saveTags(data.speakers);
+            saveBaggers(data.speakers, data.cities, tagsMap);
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();
@@ -43,35 +44,35 @@ public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao
 
     @Override
     public void deleteExistingData(SQLiteDatabase database) {
-        database.delete("baggers_tags", null, null);
         database.delete("baggers_cities", null, null);
+        database.delete("sessions_tags", null, null);
         database.delete("sessions", null, null);
         database.delete("websites", null, null);
+        database.delete("contacts", null, null);
         database.delete("baggers", null, null);
         database.delete("tags", null, null);
         database.delete("cities", null, null);
     }
 
-    private Map<String, City> saveCities(List<City> cities) {
-        Map<String, City> map = new HashMap<>();
-        for (City city : cities) {
-            city.save();
-            map.put(city.name, city);
+    private void saveCities(Map<String, City> cities) {
+        for (Map.Entry<String, City> entry : cities.entrySet()) {
+            entry.getValue().save();
         }
-        return map;
     }
 
     private Map<String, Tag> saveTags(List<Bagger> baggers) {
         Map<String, Tag> map = new HashMap<>();
         for (Bagger bagger : baggers) {
-            List<String> tagNames = bagger.tags;
-            if (tagNames != null) {
-                for (String tagName : tagNames) {
-                    Tag tag = map.get(tagName);
-                    if (tag == null) {
-                        tag = new Tag(tagName);
-                        tag.save();
-                        map.put(tagName, tag);
+            for (Session session : bagger.sessions) {
+                List<String> tagNames = session.tags;
+                if (tagNames != null) {
+                    for (String tagName : tagNames) {
+                        Tag tag = map.get(tagName);
+                        if (tag == null) {
+                            tag = new Tag(tagName);
+                            tag.save();
+                            map.put(tagName, tag);
+                        }
                     }
                 }
             }
@@ -85,7 +86,8 @@ public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao
             saveBaggerWebsites(bagger, bagger.websites);
             saveBaggerSessions(bagger, bagger.sessions);
             saveBaggerCities(bagger, bagger.cities, citiesMap);
-            saveBaggerTags(bagger, bagger.tags, tagsMap);
+            saveBaggerContacts(bagger, bagger.contacts);
+            saveSessionTags(bagger.sessions, tagsMap);
         }
     }
 
@@ -95,6 +97,13 @@ public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao
                 website.bagger = bagger;
                 website.save();
             }
+        }
+    }
+
+    private void saveBaggerContacts(Bagger bagger, Contact contacts) {
+        if (contacts != null) {
+            contacts.bagger = bagger;
+            contacts.save();
         }
     }
 
@@ -119,13 +128,16 @@ public class JsonToDatabaseDao extends com.nilhcem.bblfr.model.JsonToDatabaseDao
         }
     }
 
-    private void saveBaggerTags(Bagger bagger, List<String> tags, Map<String, Tag> tagsMap) {
-        if (tags != null) {
-            for (String tagName : tags) {
-                Tag tag = tagsMap.get(tagName);
-                if (tag != null) {
-                    BaggerTag bt = new BaggerTag(bagger, tag);
-                    bt.save();
+    private void saveSessionTags(List<Session> sessions, Map<String, Tag> tagsMap) {
+        for (Session session : sessions) {
+            List<String> tags = session.tags;
+            if (tags != null) {
+                for (String tagName : tags) {
+                    Tag tag = tagsMap.get(tagName);
+                    if (tag != null) {
+                        SessionTag st = new SessionTag(session, tag);
+                        st.save();
+                    }
                 }
             }
         }

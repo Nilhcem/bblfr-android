@@ -74,7 +74,7 @@ public class StringUtils {
         return addLineSeparator(sb, false);
     }
 
-    public static Spanned createSpannedHtmlLink(String title, String href) {
-        return Html.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", href, title));
+    public static Spanned createSpannedHtmlLink(String name, String url) {
+        return Html.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", name, url));
     }
 }
