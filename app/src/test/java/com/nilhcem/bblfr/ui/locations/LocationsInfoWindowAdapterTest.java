@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.internal.zzi;
+import com.google.android.gms.maps.model.internal.zzf;
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.model.locations.Audience;
 import com.nilhcem.bblfr.model.locations.Interest;
@@ -32,7 +32,7 @@ public class LocationsInfoWindowAdapterTest {
     @Before
     public void setup() {
         location = new Location();
-        marker = new Marker(Mockito.mock(zzi.class));
+        marker = new Marker(Mockito.mock(zzf.class));
         Map<Marker, Location> map = new HashMap<>();
 
         map.put(marker, location);
