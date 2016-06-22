@@ -34,7 +34,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import icepick.Icicle;
+import icepick.State;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
@@ -61,8 +61,8 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     private Subscription mTagsSubscription;
     TagsListAdapter mTagsAdapter;
 
-    @Icicle protected boolean mIsFiltered;
-    @Icicle ArrayList<TagsListEntry> mTags;
+    @State protected boolean mIsFiltered;
+    @State ArrayList<TagsListEntry> mTags;
 
     protected City mCity;
 

@@ -15,7 +15,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import icepick.Icicle;
+import icepick.State;
 
 public class AboutActivity extends NavigationDrawerActivity {
 
@@ -34,7 +34,7 @@ public class AboutActivity extends NavigationDrawerActivity {
     private int[] mTitlesIds = AboutPagerStepEntry.getTitles();
     private int[] mContentIds = AboutPagerStepEntry.getContents();
 
-    @Icicle int mCurrentViewPagerItem;
+    @State int mCurrentViewPagerItem;
 
     public static Intent createLaunchIntent(Context context) {
         return new Intent(context, AboutActivity.class);

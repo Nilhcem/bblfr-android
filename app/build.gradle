@@ -12,6 +12,11 @@ buildscript {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven {url "https://clojars.org/repo/"}
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
@@ -94,7 +99,7 @@ ext.supportVersion = '24.0.0'
 ext.gmsVersion= '9.0.2'
 ext.daggerVersion= '2.5'
 ext.ollieVersion= '0.3.1'
-ext.icepickVersion = '2.3.6'
+ext.icepickVersion = '3.2.0'
 
 dependencies {
     compile "com.android.support:appcompat-v7:$supportVersion"
@@ -119,8 +124,8 @@ dependencies {
     compile "com.michaelpardo:ollie:$ollieVersion"
     apt "com.michaelpardo:ollie-compiler:$ollieVersion"
 
-    compile "com.github.frankiesardo:icepick:$icepickVersion"
-    apt "com.github.frankiesardo:icepick-processor:$icepickVersion"
+    compile "frankiesardo:icepick:$icepickVersion"
+    apt "frankiesardo:icepick-processor:$icepickVersion"
 
     compile 'com.viewpagerindicator:library:2.4.1@aar'
 }

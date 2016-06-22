@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import icepick.Icicle;
+import icepick.State;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -30,7 +30,7 @@ public class BaggersListActivity extends TagsListActivity {
     @Bind(R.id.loading_view) View mEmptyView;
 
     private BaggersListAdapter mAdapter;
-    @Icicle ArrayList<BaggersListEntry> mBaggers;
+    @State ArrayList<BaggersListEntry> mBaggers;
 
     public static Intent createLaunchIntent(@NonNull Context context, City city) {
         return TagsListActivity.createLaunchIntent(context, BaggersListActivity.class, city);
