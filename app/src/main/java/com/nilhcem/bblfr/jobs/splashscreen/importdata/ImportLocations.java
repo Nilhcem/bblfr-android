@@ -5,9 +5,10 @@ import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.locations.LocationsData;
 import com.nilhcem.bblfr.model.locations.dao.JsonToDatabaseDao;
-import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
 
 import static com.nilhcem.bblfr.BuildConfig.WS_ENDPOINT;
 import static com.nilhcem.bblfr.BuildConfig.WS_LOCATIONS_URL;

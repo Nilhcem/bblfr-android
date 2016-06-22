@@ -5,9 +5,10 @@ import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.baggers.BaggersData;
 import com.nilhcem.bblfr.model.baggers.dao.JsonToDatabaseDao;
-import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
 
 import static com.nilhcem.bblfr.BuildConfig.WS_BAGGERS_HR_URL;
 import static com.nilhcem.bblfr.BuildConfig.WS_BAGGERS_URL;
