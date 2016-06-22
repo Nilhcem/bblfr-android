@@ -20,16 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-    @Bind(R.id.info_window_name) TextView mName;
-    @Bind(R.id.info_window_address) TextView mAddress;
-    @Bind(R.id.info_window_contact) TextView mContact;
-    @Bind(R.id.info_window_audience) TextView mAudience;
-    @Bind(R.id.info_window_interests) TextView mInterests;
+    @BindView(R.id.info_window_name) TextView mName;
+    @BindView(R.id.info_window_address) TextView mAddress;
+    @BindView(R.id.info_window_contact) TextView mContact;
+    @BindView(R.id.info_window_audience) TextView mAudience;
+    @BindView(R.id.info_window_interests) TextView mInterests;
 
     private View mLayout;
     private Context mContext;
@@ -59,12 +59,6 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         setHtmlTextIfNotEmpty(mInterests, formatInterestsText(data.interests));
 
         return mLayout;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        ButterKnife.unbind(this);
-        super.finalize();
     }
 
     void setHtmlTextIfNotEmpty(TextView textView, String text) {

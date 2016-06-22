@@ -26,14 +26,6 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
         }
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        if (mWithVi) {
-            ButterKnife.unbind(this);
-        }
-        super.finalize();
-    }
-
     protected Context getContext() {
         return itemView.getContext();
     }

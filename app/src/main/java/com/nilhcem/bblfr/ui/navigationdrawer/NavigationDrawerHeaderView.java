@@ -6,11 +6,11 @@ import android.widget.TextView;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.ui.BaseRecyclerViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class NavigationDrawerHeaderView extends BaseRecyclerViewHolder<Void> {
 
-    @Bind(R.id.navigation_header_flavor) TextView mFlavor;
+    @BindView(R.id.navigation_header_flavor) TextView mFlavor;
 
     public NavigationDrawerHeaderView(ViewGroup parent) {
         super(parent, R.layout.navigation_drawer_header);

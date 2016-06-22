@@ -26,7 +26,7 @@ import com.nilhcem.bblfr.ui.settings.SettingsActivity;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
@@ -52,9 +52,9 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     NavigationDrawerViewHolder mNavigationDrawer;
 
     static class NavigationDrawerViewHolder {
-        @Bind(R.id.navigation_drawer_layout) DrawerLayout mLayout;
-        @Bind(R.id.navigation_content_frame) FrameLayout mContent;
-        @Bind(R.id.navigation_drawer_view) RecyclerView mRecyclerView;
+        @BindView(R.id.navigation_drawer_layout) DrawerLayout mLayout;
+        @BindView(R.id.navigation_content_frame) FrameLayout mContent;
+        @BindView(R.id.navigation_drawer_view) RecyclerView mRecyclerView;
     }
 
     private NavigationDrawerAdapter mDrawerAdapter;
@@ -170,13 +170,6 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements V
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         mNavigationDrawer.mContent.addView(view);
         initNavigationDrawer();
-    }
-
-    @Override
-    protected void onDestroy() {
-        ButterKnife.unbind(mNavigationDrawer);
-        ButterKnife.unbind(this);
-        super.onDestroy();
     }
 
     private void initLayout() {

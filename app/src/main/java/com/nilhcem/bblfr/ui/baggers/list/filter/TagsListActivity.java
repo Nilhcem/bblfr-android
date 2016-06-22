@@ -32,7 +32,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import icepick.State;
 import rx.Subscription;
@@ -50,12 +50,12 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
     FilterDrawerViewHolder mFilterDrawer;
 
     static class FilterDrawerViewHolder {
-        @Bind(R.id.filter_container) ViewGroup mContainer;
-        @Bind(R.id.filter_drawer_layout) DrawerLayout mLayout;
-        @Bind(R.id.filter_content_frame) FrameLayout mContent;
-        @Bind(R.id.filter_drawer_view) EmptyRecyclerView mRecyclerView;
-        @Bind(R.id.loading_view) ProgressBar mEmptyView;
-        @Bind(R.id.toolbar) Toolbar mToolbar;
+        @BindView(R.id.filter_container) ViewGroup mContainer;
+        @BindView(R.id.filter_drawer_layout) DrawerLayout mLayout;
+        @BindView(R.id.filter_content_frame) FrameLayout mContent;
+        @BindView(R.id.filter_drawer_view) EmptyRecyclerView mRecyclerView;
+        @BindView(R.id.loading_view) ProgressBar mEmptyView;
+        @BindView(R.id.toolbar) Toolbar mToolbar;
     }
 
     private Subscription mTagsSubscription;
@@ -158,12 +158,6 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
         View inflated = LayoutInflater.from(this).inflate(layoutResID, mFilterDrawer.mContent, true);
         ButterKnife.bind(this, inflated);
         super.setContentView(mFilterDrawer.mContainer);
-    }
-
-    @Override
-    protected void onDestroy() {
-        ButterKnife.unbind(mFilterDrawer);
-        super.onDestroy();
     }
 
     protected void resetFilter() {

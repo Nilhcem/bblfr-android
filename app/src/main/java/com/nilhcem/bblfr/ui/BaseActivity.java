@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import icepick.Icepick;
 import rx.Subscription;
 
@@ -17,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BBLApplication mApplication;
     protected Subscription mSubscription;
 
-    @Nullable @Bind(R.id.toolbar) protected Toolbar mToolbar;
+    @Nullable @BindView(R.id.toolbar) protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

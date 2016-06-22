@@ -24,7 +24,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.android.app.AppObservable;
 import rx.schedulers.Schedulers;
@@ -41,9 +41,9 @@ public class SplashscreenActivity extends BaseActivity {
     @Inject ImportService mImportService;
     @Inject CheckDataService mCheckDataService;
 
-    @Bind(R.id.splash_logo_container) ViewGroup mLogoContainer;
-    @Bind(R.id.splash_subtitle) TextView mSubtitle;
-    @Nullable @Bind(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
+    @BindView(R.id.splash_logo_container) ViewGroup mLogoContainer;
+    @BindView(R.id.splash_subtitle) TextView mSubtitle;
+    @Nullable @BindView(R.id.splash_shimmer_container) ShimmerFrameLayout mShimmerContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +76,6 @@ public class SplashscreenActivity extends BaseActivity {
         }
 
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        ButterKnife.unbind(this);
-        super.onDestroy();
     }
 
     /**
