@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.core.utils;
 
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -75,6 +74,6 @@ public class StringUtils {
     }
 
     public static Spanned createSpannedHtmlLink(String name, String url) {
-        return Html.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", url, name));
+        return CompatibilityUtils.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", url, name));
     }
 }

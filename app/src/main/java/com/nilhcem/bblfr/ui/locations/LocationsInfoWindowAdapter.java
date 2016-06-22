@@ -2,7 +2,6 @@ package com.nilhcem.bblfr.ui.locations;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.locations.Audience;
 import com.nilhcem.bblfr.model.locations.Interest;
@@ -66,7 +66,7 @@ public class LocationsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             textView.setVisibility(View.GONE);
         } else {
             textView.setVisibility(View.VISIBLE);
-            textView.setText(Html.fromHtml(text));
+            textView.setText(CompatibilityUtils.fromHtml(text));
         }
     }
 

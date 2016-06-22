@@ -3,7 +3,6 @@ package com.nilhcem.bblfr.ui.splashscreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,6 +12,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.prefs.Preferences;
+import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.splashscreen.checkdata.CheckDataService;
 import com.nilhcem.bblfr.jobs.splashscreen.importdata.ImportService;
 import com.nilhcem.bblfr.model.baggers.City;
@@ -51,7 +51,7 @@ public class SplashscreenActivity extends BaseActivity {
         BBLApplication.get(this).component().inject(this);
         setContentView(R.layout.splashscreen_activity);
         ButterKnife.bind(this);
-        mSubtitle.setText(Html.fromHtml(getString(R.string.splash_subtitle)));
+        mSubtitle.setText(CompatibilityUtils.fromHtml(getString(R.string.splash_subtitle)));
         animateLogo();
     }
 

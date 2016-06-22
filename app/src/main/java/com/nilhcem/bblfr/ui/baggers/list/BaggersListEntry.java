@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -13,6 +12,7 @@ import android.text.style.TextAppearanceSpan;
 
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.ui.spannable.CenteredImageSpan;
+import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.core.utils.NetworkUtils;
 import com.nilhcem.bblfr.core.utils.StringUtils;
 import com.nilhcem.bblfr.model.baggers.Bagger;
@@ -51,7 +51,7 @@ public class BaggersListEntry implements Parcelable {
         if (TextUtils.isEmpty(source)) {
             return null;
         }
-        return Html.fromHtml(source);
+        return CompatibilityUtils.fromHtml(source);
     }
 
     private Spanned locationsToSpannable(Context context, String location) {
@@ -76,7 +76,7 @@ public class BaggersListEntry implements Parcelable {
 
                     // Add title (bulletpoint placeholder + title + style)
                     sb.append(ZERO_WIDTH_SPACE);
-                    sb.append(Html.fromHtml(title));
+                    sb.append(CompatibilityUtils.fromHtml(title));
                     sb.setSpan(new TextAppearanceSpan(context, R.style.BaggersSessions_Title), start, sb.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
 
                     // Replace the placeholder with the actual image
@@ -87,7 +87,7 @@ public class BaggersListEntry implements Parcelable {
                 String summary = session.summary;
                 if (!TextUtils.isEmpty(summary)) {
                     int start = addLineSeparator(sb);
-                    sb.append(Html.fromHtml(summary));
+                    sb.append(CompatibilityUtils.fromHtml(summary));
                     sb.setSpan(new TextAppearanceSpan(context, R.style.BaggersSessions_Summary), start, sb.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
