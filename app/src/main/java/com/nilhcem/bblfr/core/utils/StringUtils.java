@@ -75,6 +75,6 @@ public class StringUtils {
     }
 
     public static Spanned createSpannedHtmlLink(String name, String url) {
-        return Html.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", name, url));
+        return Html.fromHtml(String.format(Locale.US, "<a href=\"%s\">%s</a>", url, name));
     }
 }
