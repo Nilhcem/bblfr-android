@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Pair;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -30,7 +28,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -58,14 +55,12 @@ public class CitiesMapActivity extends BaseMapActivity {
 
     @Override
     protected void loadMap() {
-        mSubscription = Observable.zip(mBaggersService.getBaggersCities(), MapUtils.getGoogleMapObservable(mMapFragment), Pair::create)
+        mSubscription = mBaggersService.getBaggersCities()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onCitiesLoaded(pair.first, pair.second)), error -> {
-                    Timber.e(error, "Error getting baggers cities");
-                    Toast.makeText(CitiesMapActivity.this, R.string.baggers_map_error, Toast.LENGTH_SHORT).show();
-                    finish();
-                });
+                .subscribe(cities ->
+                        mMapFragment.getMapAsync(googleMap -> onCitiesLoaded(cities, googleMap))
+                );
     }
 
     private void onCitiesLoaded(List<City> cities, GoogleMap map) {

@@ -5,14 +5,12 @@ import android.location.Location;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
-import rx.Observable;
 import timber.log.Timber;
 
 public class MapUtils {
@@ -21,13 +19,6 @@ public class MapUtils {
 
     private MapUtils() {
         throw new UnsupportedOperationException();
-    }
-
-    public static Observable<GoogleMap> getGoogleMapObservable(MapFragment fragment) {
-        return Observable.create(subscriber -> {
-            subscriber.onNext(fragment.getMap());
-            subscriber.onCompleted();
-        });
     }
 
     public static LatLng gpsToLatLng(String gps) {

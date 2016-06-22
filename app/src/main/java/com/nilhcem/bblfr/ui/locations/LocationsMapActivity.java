@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Pair;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -25,7 +24,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -50,10 +48,12 @@ public class LocationsMapActivity extends BaseMapActivity {
     @Override
     protected void loadMap() {
         unsubscribe(mSubscription);
-        mSubscription = Observable.zip(mLocationsService.getLocations(), MapUtils.getGoogleMapObservable(mMapFragment), Pair::create)
+        mSubscription = mLocationsService.getLocations()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onHostsLoaded(pair.first, pair.second)));
+                .subscribe(locations ->
+                        mMapFragment.getMapAsync(googleMap -> onHostsLoaded(locations, googleMap))
+                );
     }
 
     private void onHostsLoaded(List<Location> locations, GoogleMap map) {
