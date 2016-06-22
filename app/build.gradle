@@ -19,8 +19,8 @@ apply from: rootProject.file('gradle/sonarqube.gradle')
 apply from: rootProject.file('gradle/unit-tests.gradle')
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.0'
 
     defaultConfig {
         applicationId 'com.nilhcem.bblfr'
