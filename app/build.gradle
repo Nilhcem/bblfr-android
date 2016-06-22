@@ -92,7 +92,7 @@ android {
 
 ext.supportVersion = '24.0.0'
 ext.gmsVersion= '9.0.2'
-ext.daggerVersion= '2.0.1'
+ext.daggerVersion= '2.5'
 ext.ollieVersion= '0.3.1'
 ext.icepickVersion = '2.3.6'
 
