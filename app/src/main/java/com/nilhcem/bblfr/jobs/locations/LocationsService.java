@@ -19,9 +19,6 @@ public class LocationsService {
     }
 
     public Observable<List<Location>> getLocations() {
-        return Observable.create(subscriber -> {
-            subscriber.onNext(mDao.getLocations());
-            subscriber.onCompleted();
-        });
+        return Observable.fromCallable(mDao::getLocations);
     }
 }

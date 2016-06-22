@@ -30,35 +30,30 @@ public class BaggersService {
     }
 
     public Observable<List<BaggersListEntry>> getBaggers(@NonNull Context context, @NonNull Long cityId, @NonNull List<String> selectedTags) {
-        return Observable.create(subscriber -> {
+        return Observable.fromCallable(() -> {
             List<BaggersListEntry> entries = new ArrayList<>();
             List<Bagger> baggers = mBaggersDao.getBaggers(cityId, selectedTags);
 
             for (Bagger bagger : baggers) {
                 entries.add(new BaggersListEntry(context, bagger));
             }
-            subscriber.onNext(entries);
-            subscriber.onCompleted();
+            return entries;
         });
     }
 
     public Observable<List<TagsListEntry>> getSessionsTags(@NonNull Long cityId) {
-        return Observable.create(subscriber -> {
+        return Observable.fromCallable(() -> {
             List<TagsListEntry> entries = new ArrayList<>();
             List<Tag> tags = mBaggersDao.getSessionsTags(cityId);
 
             for (Tag tag : tags) {
                 entries.add(new TagsListEntry(tag));
             }
-            subscriber.onNext(entries);
-            subscriber.onCompleted();
+            return entries;
         });
     }
 
     public Observable<List<City>> getBaggersCities() {
-        return Observable.create(subscriber -> {
-            subscriber.onNext(mCitiesDao.getCities());
-            subscriber.onCompleted();
-        });
+        return Observable.fromCallable(mCitiesDao::getCities);
     }
 }

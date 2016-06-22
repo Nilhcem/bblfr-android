@@ -43,14 +43,13 @@ public class CheckDataService {
     }
 
     private Observable<Boolean> checkDatabase() {
-        return Observable.create(subscriber -> {
-            subscriber.onNext(mCitiesDao.hasData() && mBaggersDao.hasData() && mLocationsDao.hasData());
-            subscriber.onCompleted();
-        });
+        return Observable.fromCallable(() ->
+                mCitiesDao.hasData() && mBaggersDao.hasData() && mLocationsDao.hasData()
+        );
     }
 
     private Observable<City> getFavoriteCity(Context context) {
-        return Observable.create(subscriber -> {
+        return Observable.fromCallable(() -> {
             mProvider.initSync(context);
             City city = null;
 
@@ -67,8 +66,7 @@ public class CheckDataService {
                     mPrefs.setFavoriteCity(city);
                 }
             }
-            subscriber.onNext(city);
-            subscriber.onCompleted();
+            return city;
         });
     }
 

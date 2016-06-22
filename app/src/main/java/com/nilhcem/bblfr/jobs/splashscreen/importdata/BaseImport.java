@@ -38,7 +38,7 @@ public abstract class BaseImport<T> {
     protected abstract String getUrl();
 
     private Observable<String> getProperJson(String url) {
-        return Observable.create(subscriber -> {
+        return Observable.fromCallable(() -> {
             String json = null;
             Request request = new Request.Builder()
                     .url(url)
@@ -52,9 +52,7 @@ public abstract class BaseImport<T> {
             } catch (IOException e) {
                 Timber.e(e, "Error importing baggers");
             }
-
-            subscriber.onNext(json);
-            subscriber.onCompleted();
+            return json;
         });
     }
 
