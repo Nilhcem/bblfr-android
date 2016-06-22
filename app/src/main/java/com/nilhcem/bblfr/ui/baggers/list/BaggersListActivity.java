@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import icepick.State;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -57,8 +57,9 @@ public class BaggersListActivity extends TagsListActivity {
         mAdapter.updateItems(null);
         mRecyclerView.scrollToPosition(0);
 
-        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggers(this, mCity.id, selectedTags))
+        mSubscription = mBaggersService.getBaggers(this, mCity.id, selectedTags)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(baggersListEntries -> {
                     Timber.d("Baggers loaded from DB");
                     mBaggers = new ArrayList<>(baggersListEntries);

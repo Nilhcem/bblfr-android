@@ -26,7 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -60,8 +60,9 @@ public class SplashscreenActivity extends BaseActivity {
         super.onStart();
 
         if (shouldImportData(mPrefs.getLastDownloadDate(), isNetworkAvailable(this))) {
-            mSubscription = AppObservable.bindActivity(this, mImportService.importData())
+            mSubscription = mImportService.importData()
                     .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(r -> onAfterDataImported(true), throwable -> onImportError());
         } else {
             onAfterDataImported(false);
@@ -101,8 +102,9 @@ public class SplashscreenActivity extends BaseActivity {
      */
     private void onAfterDataImported(boolean saveDownloadDate) {
         unsubscribe(mSubscription);
-        mSubscription = AppObservable.bindActivity(this, mCheckDataService.checkData(this))
+        mSubscription = mCheckDataService.checkData(this)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     Boolean hasValidData = result.first;
                     City city = result.second;

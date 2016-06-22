@@ -36,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import icepick.State;
 import rx.Subscription;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -84,8 +84,9 @@ public abstract class TagsListActivity extends NavigationDrawerActivity implemen
         super.onStart();
 
         if (mTags == null) {
-            mTagsSubscription = AppObservable.bindActivity(this, mBaggersService.getSessionsTags(mCity.id))
+            mTagsSubscription = mBaggersService.getSessionsTags(mCity.id)
                     .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(tags -> {
                         Timber.d("Tags loaded from database");
                         mTags = new ArrayList<>(tags);

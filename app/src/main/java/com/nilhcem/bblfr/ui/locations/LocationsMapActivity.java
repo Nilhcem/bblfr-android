@@ -26,7 +26,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -50,12 +50,9 @@ public class LocationsMapActivity extends BaseMapActivity {
     @Override
     protected void loadMap() {
         unsubscribe(mSubscription);
-        mSubscription = AppObservable.bindActivity(this,
-                Observable.zip(
-                        mLocationsService.getLocations(),
-                        MapUtils.getGoogleMapObservable(mMapFragment),
-                        Pair::create))
+        mSubscription = Observable.zip(mLocationsService.getLocations(), MapUtils.getGoogleMapObservable(mMapFragment), Pair::create)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onHostsLoaded(pair.first, pair.second)));
     }
 
@@ -68,8 +65,8 @@ public class LocationsMapActivity extends BaseMapActivity {
         Map<Marker, Location> markerLocations = new HashMap<>();
         for (Location location : locations) {
             Marker marker = map.addMarker(new MarkerOptions()
-                            .position(MapUtils.gpsToLatLng(location.gps))
-                            .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
+                    .position(MapUtils.gpsToLatLng(location.gps))
+                    .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
             );
             markers.add(marker);
             markerLocations.put(marker, location);

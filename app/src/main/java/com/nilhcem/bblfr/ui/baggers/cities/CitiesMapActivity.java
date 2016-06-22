@@ -31,7 +31,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -58,12 +58,9 @@ public class CitiesMapActivity extends BaseMapActivity {
 
     @Override
     protected void loadMap() {
-        mSubscription = AppObservable.bindActivity(this,
-                Observable.zip(
-                        mBaggersService.getBaggersCities(),
-                        MapUtils.getGoogleMapObservable(mMapFragment),
-                        Pair::create))
+        mSubscription = Observable.zip(mBaggersService.getBaggersCities(), MapUtils.getGoogleMapObservable(mMapFragment), Pair::create)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pair -> pair.second.setOnMapLoadedCallback(() -> onCitiesLoaded(pair.first, pair.second)), error -> {
                     Timber.e(error, "Error getting baggers cities");
                     Toast.makeText(CitiesMapActivity.this, R.string.baggers_map_error, Toast.LENGTH_SHORT).show();
@@ -80,9 +77,9 @@ public class CitiesMapActivity extends BaseMapActivity {
         Map<Marker, City> markerCities = new HashMap<>();
         for (City city : cities) {
             Marker marker = map.addMarker(new MarkerOptions()
-                            .position(new LatLng(city.lat, city.lng))
-                            .title(city.name)
-                            .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
+                    .position(new LatLng(city.lat, city.lng))
+                    .title(city.name)
+                    .icon(BitmapDescriptorFactory.defaultMarker(MapUtils.HUE_DEFAULT))
             );
             markers.add(marker);
             markerCities.put(marker, city);

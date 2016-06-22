@@ -19,7 +19,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -51,8 +51,9 @@ public class CitiesFallbackActivity extends NavigationDrawerActivity implements 
     @Override
     protected void onStart() {
         super.onStart();
-        mSubscription = AppObservable.bindActivity(this, mBaggersService.getBaggersCities())
+        mSubscription = mBaggersService.getBaggersCities()
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onCitiesLoaded);
     }
 
