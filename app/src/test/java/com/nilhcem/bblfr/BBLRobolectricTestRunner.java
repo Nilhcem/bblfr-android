@@ -23,7 +23,7 @@ public class BBLRobolectricTestRunner extends RobolectricTestRunner {
 
         String manifestProperty = root + "src/main/AndroidManifest.xml";
         String assetsProperty = root + "build/intermediates/assets/" + buildVariant;
-        String resProperty = root + "build/intermediates/res/" + buildVariant;
+        String resProperty = root + "build/intermediates/res/merged/" + buildVariant;
         return new AndroidManifest(
                 Fs.fileFromPath(manifestProperty),
                 Fs.fileFromPath(resProperty),

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,7 +50,8 @@ public class TagsListActivityTest {
         holder.mLayout = drawer;
         activity.mFilterDrawer = holder;
 
-        tagsAdapter = new TagsListAdapter(selectedTagsIds -> {});
+        tagsAdapter = new TagsListAdapter(selectedTagsIds -> {
+        });
         tagsAdapter = spy(tagsAdapter);
         activity.mTagsAdapter = tagsAdapter;
     }
@@ -97,7 +98,7 @@ public class TagsListActivityTest {
     @Test
     public void should_close_filter_drawer_when_pressing_back_if_visible() {
         // Given
-        activity.onFilterChanged(Arrays.asList(new String[]{"Android"}));
+        activity.onFilterChanged(Arrays.asList("Android"));
         when(drawer.isDrawerVisible(GravityCompat.END)).thenReturn(true);
 
         // When
@@ -111,7 +112,7 @@ public class TagsListActivityTest {
     @Test
     public void should_reset_filters_if_any_on_back_pressed_when_drawer_is_not_visible() {
         // Given
-        activity.onFilterChanged(Arrays.asList(new String[]{"Android"}));
+        activity.onFilterChanged(Arrays.asList("Android"));
         when(drawer.isDrawerVisible(GravityCompat.END)).thenReturn(false);
 
         // When
@@ -125,7 +126,7 @@ public class TagsListActivityTest {
     @Test
     public void should_set_filter_flag_to_true_when_filter_changes_and_has_data() {
         // Given
-        List<String> data = Arrays.asList(new String[] {"Android"});
+        List<String> data = Arrays.asList("Android");
 
         // When
         activity.onFilterChanged(data);
@@ -149,7 +150,7 @@ public class TagsListActivityTest {
     @Test
     public void should_reset_filter() {
         // Given
-        activity.onFilterChanged(Arrays.asList(new String[]{"Android"}));
+        activity.onFilterChanged(Arrays.asList("Android"));
 
         // When
         activity.resetFilter();

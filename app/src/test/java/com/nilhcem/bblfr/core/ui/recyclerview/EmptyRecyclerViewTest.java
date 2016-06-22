@@ -6,11 +6,12 @@ import android.view.ViewGroup;
 
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class EmptyRecyclerViewTest {
@@ -48,7 +49,7 @@ public class EmptyRecyclerViewTest {
         recyclerView.setAdapter(adapter);
 
         // Then
-        Assertions.assertThat(emptyView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(emptyView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -74,6 +75,6 @@ public class EmptyRecyclerViewTest {
         recyclerView.setAdapter(adapter);
 
         // Then
-        Assertions.assertThat(emptyView.getVisibility()).isEqualTo(View.GONE);
+        assertThat(emptyView.getVisibility()).isEqualTo(View.GONE);
     }
 }

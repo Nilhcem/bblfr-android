@@ -13,7 +13,7 @@ import java.util.List;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class StringUtilsTest {
@@ -41,7 +41,8 @@ public class StringUtilsTest {
         String res2 = StringUtils.appendOptional(expected, null);
 
         // Then
-        assertThat(res1).isEqualTo(res2).isEqualTo(expected);
+        assertThat(res1).isEqualTo(res2);
+        assertThat(res1).isEqualTo(expected);
     }
 
     @Test
@@ -136,13 +137,13 @@ public class StringUtilsTest {
     @Test
     public void should_create_spanned_html_link() {
         // Given
-        String title = "website";
-        String href = "http://www.nilhcem.com";
+        String name = "website";
+        String url = "http://www.nilhcem.com";
 
         // When
-        Spanned htmlLink = StringUtils.createSpannedHtmlLink(title, href);
+        Spanned htmlLink = StringUtils.createSpannedHtmlLink(name, url);
 
         // Then
-        assertThat(htmlLink).isEqualTo(Html.fromHtml("<a href=\"" + href + "\">" + title));
+        assertThat(htmlLink).isEqualTo(Html.fromHtml("<a href=\"" + url + "\">" + name));
     }
 }

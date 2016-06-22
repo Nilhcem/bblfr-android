@@ -17,7 +17,7 @@ import java.util.Collections;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
@@ -111,7 +111,7 @@ public class BaseHeaderAdapterTest {
         int itemCount = adapter.getItemCount();
 
         // Then
-        assertThat(itemCount).isZero();
+        assertThat(itemCount).isEqualTo(0);
     }
 
     @Test

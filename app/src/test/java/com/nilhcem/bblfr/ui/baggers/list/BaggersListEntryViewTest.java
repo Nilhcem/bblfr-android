@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.model.baggers.Bagger;
+import com.nilhcem.bblfr.model.baggers.Contact;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIntent;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class BaggersListEntryViewTest {
@@ -101,7 +102,7 @@ public class BaggersListEntryViewTest {
         Bagger bagger = new Bagger();
         bagger.name = "Gautier";
         bagger.bio = "Software Craftsman";
-        bagger.mail = "me@example.com";
+        bagger.contacts = new Contact();
         BaggersListEntry entry = new BaggersListEntry(RuntimeEnvironment.application, bagger);
 
         // When

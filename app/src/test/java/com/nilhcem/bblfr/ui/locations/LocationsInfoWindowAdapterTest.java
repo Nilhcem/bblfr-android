@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class LocationsInfoWindowAdapterTest {
@@ -58,7 +58,8 @@ public class LocationsInfoWindowAdapterTest {
         assertThat(adapter.mName.getText().toString()).isEqualTo("Xebia");
         assertThat(adapter.mAddress.getText().toString()).isEqualTo("Haussmann");
         assertThat(adapter.mContact.getText().toString()).contains("contact@xebia.fr");
-        assertThat(adapter.mAudience.getText().toString()).contains("100").contains("Craftsmen");
+        assertThat(adapter.mAudience.getText().toString()).contains("100");
+        assertThat(adapter.mAudience.getText().toString()).contains("Craftsmen");
         assertThat(adapter.mInterests.getText().toString()).contains("Agile");
     }
 

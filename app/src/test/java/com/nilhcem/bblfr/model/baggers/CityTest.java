@@ -7,7 +7,7 @@ import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class CityTest {
@@ -29,8 +29,8 @@ public class CityTest {
         // Then
         City fromParcel = City.CREATOR.createFromParcel(parcel);
         assertThat(fromParcel.name).isEqualTo("Paris");
-        assertThat(fromParcel.lat).isEqualTo(48.85);
-        assertThat(fromParcel.lng).isEqualTo(2.34);
+        assertThat(fromParcel.lat).isWithin(4.85);
+        assertThat(fromParcel.lng).isWithin(2.34);
         assertThat(fromParcel.picture).isEqualTo("img/villes/BBL.jpg");
     }
 }

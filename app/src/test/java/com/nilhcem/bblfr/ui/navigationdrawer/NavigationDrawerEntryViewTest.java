@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry.HOSTS;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class NavigationDrawerEntryViewTest {

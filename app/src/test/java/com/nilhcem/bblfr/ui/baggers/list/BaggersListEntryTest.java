@@ -7,6 +7,7 @@ import android.text.Spanned;
 import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.model.baggers.Bagger;
+import com.nilhcem.bblfr.model.baggers.Contact;
 import com.nilhcem.bblfr.model.baggers.Session;
 import com.nilhcem.bblfr.model.baggers.Website;
 
@@ -19,7 +20,7 @@ import java.util.Locale;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class BaggersListEntryTest {
@@ -42,6 +43,7 @@ public class BaggersListEntryTest {
         bagger.sessions = Arrays.asList(new Session[]{session});
         bagger.bio = "Software Craftsman";
         bagger.location = "Franconville";
+        bagger.contacts = new Contact();
         bagger.contacts.twitter = "Nilhcem";
         bagger.contacts.mail = "me@example.com";
 
@@ -67,12 +69,17 @@ public class BaggersListEntryTest {
         // Then
         BaggersListEntry fromParcel = BaggersListEntry.CREATOR.createFromParcel(parcel);
         Spanned htmlLocation = Html.fromHtml(String.format(Locale.US, RuntimeEnvironment.application.getString(R.string.baggers_list_location), "Franconville"));
-        assertThat(fromParcel.name.toString()).isEqualTo(name).isEqualTo("Gautier");
+        assertThat(fromParcel.name.toString()).isEqualTo(name);
+        assertThat(fromParcel.name.toString()).isEqualTo("Gautier");
         assertThat(fromParcel.links.toString()).isEqualTo(links);
         assertThat(fromParcel.sessions.toString()).isEqualTo(sessions);
-        assertThat(fromParcel.bio.toString()).isEqualTo(bio).isEqualTo("Software Craftsman");
-        assertThat(fromParcel.locations.toString()).isEqualTo(locations).isEqualTo(htmlLocation.toString());
-        assertThat(fromParcel.pictureUrl).isEqualTo(pictureUrl).isEqualTo("http://www.nilhcem.com/img.jpg");
-        assertThat(fromParcel.email).isEqualTo(email).isEqualTo("me@example.com");
+        assertThat(fromParcel.bio.toString()).isEqualTo(bio);
+        assertThat(fromParcel.bio.toString()).isEqualTo("Software Craftsman");
+        assertThat(fromParcel.locations.toString()).isEqualTo(locations);
+        assertThat(fromParcel.locations.toString()).isEqualTo(htmlLocation.toString());
+        assertThat(fromParcel.pictureUrl).isEqualTo(pictureUrl);
+        assertThat(fromParcel.pictureUrl).isEqualTo("http://www.nilhcem.com/img.jpg");
+        assertThat(fromParcel.email).isEqualTo(email);
+        assertThat(fromParcel.email).isEqualTo("me@example.com");
     }
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -51,7 +51,8 @@ public class CheckDataServiceTest {
         City closestCity2 = service.findClosestCity(location, null);
 
         // Then
-        assertThat(closestCity1).isEqualTo(closestCity2).isNull();
+        assertThat(closestCity1).isEqualTo(closestCity2);
+        assertThat(closestCity1).isNull();
     }
 
     @Test

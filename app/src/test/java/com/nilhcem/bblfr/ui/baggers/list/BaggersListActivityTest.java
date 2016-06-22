@@ -13,7 +13,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class BaggersListActivityTest {
@@ -52,7 +52,7 @@ public class BaggersListActivityTest {
         activity.setToolbarTitle(0);
 
         // Then
-        assertThat(activity.getSupportActionBar().getTitle()).contains("Hong Kong");
+        assertThat(activity.getSupportActionBar().getTitle().toString()).contains("Hong Kong");
     }
 
     @Test
@@ -64,6 +64,6 @@ public class BaggersListActivityTest {
         activity.setToolbarTitle(42);
 
         // Then
-        assertThat(activity.getSupportActionBar().getTitle()).contains("42");
+        assertThat(activity.getSupportActionBar().getTitle().toString()).contains("42");
     }
 }

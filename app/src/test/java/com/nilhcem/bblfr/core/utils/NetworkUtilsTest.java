@@ -13,7 +13,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Locale;
+
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(BBLRobolectricTestRunner.class)
@@ -49,7 +51,8 @@ public class NetworkUtilsTest {
         boolean res2 = NetworkUtils.isNetworkAvailable(context);
 
         // Then
-        assertThat(res1).isEqualTo(res2).isFalse();
+        assertThat(res1).isEqualTo(res2);
+        assertThat(res1).isFalse();
     }
 
     @Test
@@ -85,6 +88,6 @@ public class NetworkUtilsTest {
         String twitterUrl = NetworkUtils.getTwitterUrl(username);
 
         // Then
-        assertThat(twitterUrl).isEqualToIgnoringCase("http://www.twitter.com/#!/Nilhcem");
+        assertThat(twitterUrl.toLowerCase(Locale.US)).isEqualTo("http://www.twitter.com/#!/nilhcem");
     }
 }

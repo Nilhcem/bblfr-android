@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(BBLRobolectricTestRunner.class)
 public class AboutPagerAdapterTest {
@@ -28,7 +28,8 @@ public class AboutPagerAdapterTest {
         // (setup instantiation)
 
         // Then
-        assertThat(adapter.getCount()).isEqualTo(AboutPagerStepEntry.values().length).isEqualTo(4);
+        assertThat(adapter.getCount()).isEqualTo(AboutPagerStepEntry.values().length);
+        assertThat(adapter.getCount()).isEqualTo(4);
     }
 
     @Test

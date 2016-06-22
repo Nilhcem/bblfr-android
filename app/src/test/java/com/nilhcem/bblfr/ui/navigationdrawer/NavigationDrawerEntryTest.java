@@ -2,10 +2,10 @@ package com.nilhcem.bblfr.ui.navigationdrawer;
 
 import org.junit.Test;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry.FIND_BAGGER;
 import static com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry.HOSTS;
 import static com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry.valueOf;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class NavigationDrawerEntryTest {
 

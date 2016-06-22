@@ -15,12 +15,12 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Date;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_FAV_CITY_LAT;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_FAV_CITY_LNG;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_HR_MODE;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_LAST_DOWNLOAD;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_RESET_DB;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressLint("CommitPrefEdits")
 @RunWith(BBLRobolectricTestRunner.class)
@@ -44,7 +44,7 @@ public class PreferencesTest {
         long lastDownloadDate = prefs.getLastDownloadDate();
 
         // Then
-        assertThat(lastDownloadDate).isZero();
+        assertThat(lastDownloadDate).isEqualTo(0L);
     }
 
     @Test
@@ -59,7 +59,8 @@ public class PreferencesTest {
         long lastTime = new Date().getTime();
 
         // Then
-        assertThat(lastDownloadDate).isGreaterThanOrEqualTo(firstTime).isLessThanOrEqualTo(lastTime);
+        assertThat(lastDownloadDate).isAtLeast(firstTime);
+        assertThat(lastDownloadDate).isAtMost(lastTime);
     }
 
     @Test
@@ -144,6 +145,7 @@ public class PreferencesTest {
         boolean res2 = !prefs.isUsingHrMode();
 
         // Then
-        assertThat(res1).isEqualTo(res2).isTrue();
+        assertThat(res1).isEqualTo(res2);
+        assertThat(res1).isTrue();
     }
 }
