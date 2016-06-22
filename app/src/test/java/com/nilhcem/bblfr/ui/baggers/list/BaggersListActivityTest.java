@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.Arrays;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -58,7 +58,7 @@ public class BaggersListActivityTest {
     @Test
     public void should_display_number_of_results_when_list_is_filtered() {
         // Given
-        activity.onFilterChanged(Arrays.asList(new String[]{"Docker", "Android"}));
+        activity.onFilterChanged(Arrays.asList("Docker", "Android"));
 
         // When
         activity.setToolbarTitle(42);

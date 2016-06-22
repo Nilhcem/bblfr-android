@@ -16,9 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Arrays;
 import java.util.Locale;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,8 +38,8 @@ public class BaggersListEntryTest {
         Bagger bagger = new Bagger();
         bagger.name = "Gautier";
         bagger.picture = "http://www.nilhcem.com/img.jpg";
-        bagger.websites = Arrays.asList(new Website[]{website});
-        bagger.sessions = Arrays.asList(new Session[]{session});
+        bagger.websites = Arrays.asList(website);
+        bagger.sessions = Arrays.asList(session);
         bagger.bio = "Software Craftsman";
         bagger.location = "Franconville";
         bagger.contacts = new Contact();

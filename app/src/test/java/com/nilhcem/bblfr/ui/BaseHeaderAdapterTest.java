@@ -13,9 +13,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Arrays;
 import java.util.Collections;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -32,7 +31,7 @@ public class BaseHeaderAdapterTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        adapter.updateItems(Arrays.asList(new Integer[]{1, 2, 3, 4}), 0);
+        adapter.updateItems(Arrays.asList(1, 2, 3, 4), 0);
     }
 
     @Test

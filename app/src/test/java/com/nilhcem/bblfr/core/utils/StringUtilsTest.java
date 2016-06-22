@@ -9,9 +9,8 @@ import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
 import java.util.List;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -62,7 +61,7 @@ public class StringUtilsTest {
     @Test
     public void should_append_list_of_string_with_separator() {
         // Given
-        List<String> entries = Arrays.asList(new String[]{"1", "2", "3"});
+        List<String> entries = Arrays.asList("1", "2", "3");
         String separator = ":";
 
         // When
@@ -75,7 +74,7 @@ public class StringUtilsTest {
     @Test
     public void should_append_list_of_string_without_separator_if_null() {
         // Given
-        List<String> entries = Arrays.asList(new String[]{"1", "2", "3"});
+        List<String> entries = Arrays.asList("1", "2", "3");
         String separator = null;
 
         // When
