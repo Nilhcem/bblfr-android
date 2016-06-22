@@ -106,7 +106,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$supportVersion"
     compile "com.android.support:cardview-v7:$supportVersion"
 
-    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.0'
     compile 'io.reactivex:rxandroid:0.25.0'
