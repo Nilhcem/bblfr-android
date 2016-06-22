@@ -1,20 +1,20 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
     }
-
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.2.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1'
     }
-}
-
-// Required because retrolambda is on maven central
-repositories {
-    mavenCentral()
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 apply from: rootProject.file('gradle/sonarqube.gradle')
 apply from: rootProject.file('gradle/unit-tests.gradle')
 
@@ -90,9 +90,11 @@ android {
     }
 }
 
-retrolambda {
-    jvmArgs '-noverify'
-}
+ext.supportVersion = '22.2.1'
+ext.gmsVersion= '7.5.0'
+ext.daggerVersion= '2.0.1'
+ext.ollieVersion= '0.3.1'
+ext.icepickVersion = '2.3.6'
 
 dependencies {
     compile "com.android.support:appcompat-v7:$supportVersion"
@@ -111,14 +113,14 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$gmsVersion"
 
     compile "com.google.dagger:dagger:$daggerVersion"
-    provided "com.google.dagger:dagger-compiler:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
     compile 'javax.annotation:javax.annotation-api:1.2'
 
     compile "com.michaelpardo:ollie:$ollieVersion"
-    provided "com.michaelpardo:ollie-compiler:$ollieVersion"
+    apt "com.michaelpardo:ollie-compiler:$ollieVersion"
 
     compile "com.github.frankiesardo:icepick:$icepickVersion"
-    provided "com.github.frankiesardo:icepick-processor:$icepickVersion"
+    apt "com.github.frankiesardo:icepick-processor:$icepickVersion"
 
     compile 'com.viewpagerindicator:library:2.4.1@aar'
 }

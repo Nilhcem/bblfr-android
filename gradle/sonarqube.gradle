@@ -1,29 +1,23 @@
-apply plugin: 'sonar-runner'
+// http://docs.sonarqube.org/display/SONAR/Analyzing+with+SonarQube+Scanner+for+Gradle
+apply plugin: 'org.sonarqube'
 
-sonarRunner {
-    sonarProperties {
+sonarqube {
+    properties {
         def appProject = project(':app')
-        def appProjectDir = appProject.projectDir
         def appProjectBuildDir = appProject.buildDir
 
         property 'sonar.projectKey', 'bblfr-android'
         property 'sonar.projectName', 'Brown Bag Lunch France (Android)'
         property 'sonar.projectVersion', appProject.android.defaultConfig.versionName
 
-        property 'sonar.host.url', 'http://localhost:9000'
-        property 'sonar.jdbc.url', 'jdbc:h2:tcp://localhost:9092/sonar'
-        property 'sonar.jdbc.username', 'sonar'
-        property 'sonar.jdbc.password', 'sonar'
+        property 'sonar.host.url', 'http://docker:9000'
+        property 'sonar.sources', 'src'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.java.binaries', 'build'
 
+        property 'sonar.exclusions', '**/*Test.java'
         property 'sonar.core.codeCoveragePlugin', 'jacoco'
+        property 'sonar.jacoco.reportPath', "$appProjectBuildDir/jacoco/testRealDebugUnitTest.exec"
         property 'sonar.junit.reportsPath', "$appProjectBuildDir/test-results/realDebug"
-        property 'sonar.jacoco.reportPath', "$appProjectBuildDir/jacoco/testRealDebug.exec"
-
-        properties["sonar.projectBaseDir"] = appProjectBuildDir
-        properties["sonar.sources"] = "$appProjectDir/src/main/java"
-        properties["sonar.tests"] = "$appProjectDir/src/test/java"
-        //properties["sonar.java.binaries"] = "$appProjectBuildDir/intermediates/classes/real/debug"
-        properties["sonar.jacoco.excludes"] = ["android/**/*.java"]
-        properties["sonar.coverage.exclusions"] = ["android/**/*.java"]
     }
 }
