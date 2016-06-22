@@ -3,20 +3,22 @@ package com.nilhcem.bblfr.core.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class IntentUtilsTest {
 
     private Activity activity;
@@ -38,11 +40,10 @@ public class IntentUtilsTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
-        Intent mailExtra = (Intent) shadowIntent.getParcelableExtra(Intent.EXTRA_INTENT);
+        Intent intent = shadowActivity.getNextStartedActivity();
+        Intent mailExtra = intent.getParcelableExtra(Intent.EXTRA_INTENT);
 
-        assertThat(shadowIntent.getStringExtra(Intent.EXTRA_TITLE)).isEqualTo(title);
+        assertThat(intent.getStringExtra(Intent.EXTRA_TITLE)).isEqualTo(title);
         assertThat(mailExtra.getData().getScheme()).isEqualTo("mailto");
         assertThat(mailExtra.getStringExtra(Intent.EXTRA_SUBJECT)).isEqualTo(subject);
         assertThat(mailExtra.getData().getSchemeSpecificPart()).isEqualTo(recipient);
@@ -58,11 +59,10 @@ public class IntentUtilsTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
+        Intent intent = shadowActivity.getNextStartedActivity();
 
-        assertThat(shadowIntent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-        assertThat(shadowIntent.getDataString()).isEqualTo(site);
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
+        assertThat(intent.getDataString()).isEqualTo(site);
     }
 
     @Test
@@ -72,11 +72,10 @@ public class IntentUtilsTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
+        Intent intent = shadowActivity.getNextStartedActivity();
 
-        assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(SplashscreenActivity.class.getName());
-        assertThat(shadowIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
-        assertThat(shadowIntent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isEqualTo(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SplashscreenActivity.class.getName());
+        assertThat(intent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
+        assertThat(intent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isEqualTo(Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }

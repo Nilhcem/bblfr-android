@@ -2,21 +2,23 @@ package com.nilhcem.bblfr.ui.about;
 
 import android.content.Intent;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class AboutActivityTest {
 
     private AboutActivity activity;
@@ -42,8 +44,7 @@ public class AboutActivityTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
-        assertThat(shadowIntent.getDataString()).contains("lancez-vous-dans-les-brown-bag-lunches");
+        Intent intent = shadowActivity.getNextStartedActivity();
+        assertThat(intent.getDataString()).contains("lancez-vous-dans-les-brown-bag-lunches");
     }
 }

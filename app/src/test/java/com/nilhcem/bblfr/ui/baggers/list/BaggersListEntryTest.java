@@ -1,11 +1,11 @@
 package com.nilhcem.bblfr.ui.baggers.list;
 
 import android.os.Parcel;
-import android.text.Html;
 import android.text.Spanned;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.R;
+import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.Contact;
 import com.nilhcem.bblfr.model.baggers.Session;
@@ -14,14 +14,17 @@ import com.nilhcem.bblfr.model.baggers.Website;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.Locale;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class BaggersListEntryTest {
 
     BaggersListEntry entry;
@@ -67,7 +70,7 @@ public class BaggersListEntryTest {
 
         // Then
         BaggersListEntry fromParcel = BaggersListEntry.CREATOR.createFromParcel(parcel);
-        Spanned htmlLocation = Html.fromHtml(String.format(Locale.US, RuntimeEnvironment.application.getString(R.string.baggers_list_location), "Franconville"));
+        Spanned htmlLocation = CompatibilityUtils.fromHtml(String.format(Locale.US, RuntimeEnvironment.application.getString(R.string.baggers_list_location), "Franconville"));
         assertThat(fromParcel.name.toString()).isEqualTo(name);
         assertThat(fromParcel.name.toString()).isEqualTo("Gautier");
         assertThat(fromParcel.links.toString()).isEqualTo(links);

@@ -3,16 +3,19 @@ package com.nilhcem.bblfr.ui.about;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class AboutPagerAdapterTest {
 
     private AboutPagerAdapter adapter = new AboutPagerAdapter();

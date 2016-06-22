@@ -2,16 +2,19 @@ package com.nilhcem.bblfr.ui.baggers.cities;
 
 import android.content.Intent;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.ui.baggers.cities.fallback.CitiesFallbackActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class CitiesMapActivityTest {
 
     @Test

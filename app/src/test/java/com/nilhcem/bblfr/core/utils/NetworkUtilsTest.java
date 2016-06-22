@@ -3,7 +3,6 @@ package com.nilhcem.bblfr.core.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.BuildConfig;
 
 import org.junit.Before;
@@ -12,13 +11,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Locale;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class NetworkUtilsTest {
 
     @Mock Context context;

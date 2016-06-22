@@ -1,17 +1,18 @@
 package com.nilhcem.bblfr.core.prefs;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.model.baggers.City;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Date;
 
@@ -22,8 +23,8 @@ import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_HR_MODE;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_LAST_DOWNLOAD;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_RESET_DB;
 
-@SuppressLint("CommitPrefEdits")
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class PreferencesTest {
 
     private Preferences prefs;

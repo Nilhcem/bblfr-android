@@ -1,7 +1,7 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 import com.nilhcem.bblfr.model.JsonToDatabaseDao;
 import com.nilhcem.bblfr.model.baggers.City;
@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -20,7 +22,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class BaseImportTest {
 
     @Mock Preferences prefs;

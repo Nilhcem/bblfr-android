@@ -1,6 +1,5 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 
@@ -9,10 +8,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class ImportLocationsTest {
 
     @Mock Preferences prefs;

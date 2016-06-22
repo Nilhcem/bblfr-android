@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.internal.zzf;
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.model.locations.Audience;
 import com.nilhcem.bblfr.model.locations.Interest;
 import com.nilhcem.bblfr.model.locations.Location;
@@ -14,7 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +24,8 @@ import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class LocationsInfoWindowAdapterTest {
 
     private LocationsInfoWindowAdapter adapter;

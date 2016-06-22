@@ -5,7 +5,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
 import com.google.common.truth.Truth;
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
 
 import org.junit.Before;
@@ -14,15 +14,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIntent;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class NavigationDrawerActivityTest {
 
     private TestNavigationDrawerActivity activity;
@@ -63,7 +66,7 @@ public class NavigationDrawerActivityTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
-        Truth.assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(BaggersListActivity.class.getName());
+        Truth.assertThat(shadowIntent.getIntentClass().getName()).isEqualTo(BaggersListActivity.class.getName());
     }
 
     public static class TestNavigationDrawerActivity extends NavigationDrawerActivity {

@@ -3,12 +3,13 @@ package com.nilhcem.bblfr.ui.baggers.list;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.model.baggers.Bagger;
 import com.nilhcem.bblfr.model.baggers.Contact;
@@ -17,14 +18,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class BaggersListEntryViewTest {
 
     private BaggersListEntryView view;
@@ -86,11 +89,10 @@ public class BaggersListEntryViewTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(Robolectric.setupActivity(Activity.class));
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
-        Intent mailExtra = (Intent) shadowIntent.getParcelableExtra(Intent.EXTRA_INTENT);
+        Intent intent = shadowActivity.getNextStartedActivity();
+        Intent mailExtra = intent.getParcelableExtra(Intent.EXTRA_INTENT);
 
-        assertThat(shadowIntent.getStringExtra(Intent.EXTRA_TITLE)).isEqualTo(c.getString(R.string.baggers_list_contact_chooser_title));
+        assertThat(intent.getStringExtra(Intent.EXTRA_TITLE)).isEqualTo(c.getString(R.string.baggers_list_contact_chooser_title));
         assertThat(mailExtra.getData().getScheme()).isEqualTo("mailto");
         assertThat(mailExtra.getStringExtra(Intent.EXTRA_SUBJECT)).isEqualTo(c.getString(R.string.baggers_list_contact_email_subject));
         assertThat(mailExtra.getData().getSchemeSpecificPart()).isEqualTo("me@example.com");

@@ -1,20 +1,22 @@
 package com.nilhcem.bblfr.core.utils;
 
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class StringUtilsTest {
 
     @Test
@@ -143,6 +145,6 @@ public class StringUtilsTest {
         Spanned htmlLink = StringUtils.createSpannedHtmlLink(name, url);
 
         // Then
-        assertThat(htmlLink).isEqualTo(Html.fromHtml("<a href=\"" + url + "\">" + name));
+        assertThat(htmlLink.toString()).isEqualTo(CompatibilityUtils.fromHtml("<a href=\"" + url + "\">" + name).toString());
     }
 }

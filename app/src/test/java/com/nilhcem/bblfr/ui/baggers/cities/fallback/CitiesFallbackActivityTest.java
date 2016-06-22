@@ -2,7 +2,7 @@ package com.nilhcem.bblfr.ui.baggers.cities.fallback;
 
 import android.content.Intent;
 
-import com.nilhcem.bblfr.BBLRobolectricTestRunner;
+import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.model.baggers.City;
 import com.nilhcem.bblfr.ui.baggers.list.BaggersListActivity;
 
@@ -10,13 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(BBLRobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class CitiesFallbackActivityTest {
 
     private CitiesFallbackActivity activity;
@@ -39,9 +41,8 @@ public class CitiesFallbackActivityTest {
 
         // Then
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = Shadows.shadowOf(startedIntent);
-        assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(BaggersListActivity.class.getName());
-        assertThat(((City) shadowIntent.getParcelableExtra("mCity")).name).isEqualTo("Paris");
+        Intent intent = shadowActivity.getNextStartedActivity();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(BaggersListActivity.class.getName());
+        assertThat(((City) intent.getParcelableExtra("mCity")).name).isEqualTo("Paris");
     }
 }
