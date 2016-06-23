@@ -27,8 +27,8 @@
     <!-- Baggers -->
     <string name="baggers_map_toolbar_title">Sélectionnez une ville…</string>
     <string name="baggers_list_toolbar_title">Brown Bag Lunch %s</string>
-    <string name="baggers_list_toolbar_title_one">1 résultat à %s</string>
-    <string name="baggers_list_toolbar_title_many">%1$d résultats à %2$s</string>
+    <string name="baggers_list_toolbar_title_one">1 bagger à %s</string>
+    <string name="baggers_list_toolbar_title_many">%1$d baggers à %2$s</string>
     <string name="baggers_list_location"><![CDATA[<b>Lieux :</b> %s]]></string>
     <string name="baggers_list_contact_button">Invitez-moi chez vous !</string>
     <string name="baggers_list_contact_chooser_title">Contacter ce bagger par email</string>
