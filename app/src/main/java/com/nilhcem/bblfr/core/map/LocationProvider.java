@@ -13,7 +13,7 @@ public class LocationProvider {
     private Location mLastLocation;
 
     public synchronized void initSync(Context context) {
-        if (AppUtils.hasGooglePlayServices(context)) {
+        if (AppUtils.hasGooglePlayServices(context) && AppUtils.isGeolocAllowed(context)) {
             GoogleApiClient client = new GoogleApiClient.Builder(context)
                     .addApi(LocationServices.API)
                     .build();

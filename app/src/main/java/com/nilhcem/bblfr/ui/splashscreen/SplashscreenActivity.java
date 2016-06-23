@@ -2,7 +2,9 @@ package com.nilhcem.bblfr.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +14,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nilhcem.bblfr.BBLApplication;
 import com.nilhcem.bblfr.R;
 import com.nilhcem.bblfr.core.prefs.Preferences;
+import com.nilhcem.bblfr.core.utils.AppUtils;
 import com.nilhcem.bblfr.core.utils.CompatibilityUtils;
 import com.nilhcem.bblfr.jobs.splashscreen.checkdata.CheckDataService;
 import com.nilhcem.bblfr.jobs.splashscreen.importdata.ImportService;
@@ -30,12 +33,15 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.nilhcem.bblfr.core.utils.NetworkUtils.isNetworkAvailable;
 
 public class SplashscreenActivity extends BaseActivity {
 
     // Download data at most once a day (1 * 24 * 60 * 60 * 1000).
     private static final long DOWNLOAD_DATA_INTERVAL = 86_400_000L;
+
+    private static final int PERMISSION_LOCATION = 1;
 
     @Inject Preferences mPrefs;
     @Inject ImportService mImportService;
@@ -58,15 +64,29 @@ public class SplashscreenActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (shouldImportData(mPrefs.getLastDownloadDate(), isNetworkAvailable(this))) {
-            mSubscription = mImportService.importData()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(r -> onAfterDataImported(true), throwable -> onImportError());
+        if (mPrefs.getFavoriteCityLatLng() == null && !AppUtils.isGeolocAllowed(this) &&
+                !ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)) {
+            ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, PERMISSION_LOCATION);
         } else {
-            onAfterDataImported(false);
+            processImportData();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_LOCATION) {
+            processImportData();
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        super.startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -77,6 +97,17 @@ public class SplashscreenActivity extends BaseActivity {
         }
 
         super.onSaveInstanceState(outState);
+    }
+
+    private void processImportData() {
+        if (shouldImportData(mPrefs.getLastDownloadDate(), isNetworkAvailable(this))) {
+            mSubscription = mImportService.importData()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(r -> onAfterDataImported(true), throwable -> onImportError());
+        } else {
+            onAfterDataImported(false);
+        }
     }
 
     /**
@@ -134,7 +165,6 @@ public class SplashscreenActivity extends BaseActivity {
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        overridePendingTransition(0, 0);
     }
 
     private void onImportError() {

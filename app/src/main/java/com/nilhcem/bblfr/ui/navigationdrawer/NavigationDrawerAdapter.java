@@ -21,10 +21,10 @@ public class NavigationDrawerAdapter extends BaseHeaderAdapter<Void, NavigationD
         mListener = listener;
         mHrModeEnabled = hrModeEnabled;
 
-        boolean hasPlayServices = AppUtils.hasGooglePlayServices(context);
+        boolean addHosts = AppUtils.hasGooglePlayServices(context) && AppUtils.isGeolocAllowed(context);
         List<NavigationDrawerEntry> entries = new ArrayList<>();
         for (NavigationDrawerEntry value : NavigationDrawerEntry.values()) {
-            if (!hasPlayServices && value.equals(NavigationDrawerEntry.HOSTS)) {
+            if (!addHosts && value.equals(NavigationDrawerEntry.HOSTS)) {
                 continue;
             }
             entries.add(value);

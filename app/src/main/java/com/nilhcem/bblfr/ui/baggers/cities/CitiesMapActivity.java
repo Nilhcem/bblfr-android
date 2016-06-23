@@ -39,9 +39,9 @@ public class CitiesMapActivity extends BaseMapActivity {
     @Inject BaggersService mBaggersService;
 
     public static Intent createLaunchIntent(@NonNull Context context, boolean withNavigationDrawer) {
-        Intent intent = new Intent(context,
-                NetworkUtils.isNetworkAvailable(context) && AppUtils.hasGooglePlayServices(context)
-                        ? CitiesMapActivity.class : CitiesFallbackActivity.class);
+        Intent intent = new Intent(context, NetworkUtils.isNetworkAvailable(context) &&
+                AppUtils.hasGooglePlayServices(context) && AppUtils.isGeolocAllowed(context)
+                ? CitiesMapActivity.class : CitiesFallbackActivity.class);
         intent.putExtra(EXTRA_DISABLE_DRAWER, !withNavigationDrawer);
         return intent;
     }
