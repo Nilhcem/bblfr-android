@@ -4,19 +4,20 @@ import android.content.Context;
 
 import com.nilhcem.bblfr.BuildConfig;
 
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class AppUtilsTest {
 
+    @Rule public MockitoRule rule = MockitoJUnit.rule();
     @Mock(answer = Answers.RETURNS_DEEP_STUBS) Context context;
 
     @Test
