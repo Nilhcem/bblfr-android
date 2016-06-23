@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.baggers.list;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.text.Spanned;
 
@@ -24,7 +25,7 @@ import java.util.Locale;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class BaggersListEntryTest {
 
     BaggersListEntry entry;

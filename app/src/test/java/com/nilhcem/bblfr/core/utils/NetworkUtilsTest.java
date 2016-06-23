@@ -2,6 +2,7 @@ package com.nilhcem.bblfr.core.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.os.Build;
 
 import com.nilhcem.bblfr.BuildConfig;
 
@@ -20,7 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class NetworkUtilsTest {
 
     @Mock Context context;

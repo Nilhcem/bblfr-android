@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.ui.baggers.list;
 
 import android.content.Intent;
+import android.os.Build;
 
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.model.baggers.City;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class BaggersListActivityTest {
 
     private BaggersListActivity activity;

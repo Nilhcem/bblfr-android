@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.navigationdrawer;
 
+import android.os.Build;
 import android.widget.FrameLayout;
 
 import com.nilhcem.bblfr.BuildConfig;
@@ -15,7 +16,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.nilhcem.bblfr.ui.navigationdrawer.NavigationDrawerEntry.HOSTS;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class NavigationDrawerEntryViewTest {
 
     private NavigationDrawerEntryView view;

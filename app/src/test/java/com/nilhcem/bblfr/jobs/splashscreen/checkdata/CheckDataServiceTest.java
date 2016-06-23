@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.jobs.splashscreen.checkdata;
 
 import android.location.Location;
+import android.os.Build;
 
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.map.LocationProvider;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class CheckDataServiceTest {
 
     @Mock Location location;

@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui;
 
+import android.os.Build;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class BaseHeaderAdapterTest {
 
     @Spy TestBaseHeaderAdapter adapter;

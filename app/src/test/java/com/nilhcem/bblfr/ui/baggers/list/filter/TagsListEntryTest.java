@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.baggers.list.filter;
 
+import android.os.Build;
 import android.os.Parcel;
 
 import com.nilhcem.bblfr.BuildConfig;
@@ -13,7 +14,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class TagsListEntryTest {
 
     @Test

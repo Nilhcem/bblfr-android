@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.ui.baggers.list.filter;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class TagsListActivityTest {
 
     private TestTagsListActivity activity;

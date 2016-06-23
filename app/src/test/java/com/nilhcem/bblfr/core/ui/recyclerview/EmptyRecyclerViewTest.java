@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.core.ui.recyclerview;
 
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class EmptyRecyclerViewTest {
 
     private EmptyRecyclerView recyclerView;

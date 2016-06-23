@@ -1,5 +1,7 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
+import android.os.Build;
+
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 
@@ -15,7 +17,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class ImportBaggersTest {
 
     @Mock Preferences prefs;

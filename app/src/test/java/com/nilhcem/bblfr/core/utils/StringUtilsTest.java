@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.core.utils;
 
+import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 
@@ -16,7 +17,7 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class StringUtilsTest {
 
     @Test

@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.ui.navigationdrawer;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class NavigationDrawerActivityTest {
 
     private TestNavigationDrawerActivity activity;

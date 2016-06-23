@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.baggers.cities.fallback;
 
+import android.os.Build;
 import android.view.View;
 
 import com.nilhcem.bblfr.BuildConfig;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class CitiesFallbackAdapterTest {
 
     private CitiesFallbackAdapter adapter;

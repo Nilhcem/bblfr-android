@@ -2,6 +2,7 @@ package com.nilhcem.bblfr.core.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.ui.splashscreen.SplashscreenActivity;
@@ -18,7 +19,7 @@ import org.robolectric.shadows.ShadowActivity;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class IntentUtilsTest {
 
     private Activity activity;

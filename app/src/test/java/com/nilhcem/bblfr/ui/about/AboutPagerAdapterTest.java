@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.about;
 
+import android.os.Build;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -15,7 +16,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class AboutPagerAdapterTest {
 
     private AboutPagerAdapter adapter = new AboutPagerAdapter();

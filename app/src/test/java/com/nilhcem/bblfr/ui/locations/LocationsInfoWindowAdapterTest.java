@@ -1,5 +1,6 @@
 package com.nilhcem.bblfr.ui.locations;
 
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ import java.util.Map;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class LocationsInfoWindowAdapterTest {
 
     private LocationsInfoWindowAdapter adapter;

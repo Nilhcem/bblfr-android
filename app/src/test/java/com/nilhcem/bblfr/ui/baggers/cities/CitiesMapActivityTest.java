@@ -1,6 +1,7 @@
 package com.nilhcem.bblfr.ui.baggers.cities;
 
 import android.content.Intent;
+import android.os.Build;
 
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.ui.baggers.cities.fallback.CitiesFallbackActivity;
@@ -14,7 +15,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class CitiesMapActivityTest {
 
     @Test

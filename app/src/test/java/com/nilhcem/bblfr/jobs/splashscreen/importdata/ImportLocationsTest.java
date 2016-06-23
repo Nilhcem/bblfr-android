@@ -1,5 +1,7 @@
 package com.nilhcem.bblfr.jobs.splashscreen.importdata;
 
+import android.os.Build;
+
 import com.nilhcem.bblfr.BuildConfig;
 import com.nilhcem.bblfr.core.prefs.Preferences;
 
@@ -14,7 +16,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class ImportLocationsTest {
 
     @Mock Preferences prefs;

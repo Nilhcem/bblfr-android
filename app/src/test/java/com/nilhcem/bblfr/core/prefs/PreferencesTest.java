@@ -2,6 +2,7 @@ package com.nilhcem.bblfr.core.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Pair;
 
 import com.nilhcem.bblfr.BuildConfig;
@@ -24,7 +25,7 @@ import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_LAST_DOWNLOAD;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_RESET_DB;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class PreferencesTest {
 
     private Preferences prefs;
