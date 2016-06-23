@@ -76,6 +76,9 @@ public class BaggersDao {
     private void fillBaggerData(@NonNull Bagger bagger, @NonNull List<String> tagsIds) {
         // contacts
         bagger.contacts = Select.from(Contact.class).where("contacts.bagger_id=?", bagger.id).fetchSingle();
+        if (bagger.contacts == null) {
+            bagger.contacts = new Contact();
+        }
 
         // cities
         List<City> cities = Select.from(City.class).innerJoin(BaggerCity.class).on("cities._id=baggers_cities.city_id").where("baggers_cities.bagger_id=?", bagger.id).fetch();
