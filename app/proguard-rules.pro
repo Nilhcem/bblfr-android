@@ -16,60 +16,38 @@
 #   public *;
 #}
 
--printmapping out.map
+-printmapping mappings.txt
+-keepattributes SourceFile,LineNumberTable
+
 
 # Application
 -keep public class com.nilhcem.bblfr.** { *; }
 
-# Appcompat
+
+# AppCompat
 -keep public class android.support.v7.widget.** { *; }
 -keep public class android.support.v7.internal.widget.** { *; }
 -keep public class android.support.v7.internal.view.menu.** { *; }
 -keep public class * extends android.support.v4.view.ActionProvider {
     public <init>(android.content.Context);
 }
+-keep class !android.support.v7.internal.view.menu.**,** {*;}
 
-# Butterknife
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewInjector { *; }
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
 
 # Icepick
 -dontwarn icepick.**
 -keep class **$$Icicle { *; }
 -keepnames class * { @icepick.Icicle *;}
 
-# Jackson
--keep class com.fasterxml.jackson.databind.ObjectMapper {
-    public <methods>;
-    protected <methods>;
-}
--keep class com.fasterxml.jackson.databind.ObjectWriter {
-    public ** writeValueAsString(**);
-}
--dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
--keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
-    public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *;
-}
--keepnames class com.fasterxml.jackson.** {
-*;
-}
--keepnames interface com.fasterxml.jackson.** {
-    *;
-}
 
 # Okhttp
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+
 -keepattributes Signature
 -keepattributes *Annotation*
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
--dontwarn com.squareup.okhttp.**
+
 
 # Okio
 -keep class sun.misc.Unsafe { *; }
@@ -77,35 +55,46 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
-# Play Services
--keep class * extends java.util.ListResourceBundle {
-    protected Object[][] getContents();
-}
--keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-    public static final *** NULL;
-}
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclassmembernames class * {
-    @com.google.android.gms.common.annotation.KeepName *;
-}
--keepnames class * implements android.os.Parcelable {
-    public static final ** CREATOR;
-}
+
+# Picasso
+-dontwarn com.squareup.okhttp.**
+
+
+# Jackson
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keepnames class com.fasterxml.jackson.** { *; }
+ -dontwarn com.fasterxml.jackson.databind.**
+ -keep class org.codehaus.** { *; }
+ -keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
+ public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
+
+
+# Play services
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
+-dontwarn sun.misc.Unsafe
+
 
 # Retrolambda
 -dontwarn java.lang.invoke.*
 
-# RxJava
--keep class rx.schedulers.Schedulers {
-    public static <methods>;
+
+# Rxjava
+-dontwarn sun.misc.**
+
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
 }
--keep class rx.schedulers.ImmediateScheduler {
-    public <methods>;
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
 }
--keep class rx.schedulers.TestScheduler {
-    public <methods>;
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
--keep class rx.schedulers.Schedulers {
-    public static ** test();
-}
--dontwarn sun.misc.Unsafe
+
+
+# ViewPager indicator
+-dontwarn com.viewpagerindicator.LinePageIndicator
