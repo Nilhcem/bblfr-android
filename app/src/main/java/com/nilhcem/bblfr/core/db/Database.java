@@ -8,8 +8,8 @@ import ollie.Ollie;
 
 public final class Database {
 
-    private static final String NAME = "baggers.db";
-    private static final int VERSION = 2;
+    private static final String NAME = "bblfr.db";
+    private static final int VERSION = 1;
 
     private Database() {
         throw new UnsupportedOperationException();
