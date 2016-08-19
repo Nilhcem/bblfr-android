@@ -8,13 +8,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <!-- android.permission-group.LOCATION -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <uses-sdk tools:overrideLibrary="com.facebook.shimmer"/>
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false"/>
 
     <application
         android:name=".BBLApplication"
