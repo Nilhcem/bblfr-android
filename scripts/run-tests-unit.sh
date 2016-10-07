@@ -6,4 +6,4 @@ export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 ./gradlew :app:assembleRealDebug
 ./gradlew :app:testRealDebug
 
-echo "test reports: $(pwd)/app/build/reports/tests/realDebug/index.html"
+echo "test reports: $(pwd)/app/build/reports/tests/testRealDebugUnitTest/realDebug/index.html"
