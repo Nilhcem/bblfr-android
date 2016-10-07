@@ -35,8 +35,10 @@ public class AppUtilsTest {
     @Test
     public void should_return_true_when_app_was_installed_from_google_play() {
         // Given
+        String packageName = "com.nilhcem.bblfr";
         String playStorePackageName = "com.android.vending";
-        when(context.getPackageManager().getInstallerPackageName(anyString())).thenReturn(playStorePackageName);
+        when(context.getPackageName()).thenReturn(packageName);
+        when(context.getPackageManager().getInstallerPackageName(packageName)).thenReturn(playStorePackageName);
 
         // When
         boolean result = AppUtils.wasInstalledFromGooglePlay(context);

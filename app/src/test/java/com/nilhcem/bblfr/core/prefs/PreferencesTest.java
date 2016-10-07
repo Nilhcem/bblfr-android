@@ -11,7 +11,7 @@ import com.nilhcem.bblfr.model.baggers.City;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -24,7 +24,7 @@ import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_HR_MODE;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_LAST_DOWNLOAD;
 import static com.nilhcem.bblfr.core.prefs.Preferences.KEY_RESET_DB;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public class PreferencesTest {
 
