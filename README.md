@@ -712,7 +712,7 @@ Public License instead of this License.  But first, please read
 
 [Google Play]: https://play.google.com/store/apps/details?id=com.nilhcem.bblfr
 [BrownBagLunch.FR]: http://brownbaglunch.fr/
-[BBLFR Android screenshots]: http://nilhcem.github.com/screenshots/bblfr-android.png
+[BBLFR Android screenshots]: https://raw.githubusercontent.com/Nilhcem/bblfr-android/master/screenshot.png
 [RxJava]: https://github.com/ReactiveX/RxJava
 [Ollie]: https://github.com/pardom/Ollie
 [Dagger]: http://google.github.io/dagger
